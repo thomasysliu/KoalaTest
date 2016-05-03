@@ -68,6 +68,7 @@ public class MasterScheduledService extends Service{
                             final int num_of_children = cids.length;
                             mListChildren.clear();
                             if (num_of_children != 0) {
+                                ApplicationContext.mSpinChildName.clear();
                                 for (i = 0; i < num_of_children; i++) {
                                     ApplicationContext.show_child_by_id(cids[i], new CallBack() {
                                         @Override

@@ -56,7 +56,7 @@ public class EditAlarmTimeActivity extends Activity implements View.OnClickListe
                 Bundle bundle = new Bundle();
                 final String time = editAlarmTime.getText().toString();
                 int alarmtime = Integer.valueOf(time);
-                alarmtime *= 1000;
+                alarmtime *= 60;
                 ApplicationContext.update_time(type,ApplicationContext.login_mid ,String.valueOf(alarmtime));
                 bundle.putInt(ApplicationContext.ALARM_TIME, Integer.valueOf(time));
                 intent.putExtras(bundle);
