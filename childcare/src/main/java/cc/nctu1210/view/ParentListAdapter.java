@@ -102,7 +102,7 @@ public class ParentListAdapter extends BaseAdapter {
             // we've just avoided calling findViewById() on resource every time
             // just use the viewHolder instead
             viewHolder = (ViewHolder) view.getTag();
-
+        }
 
         // object item based on the position
         final NewParentItem obj = mData.get(position);
@@ -149,7 +149,7 @@ public class ParentListAdapter extends BaseAdapter {
                 }
             }
 
-        }}
+        }
         return view;
     }
 

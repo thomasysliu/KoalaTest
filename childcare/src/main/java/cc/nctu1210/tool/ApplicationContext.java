@@ -117,7 +117,7 @@ public class ApplicationContext extends Application {
     public static final String GATEWAY_FAR = "GATEWAY_FAR";
     public static final String GATEWAY_NUMBER = "GATEWAY_NUMBER";
     public static final String GATEWAY_TITLE = "GATEWAY_TITLE";
-    public static final String PARENT_ID = "PARENT_ACCOUNT";
+    public static final String PARENT_ID = "PARENT_ID";
     public static final String PARENT_ACCOUNT = "PARENT_ACCOUNT";
     public static final String PARENT_PASSWORD = "PARENT_PASSWORD";
     public static final String PARENT_CONFIRM = "PARENT_CONFIRM";
@@ -236,8 +236,8 @@ public class ApplicationContext extends Application {
 
     public static void addANewChild(ChildProfile child) {
         if (findChild(child.getDeviceAddress()) == -1) {
-            mMapChildren.put(child.getDeviceAddress(),child);
-            mMapChildrenCid.put(child.getCid(),child);
+            mMapChildren.put(child.getDeviceAddress(), child);
+            mMapChildrenCid.put(child.getCid(), child);
             mListChildren.add(child);
         }
     }
@@ -328,7 +328,7 @@ public class ApplicationContext extends Application {
             for(int j=0; j<num_parent_child; j++)
                 S = S + String.valueOf(mParents.get(i).getmChildList().get(j).spinner_select)+",";
             S = S + ",";
-            editor.putString(PARENT_CHILDLIST_PREFERENCE+i, S);
+            editor.putString(PARENT_CHILDLIST_PREFERENCE + i, S);
         }
         editor.apply();
     }
@@ -972,10 +972,6 @@ public class ApplicationContext extends Application {
                         (Request.Method.POST, DELETE_URL, json_delete_gateway, new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                int pos = gids.indexOf(id);
-                                StringBuilder str = new StringBuilder(gids);
-                                str.delete(pos,pos+2);
-                                gids = str.toString();
                                 Log.i(TAG, response.toString());
                             }
                         }, new Response.ErrorListener() {
@@ -1001,10 +997,6 @@ public class ApplicationContext extends Application {
                             @Override
                             public void onResponse(JSONObject response) {
                                 Log.i(TAG, response.toString());
-                                int pos = pids.indexOf(id);
-                                StringBuilder str = new StringBuilder(pids);
-                                str.delete(pos,pos+2);
-                                pids = str.toString();
                             }
                         }, new Response.ErrorListener() {
                             @Override
@@ -1223,7 +1215,6 @@ public class ApplicationContext extends Application {
         jsObjRequest.setShouldCache(false);
         VolleyRequestManager.getInstance(getInstance().getApplicationContext()).addToRequestQueue(jsObjRequest);
     }
-
 
 
 

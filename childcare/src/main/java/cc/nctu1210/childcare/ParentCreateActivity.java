@@ -36,7 +36,6 @@ public class ParentCreateActivity extends Activity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.parent_create);
-        mParents = ApplicationContext.mParents;
         imgAdd = (ImageView)findViewById(R.id.image_add);
         imgAdd.setOnClickListener(this);
         parentList = (ListView)findViewById(R.id.new_parent_list);
@@ -78,7 +77,6 @@ public class ParentCreateActivity extends Activity implements View.OnClickListen
                     final String password = bundle.getString(ApplicationContext.PARENT_PASSWORD);
                     final String confirm = bundle.getString(ApplicationContext.PARENT_CONFIRM);
                     final String pid = bundle.getString(ApplicationContext.PARENT_ID);
-                    Log.e("TAG","TEST PID: "+pid+"\n");
                     parentNum++;
                     NewParentItem newParent = new NewParentItem(account,password,confirm);
                     newParent.setPid(pid);
@@ -127,8 +125,8 @@ public class ParentCreateActivity extends Activity implements View.OnClickListen
                 } else if (resultCode == ApplicationContext.RESULT_CODE_REMOVE) {
                     final int position = data.getIntExtra(ApplicationContext.LIST_VIEW_POSITION, -1);
                     parentNum--;
-                    mAdapter.getData().remove(position);
                     String pid = mAdapter.getData().get(position).getPid();
+                    mAdapter.getData().remove(position);
                     ApplicationContext.delete("parent", pid);
                     mAdapter.notifyDataSetChanged();
 

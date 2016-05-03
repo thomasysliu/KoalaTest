@@ -34,7 +34,6 @@ public class GatewayCreateActivity extends Activity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gateway_create);
-        mGateways = ApplicationContext.mGateways;
         imgAdd = (ImageView)findViewById(R.id.image_add);
         imgAdd.setOnClickListener(this);
         gatewayList = (ListView)findViewById(R.id.new_gateway_list);

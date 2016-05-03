@@ -114,7 +114,7 @@ public class GatewayListEditorActivity extends Activity  implements OnClickListe
                 bundle_add_gateway.putInt(ApplicationContext.GATEWAY_NUMBER, gatewayNum);
                 Intent intent_add_gateway = new Intent(this, AddGatewayActivity.class);
                 intent_add_gateway.putExtras(bundle_add_gateway);
-                startActivityForResult(intent_add_gateway, ApplicationContext.REQUEST_CODE_ADD);
+                startActivityForResult(intent_add_gateway, ApplicationContext.REQUEST_CODE_GATEWAY_ADD);
                 break;
             case R.id.bt_close:
                 finish();
@@ -193,7 +193,7 @@ public class GatewayListEditorActivity extends Activity  implements OnClickListe
                                 object.setCheck(1);
                                 mGatewayAdapter.notifyDataSetChanged();
                             } else {
-                                Toast.makeText(GatewayListEditorActivity.this, "Sign Up Gateway fail!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(GatewayListEditorActivity.this, "update Gateway place fail!", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -206,7 +206,7 @@ public class GatewayListEditorActivity extends Activity  implements OnClickListe
                                 object.setFar(far);
                                 mGatewayAdapter.notifyDataSetChanged();
                             } else {
-                                Toast.makeText(GatewayListEditorActivity.this, "Sign Up Gateway fail!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(GatewayListEditorActivity.this, "update Gateway pdistance fail!", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -217,6 +217,8 @@ public class GatewayListEditorActivity extends Activity  implements OnClickListe
                     String gid = mGatewayAdapter.getData().get(position).getGid();
                     ApplicationContext.delete("gateway",gid);
                     mGatewayAdapter.getData().remove(position);
+                    ApplicationContext.mGateways.clear();
+                    ApplicationContext.mGateways.addAll(mGateways);
                     mGatewayAdapter.notifyDataSetChanged();
                 }
                 break;
@@ -226,6 +228,8 @@ public class GatewayListEditorActivity extends Activity  implements OnClickListe
 
     private void addANewGateway(NewGatewayItem gateway) {
         mGateways.add(gateway);
+        ApplicationContext.mGateways.clear();
+        ApplicationContext.mGateways.addAll(mGateways);
         mGatewayAdapter.notifyDataSetChanged();
         gatewayList.setSelection(mGatewayAdapter.getCount() - 1);
     }

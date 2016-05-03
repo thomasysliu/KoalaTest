@@ -133,7 +133,7 @@ public class AddParentActivity extends Activity implements View.OnClickListener{
                                 setResult(RESULT_OK, intent);
                                 finish();
                             } else {
-                                Toast.makeText(AddParentActivity.this, "add child fail!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(AddParentActivity.this, "add parent fail!", Toast.LENGTH_LONG).show();
                             }
                         }
                  });
