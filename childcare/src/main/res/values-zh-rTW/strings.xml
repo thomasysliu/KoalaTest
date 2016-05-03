@@ -29,4 +29,58 @@
     <string name="take_photo">拍照新增</string>
     <string name="photo">大頭貼</string>
     <string name="choose_photo">挑現有照片</string>
+
+    <string name="login">登入</string>
+    <string name="new_garden">新增學園</string>
+    <string name="login_as">登入為</string>
+    <string name="select_login_type">登入為: </string>
+    <string-array name="login_type_list">
+        <item>管理員</item>
+        <item>教師</item>
+        <item>家長</item>
+        <item>監測員</item>
+    </string-array>
+
+    <string name="master_account_create_title">管理員帳號新增</string>
+    <string name="teacher_create_title">教師帳號新增</string>
+    <string name="gateway_create_title">監測員帳號新增</string>
+    <string name="gateway">監測員</string>
+    <string name="child_profile_create_title">學童資訊新增</string>
+    <string name="parent_create_title">家長帳號新增</string>
+    <string name="parent">家長</string>
+    <string name="account">帳號 : </string>
+    <string name="password">密碼 : </string>
+    <string name="confirm">密碼確認 : </string>
+    <string name="place">監測地點 : </string>
+    <string name="near">接近 : </string>
+    <string name="gateway_near_hint">-60</string>
+    <string name="far">遠離 : </string>
+    <string name="gateway_far_hint">-95</string>
+    <string name="account_hint">ex:Amy123@gmail.com</string>
+    <string name="account_error">Invalid email format!</string>
+    <string name="password_hint">******</string>
+    <string name="place_hint">ex:小象班</string>
+    <string name="confirm_error">密碼不一致!!</string>
+    <string name="cancel_signup">確定取消?</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="child">學童</string>
+    <string name="set_alarm_time">警示於</string>
+    <string name="alarm_time">警示時間</string>
+    <string name="five">5</string>
+    <string name="minute">分鐘</string>
+    <string name="error_account_password_empty">帳號與密碼不能為空!! </string>
+    <string name="error_password_confirm_not_same">密碼不一致!! </string>
+
+    <string name="gateway_list">監測員清單</string>
+    <string name="parent_list">家長清單</string>
+    <string name="set_alarm_time_title">設定警示時間</string>
+    <string name="close">關閉</string>
+    <string name="gateway_list_editor">監測員編輯</string>
+    <string name="parent_list_editor">家長編輯</string>
+    <string name="child_profile_list_editor">學童資訊編輯</string>
+
+    <string name="monitor">孩童監控</string>
+    <string name="toggle_on">啟動</string>
+    <string name="toggle_off">關閉</string>
 </resources>

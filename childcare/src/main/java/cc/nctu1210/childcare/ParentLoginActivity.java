@@ -24,6 +24,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +42,7 @@ import cc.nctu1210.tool.CallBackContent;
 import cc.nctu1210.view.ChildItem;
 import cc.nctu1210.view.ChildrenListAdapter;
 
-public class ParentLoginActivity extends Activity {
+public class ParentLoginActivity extends Activity implements View.OnClickListener {
     private final String TAG = TeacherLoginActivity.class.getSimpleName();
     public static ChildrenListAdapter mChildListAdapter;
     public static List<ChildItem> mChildItems = new ArrayList<ChildItem>();
@@ -53,6 +54,10 @@ public class ParentLoginActivity extends Activity {
     private String [] cids;
     private int i;
 
+    private TextView mTextViewStatus;
+    private ImageView mImageViewKoala;
+    private Intent mParentPollingIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,22 +68,36 @@ public class ParentLoginActivity extends Activity {
         activity = ParentLoginActivity.this;
         cids = ApplicationContext.cids.split(",");
         initView();
-        Intent intent_service_start= new Intent(ParentLoginActivity.this, ParentScheduledService.class);
-        ParentLoginActivity.this.startService(intent_service_start);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Intent intent_service_start= new Intent(ParentLoginActivity.this, ParentScheduledService.class);
-        ParentLoginActivity.this.startService(intent_service_start);
+        if (ApplicationContext.mIsServiceOn) {
+            ApplicationContext.notificationServiceStartBuilder(this);
+            mParentPollingIntent = new Intent(ParentLoginActivity.this, ParentScheduledService.class);
+            ParentLoginActivity.this.startService(mParentPollingIntent);
+        } else {
+            ApplicationContext.cancelNotificationService(this);
+            mParentPollingIntent = new Intent(ParentLoginActivity.this, ParentScheduledService.class);
+            ParentLoginActivity.this.stopService(mParentPollingIntent);
+        }
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDestroy() {
+        super.onDestroy();
+        ApplicationContext.mIsServiceOn=false;
+        ApplicationContext.cancelNotificationService(this);
+        mParentPollingIntent = new Intent(ParentLoginActivity.this, ParentScheduledService.class);
+        ParentLoginActivity.this.stopService(mParentPollingIntent);
     }
+
     private void initView() {
+        mTextViewStatus = (TextView) findViewById(R.id.text_parent_status);
+        mImageViewKoala = (ImageView) findViewById(R.id.image_parent_user);
+        mImageViewKoala.setOnClickListener(this);
+
         mChildListAdapter = new ChildrenListAdapter(ParentLoginActivity.this, mChildItems,0);
         mListViewChildren = (ListView) findViewById(R.id.list_main_child);
         mListViewChildren.setAdapter(mChildListAdapter);
@@ -127,6 +146,7 @@ public class ParentLoginActivity extends Activity {
                 this.exitTime = System.currentTimeMillis();
                 return true;
             }
+            ApplicationContext.cancelNotificationService(this);
             exitPrograms();
         }
         return super.dispatchKeyEvent(event);
@@ -142,5 +162,22 @@ public class ParentLoginActivity extends Activity {
         startActivity(intent);
         // exit app
         android.os.Process.killProcess(Process.myPid());
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (ApplicationContext.mIsServiceOn) {
+            mTextViewStatus.setText(getString(R.string.toggle_off));
+            ApplicationContext.mIsServiceOn=false;
+            ApplicationContext.cancelNotificationService(this);
+            mParentPollingIntent = new Intent(ParentLoginActivity.this, ParentScheduledService.class);
+            ParentLoginActivity.this.stopService(mParentPollingIntent);
+        } else {
+            mTextViewStatus.setText(getString(R.string.toggle_on));
+            ApplicationContext.mIsServiceOn=true;
+            ApplicationContext.notificationServiceStartBuilder(this);
+            mParentPollingIntent = new Intent(ParentLoginActivity.this, ParentScheduledService.class);
+            ParentLoginActivity.this.startService(mParentPollingIntent);
+        }
     }
 }

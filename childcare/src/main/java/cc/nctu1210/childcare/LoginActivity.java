@@ -1,11 +1,13 @@
 package cc.nctu1210.childcare;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +24,7 @@ import cc.nctu1210.tool.CallBack;
 import cc.nctu1210.tool.CallBackContent;
 
 public class LoginActivity extends Activity implements View.OnClickListener{
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private Button btLogin,btNewGarden;
     private Spinner login_type;
     private int type = 0;  // 0: master,  1: teacher , 2: parent , 3: gateway
@@ -199,5 +202,30 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                 break;
         }
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+
+        switch (requestCode) {
+            case ApplicationContext.REQUEST_COARSE_LOCATION: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d(TAG, "coarse location permission granted");
+                } else {
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Functionality limited");
+                    builder.setMessage("Since location access has not been granted, this app will not be able to discover beacons when in the background.");
+                    builder.setPositiveButton(android.R.string.ok, null);
+                    builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                        }
+
+                    });
+                    builder.show();
+                }
+                return;
+            }
+        }
     }
 }

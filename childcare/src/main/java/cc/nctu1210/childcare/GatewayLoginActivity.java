@@ -12,7 +12,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,7 +32,7 @@ import cc.nctu1210.view.ChildrenListAdapterForGateway;
 import cc.nctu1210.view.ScanItem;
 import cc.nctu1210.view.ScanListAdapter;
 
-public class GatewayLoginActivity extends Activity {
+public class GatewayLoginActivity extends Activity implements View.OnClickListener {
     private long exitTime = 0L;
     private final String TAG = GatewayLoginActivity.class.getSimpleName();
     private BluetoothAdapter mBtAdapter = null;
@@ -42,6 +45,9 @@ public class GatewayLoginActivity extends Activity {
     private String [] cids;
     private int i;
     private static final int REQUEST_ENABLE_BT = 1;
+
+    private TextView mTextViewStatus;
+    private ImageView mImageViewKoala;
 
     private List<ChildProfile> mListDevices = new ArrayList<ChildProfile>();
     private HashMap<String, ChildProfile> mMapDevices = new HashMap<String, ChildProfile>();
@@ -121,19 +127,31 @@ public class GatewayLoginActivity extends Activity {
             mBLEScanner.setMonitorListHandler(mHandler);
             ApplicationContext.mBluetoothAdapter = mBtAdapter;
             ApplicationContext.mBLEScanner = mBLEScanner;
-            startMonitoring();
+            if (ApplicationContext.mIsServiceOn) {
+                ApplicationContext.notificationServiceStartBuilder(this);
+                startMonitoring();
+            } else {
+                ApplicationContext.cancelNotificationService(this);
+                stopMonitoring();
+            }
         }
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDestroy() {
+        super.onDestroy();
         if (mBLEScanner != null) {
+            ApplicationContext.mIsServiceOn = false;
+            ApplicationContext.cancelNotificationService(this);
             stopMonitoring();
         }
     }
 
     private void initView() {
+        mTextViewStatus = (TextView) findViewById(R.id.text_gateway_status);
+        mImageViewKoala = (ImageView) findViewById(R.id.image_gateway_user);
+        mImageViewKoala.setOnClickListener(this);
+
         mChildListAdapter = new ChildrenListAdapterForGateway(GatewayLoginActivity.this, mChildItems);
         mListViewChildren = (ListView) findViewById(R.id.list_main_child);
         mListViewChildren.setAdapter(mChildListAdapter);
@@ -223,6 +241,7 @@ public class GatewayLoginActivity extends Activity {
                 this.exitTime = System.currentTimeMillis();
                 return true;
             }
+            ApplicationContext.cancelNotificationService(this);
             exitPrograms();
         }
         return super.dispatchKeyEvent(event);
@@ -239,4 +258,17 @@ public class GatewayLoginActivity extends Activity {
         android.os.Process.killProcess(android.os.Process.myPid());
     }
 
+    @Override
+    public void onClick(View v) {
+        if (ApplicationContext.mIsServiceOn) {
+            ApplicationContext.mIsServiceOn = false;
+            mTextViewStatus.setText(getString(R.string.toggle_off));
+            ApplicationContext.cancelNotificationService(this);
+            stopMonitoring();
+        } else {
+            ApplicationContext.mIsServiceOn = true;
+            ApplicationContext.notificationServiceStartBuilder(this);
+            startMonitoring();
+        }
+    }
 }

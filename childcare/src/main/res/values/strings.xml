@@ -80,4 +80,8 @@
     <string name="parent_list_editor">Parent Editor</string>
     <string name="child_profile_list_editor">ChildProfile Editor</string>
 
+    <string name="monitor">Monitor</string>
+    <string name="toggle_on">On</string>
+    <string name="toggle_off">Off</string>
+
 </resources>

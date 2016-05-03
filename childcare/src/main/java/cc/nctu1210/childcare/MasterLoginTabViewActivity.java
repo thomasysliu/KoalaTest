@@ -68,6 +68,7 @@ public class MasterLoginTabViewActivity extends FragmentActivity {
            // ApplicationContext.getInstance().saveGatewayPreferences();
            // ApplicationContext.getInstance().saveParentPreferences();
            // ApplicationContext.getInstance().saveTeacherPreferences();
+            ApplicationContext.cancelNotificationService(this);
             exitPrograms();
         }
         return super.dispatchKeyEvent(event);

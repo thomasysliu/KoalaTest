@@ -6,25 +6,33 @@
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:orientation="vertical">
-
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="85dp"
-            android:id="@+id/image_main_user"
+            android:id="@+id/image_parent_user"
             android:src="@drawable/image_koala"
             android:layout_marginTop="16dp"/>
-
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:textSize="20sp"
             android:gravity="center"
-            android:id="@+id/text_place"
-            android:text="@string/notification_title"
-            android:layout_marginTop="16dp"/>
-
+            android:layout_weight="1"
+            android:text="@string/monitor"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/text_parent_status"
+            android:text="@string/toggle_off"/>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -1,33 +1,15 @@
 package cc.nctu1210.childcare;
 
-import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothManager;
-import android.bluetooth.le.ScanFilter;
-import android.bluetooth.le.ScanSettings;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,13 +18,12 @@ import java.util.List;
 import cc.nctu1210.entity.ChildProfile;
 import cc.nctu1210.polling.MasterScheduledService;
 import cc.nctu1210.tool.ApplicationContext;
-import cc.nctu1210.tool.BLESanner;
 import cc.nctu1210.tool.CallBack;
 import cc.nctu1210.tool.CallBackContent;
 import cc.nctu1210.view.ChildItem;
 import cc.nctu1210.view.ChildrenListAdapter;
 
-public class MasterLoginMainFragment extends Fragment {
+public class MasterLoginMainFragment extends Fragment implements View.OnClickListener {
     private final String TAG = MasterLoginMainFragment.class.getSimpleName();
     public static ChildrenListAdapter mChildListAdapter;
     public static List<ChildItem> mChildItems = new ArrayList<ChildItem>();
@@ -51,6 +32,10 @@ public class MasterLoginMainFragment extends Fragment {
     private HashMap<String,ChildProfile> mMapChildren;
     private String [] cids;
     private int i;
+
+    private TextView mTextViewStatus;
+    private ImageView mImageViewKoala;
+    private Intent mPollingIntent;
 
     //use timer task to periodically perform polling reuqests of children's statuses
 
@@ -73,15 +58,32 @@ public class MasterLoginMainFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        if (ApplicationContext.mIsServiceOn) {
+            ApplicationContext.notificationServiceStartBuilder(getActivity());
+            mPollingIntent = new Intent(getActivity(), MasterScheduledService.class);
+            getActivity().startService(mPollingIntent);
+        } else {
+            ApplicationContext.cancelNotificationService(getActivity());
+            mPollingIntent = new Intent(getActivity(), MasterScheduledService.class);
+            getActivity().stopService(mPollingIntent);
+        }
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDetach() {
+        super.onDetach();
+        ApplicationContext.mIsServiceOn = false;
+        ApplicationContext.cancelNotificationService(getActivity());
+        mPollingIntent = new Intent(getActivity(), MasterScheduledService.class);
+        getActivity().stopService(mPollingIntent);
     }
 
     private void initView() {
         mChildListAdapter = new ChildrenListAdapter(getActivity(), mChildItems,1);
+        mTextViewStatus = (TextView) this.getView().findViewById(R.id.text_master_status);
+        mImageViewKoala = (ImageView) this.getView().findViewById(R.id.image_main_user);
+        mImageViewKoala.setOnClickListener(this);
+
         mListViewChildren = (ListView) this.getView().findViewById(R.id.list_main_child);
         mListViewChildren.setAdapter(mChildListAdapter);
         final int num_of_children = cids.length;
@@ -119,5 +121,22 @@ public class MasterLoginMainFragment extends Fragment {
         }
         Log.i(TAG, "Initialized ListView....." + mChildListAdapter.getData().size());
         mChildListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (ApplicationContext.mIsServiceOn) {
+            ApplicationContext.mIsServiceOn = false;
+            mTextViewStatus.setText(getString(R.string.toggle_off));
+            ApplicationContext.cancelNotificationService(getActivity());
+            mPollingIntent = new Intent(getActivity(), MasterScheduledService.class);
+            getActivity().stopService(mPollingIntent);
+        } else {
+            ApplicationContext.mIsServiceOn = true;
+            mTextViewStatus.setText(getString(R.string.toggle_on));
+            ApplicationContext.notificationServiceStartBuilder(getActivity());
+            mPollingIntent = new Intent(getActivity(), MasterScheduledService.class);
+            getActivity().startService(mPollingIntent);
+        }
     }
 }
