@@ -2,7 +2,10 @@ package cc.nctu1210.childcare;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -24,10 +27,15 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     private int type = 0;  // 0: master,  1: teacher , 2: parent , 3: gateway
     private EditText edtAccount,edtPassword;
     private String [] LoginType= {"admin","teacher","parent","gateway"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            verifyStoragePermissions(this);
+            verifyCoaseLocationPermissions(this);
+        }
         edtAccount = (EditText) findViewById(R.id.edt_account);
         edtPassword = (EditText) findViewById(R.id.edt_password);
         btLogin = (Button) findViewById(R.id.bt_logIn);
@@ -36,6 +44,41 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         btNewGarden.setOnClickListener(this);
         login_type = (Spinner)findViewById(R.id.login_type);
         login_type.setOnItemSelectedListener(spnOnItemSelected);
+    }
+
+    /**
+     * Checks if the app has permission to write to device storage
+     *
+     * If the app does not has permission then the user will be prompted to grant permissions
+     *
+     * @param activity current activity
+     */
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, ApplicationContext.PERMISSIONS[1]);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    ApplicationContext.PERMISSIONS,
+                    ApplicationContext.REQUEST_EXTERNAL_STORAGE
+            );
+        }
+    }
+
+    public static void verifyCoaseLocationPermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, ApplicationContext.PERMISSIONS[2]);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    ApplicationContext.PERMISSIONS,
+                    ApplicationContext.REQUEST_COARSE_LOCATION
+            );
+        }
     }
 
     private AdapterView.OnItemSelectedListener spnOnItemSelected
