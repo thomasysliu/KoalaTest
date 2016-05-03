@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cc.nctu1210.koala3xapi.test" >
+
+    <uses-sdk
+        android:minSdkVersion="22"
+        android:targetSdkVersion="23" />
+
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:functionalTest="false"
+        android:handleProfiling="false"
+        android:label="Tests for cc.nctu1210.koala3xapi.test"
+        android:targetPackage="cc.nctu1210.koala3xapi.test" />
+
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <application>
+        <uses-library android:name="android.test.runner" />
+
+        <service
+            android:name="cc.nctu1210.koala3xapi.KoalaService"
+            android:enabled="true" >
+        </service>
+    </application>
+
+</manifest>

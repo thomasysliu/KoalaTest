@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cc.nctu1210.childcare">
+
+    <uses-sdk
+        android:minSdkVersion="21"
+        android:targetSdkVersion="23" />
+
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="cc.nctu1210.tool.ApplicationContext"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_lancher"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".BaseTabViewActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AddNewDeviceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".ChildProfleEditActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".DeviceDiscoveryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".MasterAccountCreateActivity"
+            android:label="@string/master_account_create_title"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TeacherCreateActivity"
+            android:label="@string/teacher_create_title"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GatewayCreateActivity"
+            android:label="@string/gateway_create_title"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ChildProfileCreateActivity"
+            android:label="@string/child_profile_create_title"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ParentCreateActivity"
+            android:label="@string/parent_create_title"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".AddParentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".EditParentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".AddGatewayActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".EditGatewayActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".GatewayLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TeacherLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MasterLoginTabViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ParentLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditAlarmTimeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+
+        <service
+            android:name="cc.nctu1210.api.koala3x.KoalaService"
+            android:enabled="true" />
+        <service
+            android:name="cc.nctu1210.polling.TeacherScheduledService"
+            android:enabled="true"
+            android:label="@string/app_name" />
+
+        <service
+            android:name="cc.nctu1210.polling.ParentScheduledService"
+            android:enabled="true"
+            android:label="@string/app_name" />
+
+        <service
+            android:name="cc.nctu1210.polling.MasterScheduledService"
+            android:enabled="true"
+            android:label="@string/app_name" />
+
+        <activity android:name=".GatewayListEditorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ParentListEditorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ChildProfileListEditorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog"></activity>
+
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+    </application>
+
+</manifest>

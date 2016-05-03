@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e4d0cbb0b999604b349062f0214a0a228a7fd151">
+        <dex dex="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.2.1_8107596afe1672ff71e7ac34d0ba7f8cb14307e8.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="673d77a5bbddd766037f088e775df525c46407f0">
+        <dex dex="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.2.1_d7afc2b0a04fec29c4aa0a3e53ca2a83990cc322.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="0f436ff018b1fcba2ea59250fbbbd69ac243ec01">
+        <dex dex="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\pre-dexed\debug\KoalaTest-koala3xapi-unspecified_91a975f5b3c1433cf7a3d6887d3c9d68708685a7.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3be474b1b21b31cf2fa93fe6bd641ae108d96452">
+        <dex dex="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.2.1_ec7bf0f58c1339902d8b5eed635386cf06049887.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\jars\libs\internal_impl-23.2.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="607a3d0b8013b4ccbfeb0b7cb293351994e021fb">
+        <dex dex="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\pre-dexed\debug\internal_impl-23.2.1_6c516a22f781fc86bb2d0168f220b4592f5d5bdd.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\exploded-aar\com.android.volley\volley\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8267b74107dfb312655868acb2d2ca9aa0fc5cb0">
+        <dex dex="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\pre-dexed\debug\com.android.volley-volley-unspecified_a6552eb2f1b0e9bd35b4065313fc03934d85e0b4.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3469cb457f10f74c28cbc05f069b6c894f6cbdd0">
+        <dex dex="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.2.1_0060f6ed829d6b0c90fdda35ee625d7d1ed23037.jar" />
+    </item>
+    <item
+        jar="C:\ADT\adk\extras\android\m2repository\com\android\support\support-annotations\23.2.1\support-annotations-23.2.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ccb693bc0774fcb637246f7360de25b4af7df318">
+        <dex dex="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\pre-dexed\debug\support-annotations-23.2.1_d3f5a24c2bf085824a2e4c994f89b514654a3056.jar" />
+    </item>
+    <item
+        jar="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\exploded-aar\KoalaTest\cropLib\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3ba4b3b25e29e3d0a05b755a43e8fa5689fe3cd6">
+        <dex dex="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\build\intermediates\pre-dexed\debug\KoalaTest-cropLib-unspecified_eb9fb2efb4e9f60910974e0c5b7f8a75aa98b182.jar" />
+    </item>
+
+</items>

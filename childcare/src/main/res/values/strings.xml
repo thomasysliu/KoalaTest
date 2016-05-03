@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">ChildCare</string>
+    <string name="menu_main">main</string>
+    <string name="menu_setting">Setting</string>
+    <string name="child_list">Child List</string>
+    <string name="device_list">Device List</string>
+    <string name="click_to_edit">Click to edit</string>
+    <string name="click_to_remove">Click to remove</string>
+    <string name="main_name">name</string>
+    <string name="main_status">status</string>
+    <string name="BLE_not_support">BLE is not supported!!</string>
+    <string name="bluetooth_useType">Bluetooth is not available</string>
+    <string name="cancel">Cancel</string>
+    <string name="next">Next</string>
+    <string name="finish">Finish</string>
+    <string name="ok">OK</string>
+    <string name="remove">Remove</string>
+    <string name="mac_address">MAC Address</string>
+    <string name="child_name">name</string>
+    <string name="moved_away">moved away!!</string>
+    <string name="is_miss">is missing!!</string>
+    <string name="is_new">new</string>
+    <string name="finish_system">Press again to exit the program</string>
+    <string name="base_main">Main</string>
+    <string name="base_setting">Setting</string>
+    <string name="scanning">Scanning</string>
+    <string name="edit_child_name">Edit child name</string>
+    <string name="notification_title">Child Monitoring</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="photo">Photo</string>
+    <string name="choose_photo">Choose Existing Photo</string>
+
+    <string name="login">Log In</string>
+    <string name="new_garden">New Garden</string>
+    <string name="login_as">Login as </string>
+    <string name="select_login_type">Login As : </string>
+    <string-array name="login_type_list">
+        <item>Master</item>
+        <item>Teacher</item>
+        <item>Parent</item>
+        <item>Gateway</item>
+    </string-array>
+
+    <string name="master_account_create_title">Master Account Creation</string>
+    <string name="teacher_create_title">Teacher Creation</string>
+    <string name="gateway_create_title">Gateways Creation</string>
+    <string name="gateway">Gateway</string>
+    <string name="child_profile_create_title">Child Profile Creation</string>
+    <string name="parent_create_title">Parent Creation</string>
+    <string name="parent">Parent</string>
+    <string name="account">Account : </string>
+    <string name="password">Password : </string>
+    <string name="confirm">Confirm : </string>
+    <string name="place">Place : </string>
+    <string name="near">Near : </string>
+    <string name="gateway_near_hint">-60</string>
+    <string name="far">Far : </string>
+    <string name="gateway_far_hint">-95</string>
+    <string name="account_hint">ex:Amy123@gmail.com</string>
+    <string name="account_error">Invalid email format!</string>
+    <string name="password_hint">******</string>
+    <string name="place_hint">ex:Grade 1 Class A</string>
+    <string name="confirm_error">Not same as above!</string>
+    <string name="cancel_signup">Really want to cancel ?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="child">Child</string>
+    <string name="set_alarm_time">Alarm at </string>
+    <string name="alarm_time">Alarm</string>
+    <string name="five">5</string>
+    <string name="minute">minute</string>
+    <string name="error_account_password_empty">Account and Password cannot be empty !! </string>
+    <string name="error_password_confirm_not_same">Password and Confirm are not the same !! </string>
+
+    <string name="gateway_list">Gateway List</string>
+    <string name="parent_list">Parent List</string>
+    <string name="set_alarm_time_title">Set Alarm Time</string>
+    <string name="close">Close</string>
+    <string name="gateway_list_editor">Gateway Editor</string>
+    <string name="parent_list_editor">Parent Editor</string>
+    <string name="child_profile_list_editor">ChildProfile Editor</string>
+
+</resources>

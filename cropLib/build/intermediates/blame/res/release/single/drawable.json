@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\cropLib\\build\\intermediates\\res\\merged\\release\\drawable\\crop__texture.xml",
+        "source": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\cropLib\\src\\main\\res\\drawable\\crop__texture.xml"
+    },
+    {
+        "merged": "D:\\Children-Care-App\\KoalaTest\\cropLib\\build\\intermediates\\res\\merged\\release\\drawable\\crop__texture.xml",
+        "source": "D:\\Children-Care-App\\KoalaTest\\cropLib\\src\\main\\res\\drawable\\crop__texture.xml"
+    },
+    {
+        "merged": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\cropLib\\build\\intermediates\\res\\merged\\release\\drawable\\crop__selectable_background.xml",
+        "source": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\cropLib\\src\\main\\res\\drawable\\crop__selectable_background.xml"
+    },
+    {
+        "merged": "D:\\Children-Care-App\\KoalaTest\\cropLib\\build\\intermediates\\res\\merged\\release\\drawable\\crop__selectable_background.xml",
+        "source": "D:\\Children-Care-App\\KoalaTest\\cropLib\\src\\main\\res\\drawable\\crop__selectable_background.xml"
+    }
+]

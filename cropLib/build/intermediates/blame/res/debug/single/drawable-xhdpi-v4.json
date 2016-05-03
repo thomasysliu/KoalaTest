@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\cropLib\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\crop__ic_cancel.png",
+        "source": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\cropLib\\src\\main\\res\\drawable-xhdpi\\crop__ic_cancel.png"
+    },
+    {
+        "merged": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\cropLib\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\crop__tile.png",
+        "source": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\cropLib\\src\\main\\res\\drawable-xhdpi\\crop__tile.png"
+    },
+    {
+        "merged": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\cropLib\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\crop__ic_done.png",
+        "source": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\cropLib\\src\\main\\res\\drawable-xhdpi\\crop__ic_done.png"
+    },
+    {
+        "merged": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\cropLib\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\crop__divider.9.png",
+        "source": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\cropLib\\src\\main\\res\\drawable-xhdpi\\crop__divider.9.png"
+    }
+]

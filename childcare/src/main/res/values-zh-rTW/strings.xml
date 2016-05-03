@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">ChildCare</string>
+    <string name="menu_main">主頁</string>
+    <string name="menu_setting">設定</string>
+    <string name="child_list">學童清單</string>
+    <string name="device_list">裝置清單</string>
+    <string name="click_to_edit">點擊編輯</string>
+    <string name="click_to_remove">點擊移除</string>
+    <string name="main_name">姓名</string>
+    <string name="main_status">狀態</string>
+    <string name="BLE_not_support">沒有支援BLE!!</string>
+    <string name="bluetooth_useType">無法建立藍芽連線!!</string>
+    <string name="cancel">取消</string>
+    <string name="next">下一步</string>
+    <string name="finish">結束</string>
+    <string name="ok">OK</string>
+    <string name="remove">移除</string>
+    <string name="mac_address">MAC位址</string>
+    <string name="child_name">姓名</string>
+    <string name="moved_away">遠離!!</string>
+    <string name="is_miss">遺失!!</string>
+    <string name="is_new">新增</string>
+    <string name="finish_system">再按一次離開本App</string>
+    <string name="base_main">主頁</string>
+    <string name="base_setting">設定</string>
+    <string name="scanning">掃描中...</string>
+    <string name="edit_child_name">編輯性名</string>
+    <string name="notification_title">孩童監控</string>
+    <string name="take_photo">拍照新增</string>
+    <string name="photo">大頭貼</string>
+    <string name="choose_photo">挑現有照片</string>
+</resources>
