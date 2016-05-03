@@ -51,7 +51,7 @@ public class ApplicationContext extends Application {
     public static List<ChildProfile> mListChildren;
     public static List<NewGatewayItem> mGateways;
     public static List<NewParentItem> mParents;
-    public static int AlarmTime;
+    public static int alarmTime;
     public static List<BluetoothDevice> mDeviceList;
     public static KoalaServiceManager mKoalaManager;
     public static boolean mBooleanKoalaServiceCreated;
@@ -289,10 +289,10 @@ public class ApplicationContext extends Application {
         editor.apply();
     }
 
-    public void saveTeacherPreferences() {
+    public void saveTimePreferences() {
         SharedPreferences sharedPreferences = getSharedPreferences(APPLICATION_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(ALARM_TIME_PREFERENCE, AlarmTime);
+        editor.putInt(ALARM_TIME_PREFERENCE, alarmTime);
         editor.apply();
     }
 
@@ -645,6 +645,7 @@ public class ApplicationContext extends Application {
                             content.gids=data.getString("gids");
                             content.cids=data.getString("cids");
                             content.pids=data.getString("pids");
+                            alarmTime=Integer.parseInt(data.getString("time"));
                             callBack.done(content);
                         }catch (JSONException e){
                             e.printStackTrace();

@@ -41,9 +41,9 @@ public class EditAlarmTimeActivity extends Activity implements View.OnClickListe
         mButtonCancel.setOnClickListener(this);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        final int time = bundle.getInt(ApplicationContext.ALARM_TIME,0);
-
-        editAlarmTime.setText(String.valueOf(time));
+        final int time = bundle.getInt(ApplicationContext.ALARM_TIME, 0);
+        int showAlarmtime = time/60;
+        editAlarmTime.setText(String.valueOf(showAlarmtime));
     }
 
     @Override
@@ -58,7 +58,7 @@ public class EditAlarmTimeActivity extends Activity implements View.OnClickListe
                 int alarmtime = Integer.valueOf(time);
                 alarmtime *= 60;
                 ApplicationContext.update_time(type,ApplicationContext.login_mid ,String.valueOf(alarmtime));
-                bundle.putInt(ApplicationContext.ALARM_TIME, Integer.valueOf(time));
+                bundle.putInt(ApplicationContext.ALARM_TIME, Integer.valueOf(alarmtime));
                 intent.putExtras(bundle);
                 setResult(RESULT_OK, intent);
                 finish();

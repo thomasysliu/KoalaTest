@@ -50,7 +50,6 @@ public class MasterLoginSettingFragment extends Fragment implements OnClickListe
     private static final String TAG = MasterLoginSettingFragment.class.getSimpleName();
     private LinearLayout SetAlarmTime;
     private TextView textTime;
-    private int AlarmTime;
     private ImageView imgAddGateway;
     private ListView gatewayList;
     private List<NewGatewayItem> mGateways = new ArrayList<NewGatewayItem>();
@@ -111,7 +110,9 @@ public class MasterLoginSettingFragment extends Fragment implements OnClickListe
         SetAlarmTime = (LinearLayout) this.getView().findViewById(R.id.setting_alarm);
         SetAlarmTime.setOnClickListener(this);
         textTime = (TextView) this.getView().findViewById(R.id.text_time);
-        AlarmTime = ApplicationContext.AlarmTime;/*
+        int showAlarmtime = ApplicationContext.alarmTime/60;
+        textTime.setText(String.valueOf(showAlarmtime));
+        ;/*
         mImageButtonConnect = (ImageButton) this.getView().findViewById(R.id.image_button_set_ble);
         mImageButtonConnect.setOnClickListener(this);
         mListViewDevices = (ListView) this.getView().findViewById(R.id.list_set_device);
@@ -198,7 +199,7 @@ public class MasterLoginSettingFragment extends Fragment implements OnClickListe
 
             case R.id.setting_alarm:
                 Bundle bundle_set_alarm_time = new Bundle();
-                bundle_set_alarm_time.putInt(ApplicationContext.ALARM_TIME, AlarmTime);
+                bundle_set_alarm_time.putInt(ApplicationContext.ALARM_TIME, ApplicationContext.alarmTime);
                 Intent intent_set_alarm_time = new Intent(getActivity(), EditAlarmTimeActivity.class);
                 intent_set_alarm_time.putExtras(bundle_set_alarm_time);
                 startActivityForResult(intent_set_alarm_time, ApplicationContext.REQUEST_CODE_ALARM_TIME_EDIT);
@@ -328,8 +329,9 @@ public class MasterLoginSettingFragment extends Fragment implements OnClickListe
             case ApplicationContext.REQUEST_CODE_ALARM_TIME_EDIT:
                 if (resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
-                    AlarmTime = bundle.getInt(ApplicationContext.ALARM_TIME,5);
-                    textTime.setText(String.valueOf(AlarmTime));
+                    ApplicationContext.alarmTime = bundle.getInt(ApplicationContext.ALARM_TIME,300);
+                    int showAlarmtime = ApplicationContext.alarmTime/60;
+                    textTime.setText(String.valueOf(showAlarmtime));
 
                 }
                 break;

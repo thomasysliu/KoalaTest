@@ -48,7 +48,7 @@ public class MasterAccountCreateActivity extends Activity  implements View.OnCli
         btNext = (Button) findViewById(R.id.bt_next);
         btNext.setEnabled(true);
 
-        alarmTime = ApplicationContext.AlarmTime/60; //in minutes
+        alarmTime = ApplicationContext.alarmTime/60; //in minutes
 /*
         //set Listeners
         edtAccount.addTextChangedListener(this);
@@ -85,7 +85,7 @@ public class MasterAccountCreateActivity extends Activity  implements View.OnCli
                     time = getString(R.string.five);
                 alarmTime = Integer.valueOf(time);
                 alarmTimeInSecond = alarmTime * 60;
-                ApplicationContext.AlarmTime = alarmTimeInSecond; //in seconds
+                ApplicationContext.alarmTime = alarmTimeInSecond; //in seconds
 
                 if(password.equals("") || account.equals(""))
                 {
@@ -100,7 +100,7 @@ public class MasterAccountCreateActivity extends Activity  implements View.OnCli
                         @Override
                         public void done(CallBackContent content) {
                             if (content != null) {
-                                ApplicationContext.AlarmTime = alarmTimeInSecond;
+                                ApplicationContext.alarmTime = alarmTimeInSecond;
                                 ApplicationContext.signup_mid = content.getMid();
                                 Log.e("TAG", "test: " + ApplicationContext.signup_mid + "\n");
                                 Toast.makeText(MasterAccountCreateActivity.this, "Sign Up Master success!", Toast.LENGTH_LONG).show();
