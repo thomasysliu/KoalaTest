@@ -81,7 +81,7 @@ public class ApplicationContext extends Application {
     public static List<String> mSpinChildName;
     public static String mAccount;
     public static String mPassword;
-    public static String mLoginType;
+    public static int mLoginType;  // 0: master,  1: teacher , 2: parent , 3: gateway
 
 
     private static ApplicationContext mInstance;
