@@ -47,6 +47,7 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
     private static final int REQUEST_ENABLE_BT = 1;
 
     private TextView mTextViewStatus;
+    private TextView mTextViewPlace;
     private ImageView mImageViewKoala;
 
     private List<ChildProfile> mListDevices = new ArrayList<ChildProfile>();
@@ -149,6 +150,7 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
 
     private void initView() {
         mTextViewStatus = (TextView) findViewById(R.id.text_gateway_status);
+        mTextViewPlace = (TextView) findViewById(R.id.text_place);
         mImageViewKoala = (ImageView) findViewById(R.id.image_gateway_user);
         mImageViewKoala.setOnClickListener(this);
 
@@ -267,6 +269,7 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
             stopMonitoring();
         } else {
             ApplicationContext.mIsServiceOn = true;
+            mTextViewStatus.setText(getString(R.string.toggle_on));
             ApplicationContext.notificationServiceStartBuilder(this, ApplicationContext.GATEWAY_TYPE);
             startMonitoring();
         }
