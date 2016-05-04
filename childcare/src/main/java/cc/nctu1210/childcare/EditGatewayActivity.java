@@ -77,8 +77,7 @@ public class EditGatewayActivity extends Activity implements View.OnClickListene
         final String near = bundle.getString(ApplicationContext.GATEWAY_NEAR);
         final String far = bundle.getString(ApplicationContext.GATEWAY_FAR);
         final String title = bundle.getString(ApplicationContext.GATEWAY_TITLE);
-        if(ApplicationContext.mIsLogin)
-            gid = bundle.getString(ApplicationContext.GATEWAY_ID);
+        gid = bundle.getString(ApplicationContext.GATEWAY_ID);
         gatewayTitle.setText(title);
         viewPosition = bundle.getInt(ApplicationContext.LIST_VIEW_POSITION);
         editPlace.setText(place);

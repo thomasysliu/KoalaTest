@@ -57,30 +57,66 @@ public class GatewayCreateActivity extends Activity implements View.OnClickListe
                     final String place = bundle.getString(ApplicationContext.GATEWAY_PLACE);
                     final String near = bundle.getString(ApplicationContext.GATEWAY_NEAR);
                     final String far = bundle.getString(ApplicationContext.GATEWAY_FAR);
-
                     gatewayNum++;
-                    NewGatewayItem newGateway = new  NewGatewayItem(account,password,confirm,place,near,far);
-                    newGateway.setCheck(1);
-                    addANewGateway(newGateway);
+                    ApplicationContext.signUp_gateway("gateway", account, password, place, ApplicationContext.signup_mid, near, far, new CallBack() {
+                        @Override
+                        public void done(CallBackContent content) {
+                            if (content != null) {
+                                NewGatewayItem newGateway = new NewGatewayItem(account, password, confirm, place, near, far);
+                                newGateway.setGid(content.getmGid());
+                                newGateway.setCheck(1);
+                                addANewGateway(newGateway);
+                            } else {
+                                Toast.makeText(GatewayCreateActivity.this, "Sign Up Gateway fail!", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
                 }
                 break;
             case ApplicationContext.REQUEST_CODE_GATEWAY_EDIT:
-                if (resultCode == RESULT_OK) {
+                if (resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     final String place = bundle.getString(ApplicationContext.GATEWAY_PLACE);
                     final String near = bundle.getString(ApplicationContext.GATEWAY_NEAR);
                     final String far = bundle.getString(ApplicationContext.GATEWAY_FAR);
                     final int position = bundle.getInt(ApplicationContext.LIST_VIEW_POSITION);
-                    NewGatewayItem object = mAdapter.getData().get(position);
-                    object.setPlace(place);
-                    object.setNear(near);
-                    object.setFar(far);
-                    object.setCheck(1);
-                    mAdapter.notifyDataSetChanged();
+                    final String gid = bundle.getString(ApplicationContext.GATEWAY_ID);
+                    ApplicationContext.update_gateway("gateway", gid, place, new CallBack() {
+                        @Override
+                        public void done(CallBackContent content) {
+                            if (content != null) {
+                                NewGatewayItem object = mAdapter.getData().get(position);
+                                object.setPlace(place);
+                                object.setCheck(1);
+                                mAdapter.notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(GatewayCreateActivity.this, "update Gateway place fail!", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+
+                    ApplicationContext.update_distance("distance", gid, near, far, new CallBack() {
+                        @Override
+                        public void done(CallBackContent content) {
+                            if (content != null) {
+                                NewGatewayItem object = mAdapter.getData().get(position);
+                                object.setNear(near);
+                                object.setFar(far);
+                                mAdapter.notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(GatewayCreateActivity.this, "update Gateway pdistance fail!", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
                 } else if (resultCode == ApplicationContext.RESULT_CODE_REMOVE) {
                     final int position = data.getIntExtra(ApplicationContext.LIST_VIEW_POSITION, -1);
                     gatewayNum--;
+                    String gid = mAdapter.getData().get(position).getGid();
+                    ApplicationContext.delete("gateway", gid);
+
                     mAdapter.getData().remove(position);
+                    ApplicationContext.mGateways.clear();
+                    ApplicationContext.mGateways.addAll(mGateways);
                     mAdapter.notifyDataSetChanged();
                 }
                 break;
@@ -104,31 +140,11 @@ public class GatewayCreateActivity extends Activity implements View.OnClickListe
                 startActivityForResult(intent, ApplicationContext.REQUEST_CODE_GATEWAY_ADD);
                 break;
             case R.id.bt_next:
-
-                for(int i=0; i< gatewayNum; i++)
-                {
-                    ApplicationContext.signUp_gateway(type, mGateways.get(i).getAccount(), mGateways.get(i).getPassword(),mGateways.get(i).getPlace()
-                            , ApplicationContext.signup_mid, mGateways.get(i).getNear(), mGateways.get(i).getFar(), new CallBack() {
-                        @Override
-                        public void done(CallBackContent content) {
-                            if (content != null) {
-                                check++;
-                                if(check == gatewayNum)
-                                {
-                                    Toast.makeText(GatewayCreateActivity.this, "Sign Up Gateway success!", Toast.LENGTH_LONG).show();
-                                    Intent intent_next = new Intent();
-                                    intent_next.setClass(GatewayCreateActivity.this, ChildProfileCreateActivity.class);
-                                    startActivity(intent_next);
-                                    finish();
-                                }
-                            } else {
-                                Toast.makeText(GatewayCreateActivity.this, "Sign Up Gateway fail!", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-                }
+                Intent intent_next = new Intent();
+                intent_next.setClass(GatewayCreateActivity.this, ChildProfileCreateActivity.class);
+                startActivity(intent_next);
+                finish();
                 //ApplicationContext.getInstance().saveGatewayPreferences();
-
                 break;
         }
     }
@@ -141,6 +157,7 @@ public class GatewayCreateActivity extends Activity implements View.OnClickListe
         final String near = object.getNear();
         final String far = object.getFar();
         final String title = object.getTitle();
+        final String gid = object.getGid();
         Bundle bundle = new Bundle();
         bundle.putString(ApplicationContext.GATEWAY_ACCOUNT, account);
         bundle.putString(ApplicationContext.GATEWAY_PLACE, place);
@@ -148,6 +165,7 @@ public class GatewayCreateActivity extends Activity implements View.OnClickListe
         bundle.putString(ApplicationContext.GATEWAY_FAR, far);
         bundle.putString(ApplicationContext.GATEWAY_TITLE, title);
         bundle.putInt(ApplicationContext.LIST_VIEW_POSITION, position);
+        bundle.putString(ApplicationContext.GATEWAY_ID, gid);
         Intent intent = new Intent(GatewayCreateActivity.this, EditGatewayActivity.class);
         intent.putExtras(bundle);
         startActivityForResult(intent, ApplicationContext.REQUEST_CODE_GATEWAY_EDIT);

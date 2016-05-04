@@ -627,11 +627,16 @@ public class ApplicationContext extends Application {
                 (Request.Method.POST, SIGN_UP_URL, json, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-
-                        Log.i(TAG, response.toString());
-                        CallBackContent content=new CallBackContent();
-                        content.success_msg = response.toString();
-                        callBack.done(content);
+                        try{
+                            Log.i(TAG, response.toString());
+                            JSONObject data = response.getJSONObject("data");
+                            CallBackContent content=new CallBackContent();
+                            String gid = data.getString("gid");
+                            content.mGid = gid;
+                            callBack.done(content);
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
                     }
                 }, new Response.ErrorListener() {
                     @Override
