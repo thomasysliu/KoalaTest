@@ -68,14 +68,18 @@ uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from D:\Children-Care-App\KoalaTest\childcare\src\main\AndroidManifest.xml:16:5-81
 	android:name
 		ADDED from D:\Children-Care-App\KoalaTest\childcare\src\main\AndroidManifest.xml:16:22-78
-android:uses-permission#android.permission.READ_PHONE_STATE
-ADDED from D:\Children-Care-App\KoalaTest\childcare\src\main\AndroidManifest.xml:18:5-83
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from D:\Children-Care-App\KoalaTest\childcare\src\main\AndroidManifest.xml:17:5-80
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare\src\main\AndroidManifest.xml:18:30-80
-android:uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from D:\Children-Care-App\KoalaTest\childcare\src\main\AndroidManifest.xml:19:5-88
+		ADDED from D:\Children-Care-App\KoalaTest\childcare\src\main\AndroidManifest.xml:17:22-78
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from D:\Children-Care-App\KoalaTest\childcare\src\main\AndroidManifest.xml:18:5-75
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare\src\main\AndroidManifest.xml:19:30-85
+		ADDED from D:\Children-Care-App\KoalaTest\childcare\src\main\AndroidManifest.xml:18:22-72
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from D:\Children-Care-App\KoalaTest\childcare\src\main\AndroidManifest.xml:19:5-80
+	android:name
+		ADDED from D:\Children-Care-App\KoalaTest\childcare\src\main\AndroidManifest.xml:19:22-77
 application
 ADDED from D:\Children-Care-App\KoalaTest\childcare\src\main\AndroidManifest.xml:21:5-137:19
 MERGED from [com.android.support:appcompat-v7:23.2.1] D:\Children-Care-App\KoalaTest\childcare\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.2.1\AndroidManifest.xml:25:5-20

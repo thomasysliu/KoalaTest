@@ -112,6 +112,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_logIn:
+                ApplicationContext.mLoginType = LoginType[type];
                 String account=edtAccount.getText().toString();
                 String password=edtPassword.getText().toString();
                 final Intent intent_login = new Intent();

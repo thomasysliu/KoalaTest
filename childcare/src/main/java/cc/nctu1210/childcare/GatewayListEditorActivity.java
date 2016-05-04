@@ -54,6 +54,8 @@ public class GatewayListEditorActivity extends Activity  implements OnClickListe
     private GatewayListAdapterForMaster mGatewayAdapter;
     private int gatewayNum = 0;
     private Button btnClose;
+    private int old_gatewayNum;
+    private int check = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,9 +88,10 @@ public class GatewayListEditorActivity extends Activity  implements OnClickListe
             public void done(CallBackContent content) {
                 if (content != null) {
                     ApplicationContext.mGateways = content.getShow_gateway();
+                    old_gatewayNum = ApplicationContext.mGateways.size();
                     populateGatewayList();
                 } else {
-                    Log.e(TAG, "show_child_by_id fail" + "\n");
+                    Log.e(TAG, "show_all_gateway fail" + "\n");
                 }
             }
         });
@@ -117,7 +120,32 @@ public class GatewayListEditorActivity extends Activity  implements OnClickListe
                 startActivityForResult(intent_add_gateway, ApplicationContext.REQUEST_CODE_GATEWAY_ADD);
                 break;
             case R.id.bt_close:
-                finish();
+                if(old_gatewayNum<gatewayNum)
+                {
+                    check = old_gatewayNum;
+                    for(int i=old_gatewayNum; i< gatewayNum; i++)
+                    {
+                        Log.e(TAG,"old : "+old_gatewayNum+"\n");
+                        Log.e(TAG,"current : "+gatewayNum+"\n");
+                        ApplicationContext.signUp_gateway("gateway", mGateways.get(i).getAccount(), mGateways.get(i).getPassword(), mGateways.get(i).getPlace()
+                                , ApplicationContext.login_mid, mGateways.get(i).getNear(), mGateways.get(i).getFar(), new CallBack() {
+                            @Override
+                            public void done(CallBackContent content) {
+                                if (content != null) {
+                                    check++;
+                                    if (check == gatewayNum) {
+                                        finish();
+                                    }
+                                } else {
+                                    Toast.makeText(GatewayListEditorActivity.this, "Sign Up Gateway fail!", Toast.LENGTH_LONG).show();
+                                    finish();
+                                }
+                            }
+                        });
+                    }
+                }
+                else
+                    finish();
                 break;
 
         }
@@ -161,19 +189,12 @@ public class GatewayListEditorActivity extends Activity  implements OnClickListe
                     final String place = bundle.getString(ApplicationContext.GATEWAY_PLACE);
                     final String near = bundle.getString(ApplicationContext.GATEWAY_NEAR);
                     final String far = bundle.getString(ApplicationContext.GATEWAY_FAR);
-                    ApplicationContext.signUp_gateway("gateway", account, password, place, ApplicationContext.login_mid, near, far, new CallBack() {
-                        @Override
-                        public void done(CallBackContent content) {
-                            if (content != null) {
-                                gatewayNum++;
-                                NewGatewayItem newGateway = new NewGatewayItem(account, password, confirm, place, near, far);
-                                newGateway.setCheck(1);
-                                addANewGateway(newGateway);
-                            } else {
-                                Toast.makeText(GatewayListEditorActivity.this, "Sign Up Gateway fail!", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
+
+                    gatewayNum++;
+                    NewGatewayItem newGateway = new NewGatewayItem(account, password, confirm, place, near, far);
+                    newGateway.setCheck(1);
+                    addANewGateway(newGateway);
+
                 }
                 break;
             case ApplicationContext.REQUEST_CODE_GATEWAY_EDIT:
@@ -184,38 +205,53 @@ public class GatewayListEditorActivity extends Activity  implements OnClickListe
                     final String far = bundle.getString(ApplicationContext.GATEWAY_FAR);
                     final int position = bundle.getInt(ApplicationContext.LIST_VIEW_POSITION);
                     final String gid = bundle.getString(ApplicationContext.GATEWAY_ID);
-                    ApplicationContext.update_gateway("gateway", gid, place, new CallBack() {
-                        @Override
-                        public void done(CallBackContent content) {
-                            if (content != null) {
-                                NewGatewayItem object = mGatewayAdapter.getData().get(position);
-                                object.setPlace(place);
-                                object.setCheck(1);
-                                mGatewayAdapter.notifyDataSetChanged();
-                            } else {
-                                Toast.makeText(GatewayListEditorActivity.this, "update Gateway place fail!", Toast.LENGTH_LONG).show();
+                    if(!gid.equals("")) {
+                        ApplicationContext.update_gateway("gateway", gid, place, new CallBack() {
+                            @Override
+                            public void done(CallBackContent content) {
+                                if (content != null) {
+                                    NewGatewayItem object = mGatewayAdapter.getData().get(position);
+                                    object.setPlace(place);
+                                    object.setCheck(1);
+                                    mGatewayAdapter.notifyDataSetChanged();
+                                } else {
+                                    Toast.makeText(GatewayListEditorActivity.this, "update Gateway place fail!", Toast.LENGTH_LONG).show();
+                                }
                             }
-                        }
-                    });
-                    ApplicationContext.update_distance("distance", gid, near, far, new CallBack() {
-                        @Override
-                        public void done(CallBackContent content) {
-                            if (content != null) {
-                                NewGatewayItem object = mGatewayAdapter.getData().get(position);
-                                object.setNear(near);
-                                object.setFar(far);
-                                mGatewayAdapter.notifyDataSetChanged();
-                            } else {
-                                Toast.makeText(GatewayListEditorActivity.this, "update Gateway pdistance fail!", Toast.LENGTH_LONG).show();
+                        });
+
+                        ApplicationContext.update_distance("distance", gid, near, far, new CallBack() {
+                            @Override
+                            public void done(CallBackContent content) {
+                                if (content != null) {
+                                    NewGatewayItem object = mGatewayAdapter.getData().get(position);
+                                    object.setNear(near);
+                                    object.setFar(far);
+                                    mGatewayAdapter.notifyDataSetChanged();
+                                } else {
+                                    Toast.makeText(GatewayListEditorActivity.this, "update Gateway pdistance fail!", Toast.LENGTH_LONG).show();
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+                    else
+                    {
+                        NewGatewayItem object = mGatewayAdapter.getData().get(position);
+                        object.setPlace(place);
+                        object.setNear(near);
+                        object.setFar(far);
+                        object.setCheck(1);
+                        mGatewayAdapter.notifyDataSetChanged();
+                    }
 
                 } else if (resultCode == ApplicationContext.RESULT_CODE_REMOVE) {
                     final int position = data.getIntExtra(ApplicationContext.LIST_VIEW_POSITION, -1);
                     gatewayNum--;
                     String gid = mGatewayAdapter.getData().get(position).getGid();
-                    ApplicationContext.delete("gateway",gid);
+                    if(!gid.equals("")) {
+                        ApplicationContext.delete("gateway", gid);
+                        old_gatewayNum--;
+                    }
                     mGatewayAdapter.getData().remove(position);
                     ApplicationContext.mGateways.clear();
                     ApplicationContext.mGateways.addAll(mGateways);
@@ -232,5 +268,32 @@ public class GatewayListEditorActivity extends Activity  implements OnClickListe
         ApplicationContext.mGateways.addAll(mGateways);
         mGatewayAdapter.notifyDataSetChanged();
         gatewayList.setSelection(mGatewayAdapter.getCount() - 1);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (old_gatewayNum < gatewayNum) {
+            check = old_gatewayNum;
+            for (int i = old_gatewayNum - 1; i < gatewayNum; i++) {
+                ApplicationContext.signUp_gateway("gateway", mGateways.get(i).getAccount(), mGateways.get(i).getPassword(), mGateways.get(i).getPlace()
+                        , ApplicationContext.login_mid, mGateways.get(i).getNear(), mGateways.get(i).getFar(), new CallBack() {
+                    @Override
+                    public void done(CallBackContent content) {
+                        if (content != null) {
+                            check++;
+                            if (check == gatewayNum) {
+                                finish();
+                            }
+                        } else {
+                            Toast.makeText(GatewayListEditorActivity.this, "Sign Up Gateway fail!", Toast.LENGTH_LONG).show();
+                            finish();
+                        }
+                    }
+                });
+            }
+        } else
+            finish();
+
     }
 }

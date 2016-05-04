@@ -279,6 +279,7 @@
     <string name="menu_main">main</string>
     <string name="menu_setting">Setting</string>
     <string name="minute">minute</string>
+    <string name="monitor">Monitor</string>
     <string name="moved_away">moved away!!</string>
     <string name="near">Near : </string>
     <string name="new_garden">New Garden</string>
@@ -303,6 +304,8 @@
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="take_photo">Take Photo</string>
     <string name="teacher_create_title">Teacher Creation</string>
+    <string name="toggle_off">Off</string>
+    <string name="toggle_on">On</string>
     <string name="yes">Yes</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
