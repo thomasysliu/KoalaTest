@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="D:\Children-Care-App\KoalaTest\childcare\src\main\jniLibs"/></dataSet><dataSet config="debug"><source path="D:\Children-Care-App\KoalaTest\childcare\src\debug\jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\src\main\jniLibs"/></dataSet><dataSet config="debug"><source path="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare\src\debug\jniLibs"/></dataSet></merger>
