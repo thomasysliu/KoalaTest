@@ -32,7 +32,14 @@
                     "endOffset": 309
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 427,
+                        "endColumn": 53,
+                        "endOffset": 476
+                    }
                 }
             },
             {
@@ -44,7 +51,14 @@
                     "endOffset": 404
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 94,
+                        "endOffset": 145
+                    }
                 }
             },
             {
@@ -56,7 +70,14 @@
                     "endOffset": 511
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 150,
+                        "endColumn": 106,
+                        "endOffset": 252
+                    }
                 }
             },
             {
@@ -68,7 +89,14 @@
                     "endOffset": 634
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 257,
+                        "endColumn": 122,
+                        "endOffset": 375
+                    }
                 }
             },
             {
@@ -80,7 +108,14 @@
                     "endOffset": 727
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 380,
+                        "endColumn": 92,
+                        "endOffset": 468
+                    }
                 }
             },
             {
@@ -92,7 +127,14 @@
                     "endOffset": 827
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 473,
+                        "endColumn": 99,
+                        "endOffset": 568
+                    }
                 }
             },
             {
@@ -104,7 +146,14 @@
                     "endOffset": 909
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 573,
+                        "endColumn": 81,
+                        "endOffset": 650
+                    }
                 }
             },
             {
@@ -116,7 +165,14 @@
                     "endOffset": 1006
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 655,
+                        "endColumn": 96,
+                        "endOffset": 747
+                    }
                 }
             },
             {
@@ -128,7 +184,14 @@
                     "endOffset": 1114
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 752,
+                        "endColumn": 107,
+                        "endOffset": 855
+                    }
                 }
             },
             {
@@ -140,7 +203,14 @@
                     "endOffset": 1190
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 860,
+                        "endColumn": 75,
+                        "endOffset": 931
+                    }
                 }
             },
             {
@@ -152,7 +222,14 @@
                     "endOffset": 1266
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 936,
+                        "endColumn": 75,
+                        "endOffset": 1007
+                    }
                 }
             },
             {
@@ -164,7 +241,14 @@
                     "endOffset": 1344
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 1012,
+                        "endColumn": 77,
+                        "endOffset": 1085
+                    }
                 }
             },
             {
@@ -176,7 +260,14 @@
                     "endOffset": 1440
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 1090,
+                        "endColumn": 95,
+                        "endOffset": 1181
+                    }
                 }
             },
             {
@@ -188,7 +279,14 @@
                     "endOffset": 1536
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 1186,
+                        "endColumn": 95,
+                        "endOffset": 1277
+                    }
                 }
             },
             {
@@ -200,7 +298,14 @@
                     "endOffset": 1631
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 1282,
+                        "endColumn": 94,
+                        "endOffset": 1372
+                    }
                 }
             },
             {
@@ -212,7 +317,14 @@
                     "endOffset": 1728
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 1377,
+                        "endColumn": 96,
+                        "endOffset": 1469
+                    }
                 }
             },
             {
@@ -224,7 +336,14 @@
                     "endOffset": 1823
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1474,
+                        "endColumn": 94,
+                        "endOffset": 1564
+                    }
                 }
             },
             {
@@ -236,7 +355,14 @@
                     "endOffset": 1923
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 1569,
+                        "endColumn": 99,
+                        "endOffset": 1664
+                    }
                 }
             },
             {
@@ -248,7 +374,14 @@
                     "endOffset": 2036
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 1669,
+                        "endColumn": 112,
+                        "endOffset": 1777
+                    }
                 }
             },
             {
@@ -260,7 +393,14 @@
                     "endOffset": 2130
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 1782,
+                        "endColumn": 93,
+                        "endOffset": 1871
+                    }
                 }
             },
             {
@@ -348,7 +488,14 @@
                     "endOffset": 2388
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 1,
+                        "startColumn": 4,
+                        "startOffset": 17,
+                        "endColumn": 46,
+                        "endOffset": 59
+                    }
                 }
             },
             {
@@ -360,7 +507,14 @@
                     "endOffset": 2429
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 23,
+                        "startColumn": 4,
+                        "startOffset": 1000,
+                        "endColumn": 40,
+                        "endOffset": 1036
+                    }
                 }
             },
             {
@@ -372,7 +526,14 @@
                     "endOffset": 2473
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 24,
+                        "startColumn": 4,
+                        "startOffset": 1042,
+                        "endColumn": 43,
+                        "endOffset": 1081
+                    }
                 }
             },
             {
@@ -384,7 +545,14 @@
                     "endOffset": 2530
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 482,
+                        "endColumn": 56,
+                        "endOffset": 534
+                    }
                 }
             },
             {
@@ -396,7 +564,14 @@
                     "endOffset": 2568
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 540,
+                        "endColumn": 37,
+                        "endOffset": 573
+                    }
                 }
             },
             {
@@ -446,7 +621,14 @@
                     "endOffset": 2697
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 152,
+                        "endColumn": 43,
+                        "endOffset": 191
+                    }
                 }
             },
             {
@@ -458,7 +640,14 @@
                     "endOffset": 2739
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 777,
+                        "endColumn": 41,
+                        "endOffset": 814
+                    }
                 }
             },
             {
@@ -508,7 +697,14 @@
                     "endOffset": 2909
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 30,
+                        "startColumn": 4,
+                        "startOffset": 1319,
+                        "endColumn": 46,
+                        "endOffset": 1361
+                    }
                 }
             },
             {
@@ -520,7 +716,14 @@
                     "endOffset": 2956
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 243,
+                        "endColumn": 46,
+                        "endOffset": 285
+                    }
                 }
             },
             {
@@ -532,7 +735,14 @@
                     "endOffset": 3005
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 291,
+                        "endColumn": 48,
+                        "endOffset": 335
+                    }
                 }
             },
             {
@@ -601,7 +811,14 @@
                     "endOffset": 3204
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\KoalaTest\\cropLib\\unspecified\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\KoalaTest\\cropLib\\unspecified\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 100,
+                        "endColumn": 67,
+                        "endOffset": 163
+                    }
                 }
             },
             {
@@ -613,7 +830,14 @@
                     "endOffset": 3246
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\KoalaTest\\cropLib\\unspecified\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\KoalaTest\\cropLib\\unspecified\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 168,
+                        "endColumn": 41,
+                        "endOffset": 205
+                    }
                 }
             },
             {
@@ -625,7 +849,14 @@
                     "endOffset": 3301
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\KoalaTest\\cropLib\\unspecified\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\KoalaTest\\cropLib\\unspecified\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 210,
+                        "endColumn": 54,
+                        "endOffset": 260
+                    }
                 }
             },
             {
@@ -637,7 +868,14 @@
                     "endOffset": 3350
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\KoalaTest\\cropLib\\unspecified\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\KoalaTest\\cropLib\\unspecified\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 265,
+                        "endColumn": 48,
+                        "endOffset": 309
+                    }
                 }
             },
             {
@@ -649,7 +887,14 @@
                     "endOffset": 3394
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\KoalaTest\\cropLib\\unspecified\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\KoalaTest\\cropLib\\unspecified\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 314,
+                        "endColumn": 43,
+                        "endOffset": 353
+                    }
                 }
             },
             {
@@ -661,7 +906,14 @@
                     "endOffset": 3439
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 197,
+                        "endColumn": 44,
+                        "endOffset": 237
+                    }
                 }
             },
             {
@@ -673,7 +925,14 @@
                     "endOffset": 3488
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 4,
+                        "startOffset": 1132,
+                        "endColumn": 48,
+                        "endOffset": 1176
+                    }
                 }
             },
             {
@@ -742,7 +1001,14 @@
                     "endOffset": 3703
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 617,
+                        "endColumn": 37,
+                        "endOffset": 650
+                    }
                 }
             },
             {
@@ -754,7 +1020,14 @@
                     "endOffset": 3756
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 946,
+                        "endColumn": 52,
+                        "endOffset": 994
+                    }
                 }
             },
             {
@@ -899,7 +1172,14 @@
                     "endOffset": 4129
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 865,
+                        "endColumn": 40,
+                        "endOffset": 901
+                    }
                 }
             },
             {
@@ -911,7 +1191,14 @@
                     "endOffset": 4167
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 907,
+                        "endColumn": 37,
+                        "endOffset": 940
+                    }
                 }
             },
             {
@@ -961,7 +1248,14 @@
                     "endOffset": 4291
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 730,
+                        "endColumn": 45,
+                        "endOffset": 771
+                    }
                 }
             },
             {
@@ -973,7 +1267,14 @@
                     "endOffset": 4332
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 341,
+                        "endColumn": 40,
+                        "endOffset": 377
+                    }
                 }
             },
             {
@@ -985,7 +1286,14 @@
                     "endOffset": 4375
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 383,
+                        "endColumn": 42,
+                        "endOffset": 421
+                    }
                 }
             },
             {
@@ -1016,7 +1324,14 @@
                     "endOffset": 4480
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 65,
+                        "endColumn": 40,
+                        "endOffset": 101
+                    }
                 }
             },
             {
@@ -1028,7 +1343,14 @@
                     "endOffset": 4524
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 107,
+                        "endColumn": 43,
+                        "endOffset": 146
+                    }
                 }
             },
             {
@@ -1078,7 +1400,14 @@
                     "endOffset": 4647
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 820,
+                        "endColumn": 43,
+                        "endOffset": 859
+                    }
                 }
             },
             {
@@ -1128,7 +1457,14 @@
                     "endOffset": 4767
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 579,
+                        "endColumn": 36,
+                        "endOffset": 611
+                    }
                 }
             },
             {
@@ -1159,7 +1495,14 @@
                     "endOffset": 4852
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 27,
+                        "startColumn": 4,
+                        "startOffset": 1182,
+                        "endColumn": 51,
+                        "endOffset": 1229
+                    }
                 }
             },
             {
@@ -1171,7 +1514,14 @@
                     "endOffset": 4886
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 656,
+                        "endColumn": 33,
+                        "endOffset": 685
+                    }
                 }
             },
             {
@@ -1297,7 +1647,14 @@
                     "endOffset": 5206
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 29,
+                        "startColumn": 4,
+                        "startOffset": 1280,
+                        "endColumn": 37,
+                        "endOffset": 1313
+                    }
                 }
             },
             {
@@ -1347,7 +1704,14 @@
                     "endOffset": 5332
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 691,
+                        "endColumn": 37,
+                        "endOffset": 724
+                    }
                 }
             },
             {
@@ -1359,7 +1723,14 @@
                     "endOffset": 5376
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 25,
+                        "startColumn": 4,
+                        "startOffset": 1087,
+                        "endColumn": 43,
+                        "endOffset": 1126
+                    }
                 }
             },
             {
@@ -1428,7 +1799,14 @@
                     "endOffset": 5632
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 1876,
+                        "endColumn": 100,
+                        "endOffset": 1972
+                    }
                 }
             },
             {
@@ -1440,7 +1818,14 @@
                     "endOffset": 5676
                 },
                 "from": {
-                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml"
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 4,
+                        "startOffset": 1235,
+                        "endColumn": 43,
+                        "endOffset": 1274
+                    }
                 }
             },
             {

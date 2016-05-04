@@ -275,7 +275,7 @@ public class GatewayListEditorActivity extends Activity  implements OnClickListe
         super.onBackPressed();
         if (old_gatewayNum < gatewayNum) {
             check = old_gatewayNum;
-            for (int i = old_gatewayNum - 1; i < gatewayNum; i++) {
+            for (int i = old_gatewayNum; i < gatewayNum; i++) {
                 ApplicationContext.signUp_gateway("gateway", mGateways.get(i).getAccount(), mGateways.get(i).getPassword(), mGateways.get(i).getPlace()
                         , ApplicationContext.login_mid, mGateways.get(i).getNear(), mGateways.get(i).getFar(), new CallBack() {
                     @Override
