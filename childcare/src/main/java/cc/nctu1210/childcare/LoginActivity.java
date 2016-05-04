@@ -116,7 +116,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                 String account=edtAccount.getText().toString();
                 String password=edtPassword.getText().toString();
                 final Intent intent_login = new Intent();
-                if(type == 0) {
+                if(type == ApplicationContext.MASTER_TYPE) {
                     intent_login.setClass(LoginActivity.this, MasterLoginTabViewActivity.class);
                     ApplicationContext.login_admin(LoginType[type], account, password, new CallBack() {
                         @Override
@@ -136,7 +136,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                         }
                     });
                 }
-                else if(type == 1)
+                else if(type == ApplicationContext.TEACHER_TYPE)
                 {
                     intent_login.setClass(LoginActivity.this, TeacherLoginActivity.class);
                     ApplicationContext.login_teacher(LoginType[type], account, password, new CallBack() {
@@ -155,7 +155,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                         }
                     });
                 }
-                else if(type == 2)
+                else if(type == ApplicationContext.PARENT_TYPE)
                 {
                     intent_login.setClass(LoginActivity.this, ParentLoginActivity.class);
                     ApplicationContext.login_parent(LoginType[type], account, password, new CallBack() {
@@ -175,7 +175,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                         }
                     });
                 }
-                else if(type == 3)
+                else if(type == ApplicationContext.GATEWAY_TYPE)
                 {
                     intent_login.setClass(LoginActivity.this, GatewayLoginActivity.class);
                     ApplicationContext.login_gateway(LoginType[type], account, password, new CallBack() {
