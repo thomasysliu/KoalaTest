@@ -74,7 +74,7 @@ public class ParentLoginActivity extends Activity implements View.OnClickListene
     public void onResume() {
         super.onResume();
         if (ApplicationContext.mIsServiceOn) {
-            ApplicationContext.notificationServiceStartBuilder(this);
+            ApplicationContext.notificationServiceStartBuilder(this, ApplicationContext.PARENT_TYPE);
             mParentPollingIntent = new Intent(ParentLoginActivity.this, ParentScheduledService.class);
             ParentLoginActivity.this.startService(mParentPollingIntent);
         } else {
@@ -175,7 +175,7 @@ public class ParentLoginActivity extends Activity implements View.OnClickListene
         } else {
             mTextViewStatus.setText(getString(R.string.toggle_on));
             ApplicationContext.mIsServiceOn=true;
-            ApplicationContext.notificationServiceStartBuilder(this);
+            ApplicationContext.notificationServiceStartBuilder(this, ApplicationContext.PARENT_TYPE);
             mParentPollingIntent = new Intent(ParentLoginActivity.this, ParentScheduledService.class);
             ParentLoginActivity.this.startService(mParentPollingIntent);
         }

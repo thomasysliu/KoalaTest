@@ -59,7 +59,7 @@ public class MasterLoginMainFragment extends Fragment implements View.OnClickLis
     public void onResume() {
         super.onResume();
         if (ApplicationContext.mIsServiceOn) {
-            ApplicationContext.notificationServiceStartBuilder(getActivity());
+            ApplicationContext.notificationServiceStartBuilder(getActivity(), ApplicationContext.MASTER_TYPE);
             mPollingIntent = new Intent(getActivity(), MasterScheduledService.class);
             getActivity().startService(mPollingIntent);
         } else {
@@ -134,7 +134,7 @@ public class MasterLoginMainFragment extends Fragment implements View.OnClickLis
         } else {
             ApplicationContext.mIsServiceOn = true;
             mTextViewStatus.setText(getString(R.string.toggle_on));
-            ApplicationContext.notificationServiceStartBuilder(getActivity());
+            ApplicationContext.notificationServiceStartBuilder(getActivity(), ApplicationContext.MASTER_TYPE);
             mPollingIntent = new Intent(getActivity(), MasterScheduledService.class);
             getActivity().startService(mPollingIntent);
         }

@@ -44,7 +44,11 @@ import java.util.List;
 
 import cc.nctu1210.api.koala3x.KoalaServiceManager;
 import cc.nctu1210.childcare.BaseTabViewActivity;
+import cc.nctu1210.childcare.GatewayLoginActivity;
+import cc.nctu1210.childcare.MasterLoginTabViewActivity;
+import cc.nctu1210.childcare.ParentLoginActivity;
 import cc.nctu1210.childcare.R;
+import cc.nctu1210.childcare.TeacherLoginActivity;
 import cc.nctu1210.entity.ChildProfile;
 import cc.nctu1210.view.NewGatewayItem;
 import cc.nctu1210.view.NewParentItem;
@@ -82,6 +86,11 @@ public class ApplicationContext extends Application {
     public static String mAccount;
     public static String mPassword;
     public static int mLoginType;  // 0: master,  1: teacher , 2: parent , 3: gateway
+
+    public static final int MASTER_TYPE = 0;
+    public static final int TEACHER_TYPE = 1;
+    public static final int PARENT_TYPE = 2;
+    public static final int GATEWAY_TYPE = 3;
 
 
     private static ApplicationContext mInstance;
@@ -325,7 +334,7 @@ public class ApplicationContext extends Application {
             editor.putString(GATEWAY_CONFIRM_PREFERENCE + i, mGateways.get(i).getConfirm());
             editor.putString(GATEWAY_PLACE_PREFERENCE+i, mGateways.get(i).getPlace());
             editor.putString(GATEWAY_NEAR_PREFERENCE+i, mGateways.get(i).getNear());
-            editor.putString(GATEWAY_FAR_PREFERENCE+i, mGateways.get(i).getFar());
+            editor.putString(GATEWAY_FAR_PREFERENCE + i, mGateways.get(i).getFar());
         }
         editor.apply();
     }
@@ -1234,13 +1243,23 @@ public class ApplicationContext extends Application {
         VolleyRequestManager.getInstance(getInstance().getApplicationContext()).addToRequestQueue(jsObjRequest);
     }
 
-    public static void notificationServiceStartBuilder(Activity activity) {
+    public static void notificationServiceStartBuilder(Activity activity, int loginType) {
         final int notifyID = NOTIFY_SERVICE_ID; // 通知的識別號碼
         final boolean autoCancel = false; // 點擊通知後是否要自動移除掉通知
         final Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION); // 通知音效的URI，在這裡使用系統內建的通知音效
         final int requestCode = REQUEST_NOTIFICATION_SERVICE; // PendingIntent的Request Code
         final Intent intent = activity.getIntent(); // 目前Activity的Intent
-        intent.setClass(activity, BaseTabViewActivity.class);
+        if (loginType == MASTER_TYPE) {
+            intent.setClass(activity, MasterLoginTabViewActivity.class);
+        } else if (loginType == TEACHER_TYPE) {
+            intent.setClass(activity, TeacherLoginActivity.class);
+        } else if (loginType == PARENT_TYPE) {
+            intent.setClass(activity, ParentLoginActivity.class);
+        } else if (loginType == GATEWAY_TYPE) {
+            intent.setClass(activity, GatewayLoginActivity.class);
+        }
+
+
         final int flags = PendingIntent.FLAG_UPDATE_CURRENT; // ONE_SHOT：PendingIntent只使用一次；CANCEL_CURRENT：PendingIntent執行前會先結束掉之前的；NO_CREATE：沿用先前的PendingIntent，不建立新的PendingIntent；UPDATE_CURRENT：更新先前PendingIntent所帶的額外資料，並繼續沿用
         final PendingIntent pendingIntent = PendingIntent.getActivity(activity.getApplicationContext(), requestCode, intent, flags); // 取得PendingIntent
 

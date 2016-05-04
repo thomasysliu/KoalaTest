@@ -32,12 +32,12 @@
         "source": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\layout\\abc_screen_simple.xml"
     },
     {
-        "merged": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\main_page.xml",
-        "source": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\layout\\main_page.xml"
-    },
-    {
         "merged": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\child_profie_edit.xml",
         "source": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\layout\\child_profie_edit.xml"
+    },
+    {
+        "merged": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\main_page.xml",
+        "source": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\layout\\main_page.xml"
     },
     {
         "merged": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",

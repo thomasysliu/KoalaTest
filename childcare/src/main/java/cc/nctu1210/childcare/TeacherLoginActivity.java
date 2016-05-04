@@ -73,7 +73,7 @@ public class TeacherLoginActivity extends Activity implements View.OnClickListen
     public void onResume() {
         super.onResume();
         if (ApplicationContext.mIsServiceOn) {
-            ApplicationContext.notificationServiceStartBuilder(this);
+            ApplicationContext.notificationServiceStartBuilder(this, ApplicationContext.TEACHER_TYPE);
             mTeacherPollingIntent = new Intent(TeacherLoginActivity.this, TeacherScheduledService.class);
             TeacherLoginActivity.this.startService(mTeacherPollingIntent);
         } else {
@@ -173,7 +173,7 @@ public class TeacherLoginActivity extends Activity implements View.OnClickListen
         } else {
             mTextViewStatus.setText(getString(R.string.toggle_on));
             ApplicationContext.mIsServiceOn=true;
-            ApplicationContext.notificationServiceStartBuilder(this);
+            ApplicationContext.notificationServiceStartBuilder(this, ApplicationContext.TEACHER_TYPE);
             mTeacherPollingIntent = new Intent(TeacherLoginActivity.this, ParentScheduledService.class);
             TeacherLoginActivity.this.startService(mTeacherPollingIntent);
         }

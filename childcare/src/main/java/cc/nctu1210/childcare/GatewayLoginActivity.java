@@ -128,7 +128,7 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
             ApplicationContext.mBluetoothAdapter = mBtAdapter;
             ApplicationContext.mBLEScanner = mBLEScanner;
             if (ApplicationContext.mIsServiceOn) {
-                ApplicationContext.notificationServiceStartBuilder(this);
+                ApplicationContext.notificationServiceStartBuilder(this, ApplicationContext.GATEWAY_TYPE);
                 startMonitoring();
             } else {
                 ApplicationContext.cancelNotificationService(this);
@@ -267,7 +267,7 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
             stopMonitoring();
         } else {
             ApplicationContext.mIsServiceOn = true;
-            ApplicationContext.notificationServiceStartBuilder(this);
+            ApplicationContext.notificationServiceStartBuilder(this, ApplicationContext.GATEWAY_TYPE);
             startMonitoring();
         }
     }
