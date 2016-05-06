@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,7 +44,6 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
     public static List<ChildItem> mChildItems = new ArrayList<ChildItem>();
     private ListView mListViewChildren;
     private List<ChildProfile> mListChildren;
-    private HashMap<String,ChildProfile> mMapChildren;
     private String [] cids;
     private int i;
     private static final int REQUEST_ENABLE_BT = 1;
@@ -79,16 +79,14 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
                     }
                     if ((position = ApplicationContext.getInstance().findChild(device.getAddress())) != -1) {
                         ChildProfile child = mListChildren.get(position);
-                        ChildItem item = mChildItems.get(position);
                         String status="?";
                         if(!range.equals("miss"))
-                            status = String.valueOf(rssi);
+                            status = String.valueOf(range);
                         child.setStatus(status);
-                        item.rssi = status;
+                        child.setRssi(String.valueOf(rssi));
                         int unixTime = (int) (System.currentTimeMillis() / 1000L);
                         Log.i(TAG, "scan a device:"+device.getAddress()+" rssi:"+status+" time:"+unixTime);
-                        ApplicationContext.gateway_upload(ApplicationContext.mGid,item.cid,item.rssi,String.valueOf(unixTime));
-                        mChildListAdapter.notifyDataSetChanged();
+                        ApplicationContext.gateway_upload(ApplicationContext.mGid,child.getCid(),child.getRssi(),String.valueOf(unixTime));
                     }
                     break;
             }
@@ -99,9 +97,6 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gateway_login);
-        mListChildren = ApplicationContext.mListChildren;
-        mMapChildren = ApplicationContext.mMapChildren;
-        cids = ApplicationContext.cids.split(",");
         initView();
 
         Log.i(TAG, "getPackageManager");
@@ -148,26 +143,6 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
                 this.stopService(mGatewayPollingIntent);
             }
         }
-        if (ApplicationContext.mIsLogin && ApplicationContext.mIsServiceOn) {
-            ApplicationContext.showProgressDialog(this);
-            ApplicationContext.login_gateway(ApplicationContext.mLoginFlag, ApplicationContext.mAccount, ApplicationContext.mPassword, new CallBack() {
-                @Override
-                public void done(CallBackContent content) {
-                    if (content != null) {
-                        ApplicationContext.login_mid = content.getMid();
-                        ApplicationContext.cids = content.getCids();
-                        ApplicationContext.mGid = content.getmGid();
-                        ApplicationContext.mPlace = content.getPlace();
-                        ApplicationContext.mIsLogin = true;
-                        ApplicationContext.clearChildrenList();
-                        initView();
-                    } else {
-                        Toast.makeText(GatewayLoginActivity.this, "Login fail !", Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
-            ApplicationContext.dismissProgressDialog();
-        }
     }
 
     @Override
@@ -198,27 +173,18 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
         mChildListAdapter = new ChildrenListAdapterForGateway(GatewayLoginActivity.this, mChildItems);
         mListViewChildren = (ListView) findViewById(R.id.list_main_child);
         mListViewChildren.setAdapter(mChildListAdapter);
-        final int num_of_children = cids.length;
         ApplicationContext.showProgressDialog(this);
-        if (mListChildren.size() != num_of_children) {
-            ApplicationContext.mShowChildCount = 0;
-            for (i=0; i<num_of_children; i++) {
-                ApplicationContext.show_child_by_id(cids[i], new CallBack() {
-                    @Override
-                    public void done(CallBackContent content) {
-                        if (content != null) {
-                            ApplicationContext.mShowChildCount++;
-                            ChildProfile mChild = content.getChild();
-                            ApplicationContext.addANewChild(mChild);
-                            if (ApplicationContext.mShowChildCount == num_of_children)
-                                populateList();
-                        } else {
-                            Log.e(TAG, "show_child_by_id fail" + "\n");
-                        }
-                    }
-                });
+        ApplicationContext.show_all_children(ApplicationContext.login_mid, false, -1, new CallBack() {
+            @Override
+            public void done(CallBackContent content) {
+                if (content != null) {
+                    mListChildren = content.getShow_children();
+                    populateList();
+                } else {
+                    Log.e(TAG, "show_child_by_id fail" + "\n");
+                }
             }
-        }
+        });
         ApplicationContext.dismissProgressDialog();
     }
 
@@ -237,6 +203,7 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
     private void populateList() {
         mChildListAdapter.getData().clear();
         Log.i(TAG, "Initializing ListView....." + mChildListAdapter.getData().size());
+        Collections.sort(mListChildren);
         for (int i = 0, size = mListChildren.size(); i < size; i++) {
             ChildItem object = new ChildItem(mListChildren.get(i).getName(),mListChildren.get(i).getStatus());
             object.photoName = mListChildren.get(i).getPhotoName();
