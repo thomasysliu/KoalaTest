@@ -2,6 +2,7 @@ package cc.nctu1210.childcare;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -26,6 +28,8 @@ import com.soundcloud.android.crop.Crop;
 import java.io.File;
 
 import cc.nctu1210.tool.ApplicationContext;
+import cc.nctu1210.tool.CallBack;
+import cc.nctu1210.tool.CallBackContent;
 import cc.nctu1210.tool.VolleyRequestManager;
 
 /**
@@ -45,6 +49,7 @@ public class ChildProfleEditActivity extends Activity implements View.OnClickLis
     private File tmpFile = ApplicationContext.createImageFile(ApplicationContext.CHILD_PHOTO_FILE_PATH, "tmp.jpg");
     Bitmap photo = null;
     private String type = "child";
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +58,9 @@ public class ChildProfleEditActivity extends Activity implements View.OnClickLis
                 R.layout.title_bar);
         setFinishOnTouchOutside(false);
         setContentView(R.layout.child_profie_edit);
+        progressDialog = new ProgressDialog(ChildProfleEditActivity.this);
+        progressDialog.setTitle(getString(R.string.processing_title));
+        progressDialog.setMessage(getString(R.string.processing_dialog));
         init();
     }
 
@@ -196,39 +204,86 @@ public class ChildProfleEditActivity extends Activity implements View.OnClickLis
                         }).show();
                 break;
             case R.id.button_edit_ok:
-                Intent intent = getIntent();
-                Bundle bundle = new Bundle();
-                final String name = mEditTextName.getText().toString();
-                int position = viewPosition;
-                bundle.putString(ApplicationContext.CHILD_NAME, name);
-                bundle.putInt(ApplicationContext.LIST_VIEW_POSITION, position);
-                bundle.putString(ApplicationContext.PHOTO_NAME, photoName);
-                intent.putExtras(bundle);
-                if (photo != null) {
-                    //final File photoFile = ApplicationContext.createImageFile(ApplicationContext.CHILD_PHOTO_FILE_PATH, photoName);
-                    //ApplicationContext.saveBitmap(photoFile, photo);
-                    ApplicationContext.addBitmapToMemoryCache(photoName, photo);
-                    ApplicationContext.update_child("child", cid, name, photo);
-                    ApplicationContext.imageFileDelete(tmpFile);
+                if(ApplicationContext.checkInternetConnection(this)) {
+                    final Intent intent = getIntent();
+                    final Bundle bundle = new Bundle();
+                    final String name = mEditTextName.getText().toString();
+                    final int position = viewPosition;
+                    if (photo != null) {
+                        //final File photoFile = ApplicationContext.createImageFile(ApplicationContext.CHILD_PHOTO_FILE_PATH, photoName);
+                        //ApplicationContext.saveBitmap(photoFile, photo);
+                        ApplicationContext.addBitmapToMemoryCache(photoName, photo);
+                        progressDialog.show();
+                        ApplicationContext.update_child("child", cid, name, photo, new CallBack() {
+                            @Override
+                            public void done(CallBackContent content) {
+                                if (content != null) {
+                                    progressDialog.dismiss();
+                                    bundle.putString(ApplicationContext.CHILD_NAME, name);
+                                    bundle.putInt(ApplicationContext.LIST_VIEW_POSITION, position);
+                                    bundle.putString(ApplicationContext.PHOTO_NAME, photoName);
+                                    intent.putExtras(bundle);
+                                    setResult(RESULT_OK, intent);
+                                    finish();
+
+                                } else {
+                                    Toast.makeText(ChildProfleEditActivity.this, "edit child fail!", Toast.LENGTH_LONG).show();
+                                    progressDialog.dismiss();
+                                }
+                            }
+                        });
+                        ApplicationContext.imageFileDelete(tmpFile);
+                    } else {
+                        photo = ApplicationContext.getBitMapById(this, R.drawable.default_user);
+                        progressDialog.show();
+                        ApplicationContext.update_child("child", cid, name, photo, new CallBack() {
+                            @Override
+                            public void done(CallBackContent content) {
+                                if (content != null) {
+                                    progressDialog.dismiss();
+                                    bundle.putString(ApplicationContext.CHILD_NAME, name);
+                                    bundle.putInt(ApplicationContext.LIST_VIEW_POSITION, position);
+                                    bundle.putString(ApplicationContext.PHOTO_NAME, photoName);
+                                    intent.putExtras(bundle);
+                                    setResult(RESULT_OK, intent);
+                                    finish();
+
+                                } else {
+                                    Toast.makeText(ChildProfleEditActivity.this, "edit child fail!", Toast.LENGTH_LONG).show();
+                                    progressDialog.dismiss();
+                                }
+                            }
+                        });
+
+                    }
                 }
                 else
-                {
-                    photo = ApplicationContext.getBitMapById(this, R.drawable.default_user);
-                    ApplicationContext.update_child("child", cid, name, photo);
+                    Toast.makeText(ChildProfleEditActivity.this, getString(R.string.internet_error), Toast.LENGTH_LONG).show();
 
-                }
-                setResult(RESULT_OK, intent);
-                finish();
                 break;
             case R.id.button_edit_remove:
-                intent = getIntent();
-                position = viewPosition;
-                intent.putExtra(ApplicationContext.LIST_VIEW_POSITION, position);
-                setResult(ApplicationContext.RESULT_CODE_REMOVE, intent);
-                final String addr = deviceAddress;
-                ApplicationContext.removeAChild(addr);
-                ApplicationContext.delete("child",cid);
-                finish();
+                if(ApplicationContext.checkInternetConnection(this)) {
+                    final Intent intent = getIntent();
+                    final int position = viewPosition;
+                    ApplicationContext.delete("child", cid, new CallBack() {
+                        @Override
+                        public void done(CallBackContent content) {
+                            if (content != null) {
+                                progressDialog.dismiss();
+                                intent.putExtra(ApplicationContext.LIST_VIEW_POSITION, position);
+                                setResult(ApplicationContext.RESULT_CODE_REMOVE, intent);
+                                final String addr = deviceAddress;
+                                ApplicationContext.removeAChild(addr);
+                                finish();
+                            } else {
+                                Toast.makeText(ChildProfleEditActivity.this, "Remove child fail! ", Toast.LENGTH_LONG).show();
+                                progressDialog.dismiss();
+                            }
+                        }
+                    });
+                }
+                else
+                    Toast.makeText(ChildProfleEditActivity.this, getString(R.string.internet_error), Toast.LENGTH_LONG).show();
                 break;
         }
     }

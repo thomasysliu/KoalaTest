@@ -2,6 +2,7 @@ package cc.nctu1210.childcare;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -29,6 +30,8 @@ import cc.nctu1210.api.koala3x.KoalaServiceManager;
 import cc.nctu1210.api.koala3x.SensorEvent;
 import cc.nctu1210.api.koala3x.SensorEventListener;
 import cc.nctu1210.tool.ApplicationContext;
+import cc.nctu1210.tool.CallBack;
+import cc.nctu1210.tool.CallBackContent;
 import cc.nctu1210.view.NewParentItem;
 import cc.nctu1210.view.ParentCreateChildItem;
 import cc.nctu1210.view.ParentCreateChildrenListAdapter;
@@ -44,6 +47,7 @@ public class EditParentActivity extends Activity implements View.OnClickListener
     private Button mButtonOk;
     private Button mButtonRemove;
     private String pid = "";
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,9 @@ public class EditParentActivity extends Activity implements View.OnClickListener
                 R.layout.title_bar);
         setFinishOnTouchOutside(false);
         setContentView(R.layout.edit_parent);
+        progressDialog = new ProgressDialog(EditParentActivity.this);
+        progressDialog.setTitle(getString(R.string.processing_title));
+        progressDialog.setMessage(getString(R.string.processing_dialog));
         init();
     }
 
@@ -106,30 +113,65 @@ public class EditParentActivity extends Activity implements View.OnClickListener
                 new_child_list.setSelection(mAdapter.getCount() - 1);
                 break;
             case R.id.button_edit_ok:
-                Intent intent = getIntent();
-                Bundle bundle = new Bundle();
-                bundle.putString(ApplicationContext.PARENT_ID, pid);
-                int position = viewPosition;
-                bundle.putInt(ApplicationContext.LIST_VIEW_POSITION, position);
-                int num_child = mAdapter.getCount();
-                if(num_child!=0) {
-                    bundle.putInt(ApplicationContext.PARENT_CREATE_CHILD_NUM,num_child);
-                    for (int i = 0; i < num_child; i++) {
-                        bundle.putString(ApplicationContext.PARENT_CREATE_CHILD_ID + i, mNewChild.get(i).getID());
-                        bundle.putInt(ApplicationContext.PARENT_CREATE_CHILD_SPINNER_SELECT + i, mNewChild.get(i).getSpinnerSelect());
+                if(ApplicationContext.checkInternetConnection(this)) {
+                    final Intent intent = getIntent();
+                    final Bundle bundle = new Bundle();
+                    bundle.putString(ApplicationContext.PARENT_ID, pid);
+                    int position = viewPosition;
+                    bundle.putInt(ApplicationContext.LIST_VIEW_POSITION, position);
+                    final int num_child = mAdapter.getCount();
+                    String childIdlist = "";
+                    if(num_child!=0) {
+                        for (int i = 0; i < num_child; i++) {
+                            childIdlist = childIdlist + mNewChild.get(i).getID() + ",";
+                        }
+                        progressDialog.show();
+                        ApplicationContext.parent_child_define(pid, childIdlist, new CallBack() {
+                            @Override
+                            public void done(CallBackContent content) {
+                                if (content != null) {
+                                    bundle.putInt(ApplicationContext.PARENT_CREATE_CHILD_NUM, num_child);
+                                    for (int i = 0; i < num_child; i++) {
+                                        bundle.putString(ApplicationContext.PARENT_CREATE_CHILD_ID + i, mNewChild.get(i).getID());
+                                        bundle.putInt(ApplicationContext.PARENT_CREATE_CHILD_SPINNER_SELECT + i, mNewChild.get(i).getSpinnerSelect());
+                                    }
+                                    progressDialog.dismiss();
+                                    intent.putExtras(bundle);
+                                    setResult(RESULT_OK, intent);
+                                    finish();
+                                } else {
+                                    Toast.makeText(EditParentActivity.this, "Edit parent fail! ", Toast.LENGTH_LONG).show();
+                                    progressDialog.dismiss();
+                                }
+                            }
+                        });
                     }
                 }
-                intent.putExtras(bundle);
-                setResult(RESULT_OK, intent);
-                finish();
+                else
+                    Toast.makeText(EditParentActivity.this, getString(R.string.internet_error), Toast.LENGTH_LONG).show();
 
                 break;
             case R.id.button_edit_remove:
-                intent = getIntent();
-                int position_remove = viewPosition;
-                intent.putExtra(ApplicationContext.LIST_VIEW_POSITION, position_remove);
-                setResult(ApplicationContext.RESULT_CODE_REMOVE, intent);
-                finish();
+                if(ApplicationContext.checkInternetConnection(this)) {
+                    final Intent intent_remove = getIntent();
+                    final int position_remove = viewPosition;
+                    ApplicationContext.delete("parent", pid, new CallBack() {
+                        @Override
+                        public void done(CallBackContent content) {
+                            if (content != null) {
+                                progressDialog.dismiss();
+                                intent_remove.putExtra(ApplicationContext.LIST_VIEW_POSITION, position_remove);
+                                setResult(ApplicationContext.RESULT_CODE_REMOVE, intent_remove);
+                                finish();
+                            } else {
+                                Toast.makeText(EditParentActivity.this, "Remove parent fail! ", Toast.LENGTH_LONG).show();
+                                progressDialog.dismiss();
+                            }
+                        }
+                    });
+                }
+                else
+                    Toast.makeText(EditParentActivity.this, getString(R.string.internet_error), Toast.LENGTH_LONG).show();
                 break;
         }
     }

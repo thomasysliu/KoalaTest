@@ -66,6 +66,7 @@
     <string name="gateway_list">監測員清單</string>
     <string name="gateway_list_editor">監測員編輯</string>
     <string name="gateway_near_hint">-60</string>
+    <string name="internet_error">沒有網路 !!</string>
     <string name="is_miss">遺失!!</string>
     <string name="is_new">新增</string>
     <string name="login">登入</string>

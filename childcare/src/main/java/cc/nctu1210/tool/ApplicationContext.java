@@ -18,6 +18,8 @@ import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Base64;
@@ -952,7 +954,47 @@ public class ApplicationContext extends Application {
         VolleyRequestManager.getInstance(getInstance().getApplicationContext()).addToRequestQueue(jsObjRequest);
     }
 
-    public static void parent_child_define(String pid, String cids) {
+    public static void gateway_show_child_by_id(final String cid,final CallBack callBack) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("cid", cid);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.POST, SHOW_CHILD_BY_ID_URL, json, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+                            Log.i(TAG, response.toString());
+                            JSONObject data = response.getJSONObject("data");
+                            CallBackContent content=new CallBackContent();
+                            String name = data.getString("name");
+                            String photo_url = data.getString("photo");
+                            String mac =  data.getString("mac");
+                            //mSpinChildName.add(name);
+                            ChildProfile child = new ChildProfile(name, mac, photo_url);
+                            child.setCid(cid);
+                            content.child = child;
+                            callBack.done(content);
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i(TAG, error.toString());
+                    }
+                });
+        //no cache
+        jsObjRequest.setShouldCache(false);
+        VolleyRequestManager.getInstance(getInstance().getApplicationContext()).addToRequestQueue(jsObjRequest);
+    }
+
+    public static void parent_child_define(String pid, String cids, final CallBack callBack) {
         JSONObject json = new JSONObject();
         try {
             json.put("pid", pid);
@@ -966,11 +1008,15 @@ public class ApplicationContext extends Application {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.i(TAG, response.toString());
+                        CallBackContent content=new CallBackContent();
+                        content.success_msg = response.toString();
+                        callBack.done(content);
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i(TAG, error.toString());
+                        callBack.done(null);
                     }
                 });
         //no cache
@@ -1020,7 +1066,7 @@ public class ApplicationContext extends Application {
         VolleyRequestManager.getInstance(getInstance().getApplicationContext()).addToRequestQueue(jsObjRequest);
     }
 
-    public static void delete(String type, final String id) {
+    public static void delete(String type, final String id, final CallBack callBack) {
         switch (type) {
             case "child":
                 JSONObject json_delete_child = new JSONObject();
@@ -1034,16 +1080,21 @@ public class ApplicationContext extends Application {
                         (Request.Method.POST, DELETE_URL, json_delete_child, new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                    Log.i(TAG, response.toString());
-                                    int pos = cids.indexOf(id);
-                                    StringBuilder str = new StringBuilder(cids);
-                                    str.delete(pos,pos+2);
-                                    cids = str.toString();
+                                Log.i(TAG, response.toString());
+                                int pos = cids.indexOf(id);
+                                StringBuilder str = new StringBuilder(cids);
+                                str.delete(pos,pos+2);
+                                cids = str.toString();
+                                CallBackContent content=new CallBackContent();
+                                content.success_msg = response.toString();
+                                callBack.done(content);
+
                             }
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 Log.i(TAG, error.toString());
+                                callBack.done(null);
                             }
                         });
                 //no cache
@@ -1063,11 +1114,15 @@ public class ApplicationContext extends Application {
                             @Override
                             public void onResponse(JSONObject response) {
                                 Log.i(TAG, response.toString());
+                                CallBackContent content=new CallBackContent();
+                                content.success_msg = response.toString();
+                                callBack.done(content);
                             }
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 Log.i(TAG, error.toString());
+                                callBack.done(null);
                             }
                         });
                 //no cache
@@ -1087,11 +1142,15 @@ public class ApplicationContext extends Application {
                             @Override
                             public void onResponse(JSONObject response) {
                                 Log.i(TAG, response.toString());
+                                CallBackContent content=new CallBackContent();
+                                content.success_msg = response.toString();
+                                callBack.done(content);
                             }
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 Log.i(TAG, error.toString());
+                                callBack.done(null);
                             }
                         });
                 //no cache
@@ -1134,7 +1193,7 @@ public class ApplicationContext extends Application {
         VolleyRequestManager.getInstance(getInstance().getApplicationContext()).addToRequestQueue(jsObjRequest);
     }
 
-    public static void update_child(String type, String cid, String name, Bitmap bitmap) {
+    public static void update_child(String type, String cid, String name, Bitmap bitmap,final CallBack callBack) {
         String base64 = encodeImagetoString(bitmap);
         JSONObject json = new JSONObject();
         try {
@@ -1151,11 +1210,15 @@ public class ApplicationContext extends Application {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.i(TAG, response.toString());
+                        CallBackContent content=new CallBackContent();
+                        content.success_msg = response.toString();
+                        callBack.done(content);
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i(TAG, error.toString());
+                        callBack.done(null);
                     }
                 });
         //no cache
@@ -1338,5 +1401,16 @@ public class ApplicationContext extends Application {
         notificationManager.cancel(notifyID);
     }
 
+    public static boolean checkInternetConnection(Activity activity){
+        ConnectivityManager cm=(ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni=cm.getActiveNetworkInfo();
+        if(ni!=null && ni.isConnected()){
+            // System.out.println("ni.isConnected() = "+ni.isConnected());
+            return ni.isConnected();
+        }else{
+            // System.out.println("ni.isConnected() = "+ni.isConnected());
+            return false;
+        }
+    }
 
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class MasterLoginMainFragment extends Fragment implements View.OnClickLis
             mPollingIntent = new Intent(getActivity(), MasterScheduledService.class);
             getActivity().stopService(mPollingIntent);
         }
-        if (ApplicationContext.mIsLogin) {
+        if (ApplicationContext.mIsLogin & ApplicationContext.mIsServiceOn) {
             ApplicationContext.showProgressDialog(getActivity());
             ApplicationContext.login_admin(ApplicationContext.mLoginFlag, ApplicationContext.mAccount, ApplicationContext.mPassword, new CallBack() {
                 @Override
@@ -79,8 +80,7 @@ public class MasterLoginMainFragment extends Fragment implements View.OnClickLis
                         ApplicationContext.cids = content.getCids();
                         ApplicationContext.pids = content.getPids();
                         ApplicationContext.mIsLogin = true;
-                        ApplicationContext.mListChildren.clear();
-                        ApplicationContext.mMapChildren.clear();
+                        ApplicationContext.clearChildrenList();
                         cids = ApplicationContext.cids.split(",");
                         initView();
                     } else {
@@ -115,7 +115,7 @@ public class MasterLoginMainFragment extends Fragment implements View.OnClickLis
         mListViewChildren = (ListView) this.getView().findViewById(R.id.list_main_child);
         mListViewChildren.setAdapter(mChildListAdapter);
         final int num_of_children = cids.length;
-        Log.i(TAG, "num of children:"+num_of_children+" mListChildren:"+mListChildren.size());
+        Log.i(TAG, "num of children:" + num_of_children + " mListChildren:" + mListChildren.size());
         ApplicationContext.showProgressDialog(getActivity());
         if (mListChildren.size() != num_of_children) {
             //ApplicationContext.mSpinChildName.clear();

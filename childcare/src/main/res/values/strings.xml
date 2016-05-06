@@ -86,4 +86,6 @@
 
     <string name="processing_title">Data Processing</string>
     <string name="processing_dialog">Please wait...</string>
+
+    <string name="internet_error">Internet not available !!</string>
 </resources>

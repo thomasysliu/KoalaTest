@@ -2,6 +2,7 @@ package cc.nctu1210.childcare;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -48,6 +49,7 @@ public class AddNewDeviceActivity extends Activity implements View.OnClickListen
     private int viewPosition;
     private File tmpFile = ApplicationContext.createImageFile(ApplicationContext.CHILD_PHOTO_FILE_PATH, "tmp.jpg");
     Bitmap photo = null;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,9 @@ public class AddNewDeviceActivity extends Activity implements View.OnClickListen
                 R.layout.title_bar);
         setFinishOnTouchOutside(false);
         setContentView(R.layout.add_new_child);
+        progressDialog = new ProgressDialog(AddNewDeviceActivity.this);
+        progressDialog.setTitle(getString(R.string.processing_title));
+        progressDialog.setMessage(getString(R.string.processing_dialog));
         init();
     }
 
@@ -195,60 +200,33 @@ public class AddNewDeviceActivity extends Activity implements View.OnClickListen
                         }).show();
                 break;
             case R.id.button_new_ok:
-                final Intent intent = getIntent();
-                final Bundle bundle = new Bundle();
-                final String name = mEditTextName.getText().toString();
-                final String photoName = name+".jpg";
-                final String addr = deviceAddress;
-                final String range = deviceRange;
-                final int position = viewPosition;
-                if (photo != null) {
+                if(ApplicationContext.checkInternetConnection(this)) {
+                    final Intent intent = getIntent();
+                    final Bundle bundle = new Bundle();
+                    final String name = mEditTextName.getText().toString();
+                    final String photoName = name + ".jpg";
+                    final String addr = deviceAddress;
+                    final String range = deviceRange;
+                    final int position = viewPosition;
+                    if (photo != null) {
 
-                    /*
-                    final File photoFile = ApplicationContext.createImageFile(ApplicationContext.CHILD_PHOTO_FILE_PATH, photoName);
-                    ApplicationContext.saveBitmap(photoFile, photo);
-                    ApplicationContext.imageFileDelete(tmpFile);
-                    */
-                    ApplicationContext.addBitmapToMemoryCache(photoName, photo);
-                    int mid;
-                    if(ApplicationContext.mIsLogin)
-                        mid = ApplicationContext.login_mid;
-                    else
-                        mid = ApplicationContext.signup_mid;
-                    ApplicationContext.new_child(mid,addr,name,photo, new CallBack() {
-                        @Override
-                        public void done(CallBackContent content) {
-                            if (content != null) {
-                                ApplicationContext.cids = content.getCids();
-                                String cid = content.getChild().getCid();
-                                bundle.putString(ApplicationContext.CHILD_NAME, name);
-                                bundle.putString(ApplicationContext.DEVICE_ADDRESS, addr);
-                                bundle.putString(ApplicationContext.DEVICE_RANGE, range);
-                                bundle.putInt(ApplicationContext.LIST_VIEW_POSITION, position);
-                                bundle.putString(ApplicationContext.PHOTO_NAME, photoName);
-                                bundle.putString(ApplicationContext.CHILD_ID, cid);
-                                intent.putExtras(bundle);
-                                setResult(RESULT_OK, intent);
-                                finish();
-                            } else {
-                                Toast.makeText(AddNewDeviceActivity.this, "add child fail!", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-                            ApplicationContext.imageFileDelete(tmpFile);
-                }
-                else
-                {
-                    photo = ApplicationContext.getBitMapById(this, R.drawable.default_user);
-                    int mid;
-                    if(ApplicationContext.mIsLogin)
-                        mid = ApplicationContext.login_mid;
-                    else
-                        mid = ApplicationContext.signup_mid;
-                        ApplicationContext.new_child(mid,addr,name,photo, new CallBack() {
+                        /*
+                        final File photoFile = ApplicationContext.createImageFile(ApplicationContext.CHILD_PHOTO_FILE_PATH, photoName);
+                        ApplicationContext.saveBitmap(photoFile, photo);
+                        ApplicationContext.imageFileDelete(tmpFile);
+                        */
+                        ApplicationContext.addBitmapToMemoryCache(photoName, photo);
+                        int mid;
+                        if (ApplicationContext.mIsLogin)
+                            mid = ApplicationContext.login_mid;
+                        else
+                            mid = ApplicationContext.signup_mid;
+                        progressDialog.show();
+                        ApplicationContext.new_child(mid, addr, name, photo, new CallBack() {
                             @Override
                             public void done(CallBackContent content) {
                                 if (content != null) {
+                                    progressDialog.dismiss();
                                     ApplicationContext.cids = content.getCids();
                                     String cid = content.getChild().getCid();
                                     bundle.putString(ApplicationContext.CHILD_NAME, name);
@@ -262,11 +240,45 @@ public class AddNewDeviceActivity extends Activity implements View.OnClickListen
                                     finish();
                                 } else {
                                     Toast.makeText(AddNewDeviceActivity.this, "add child fail!", Toast.LENGTH_LONG).show();
+                                    progressDialog.dismiss();
                                 }
                             }
                         });
+                        ApplicationContext.imageFileDelete(tmpFile);
+                    } else {
+                        photo = ApplicationContext.getBitMapById(this, R.drawable.default_user);
+                        int mid;
+                        if (ApplicationContext.mIsLogin)
+                            mid = ApplicationContext.login_mid;
+                        else
+                            mid = ApplicationContext.signup_mid;
+                        progressDialog.show();
+                        ApplicationContext.new_child(mid, addr, name, photo, new CallBack() {
+                            @Override
+                            public void done(CallBackContent content) {
+                                if (content != null) {
+                                    progressDialog.dismiss();
+                                    ApplicationContext.cids = content.getCids();
+                                    String cid = content.getChild().getCid();
+                                    bundle.putString(ApplicationContext.CHILD_NAME, name);
+                                    bundle.putString(ApplicationContext.DEVICE_ADDRESS, addr);
+                                    bundle.putString(ApplicationContext.DEVICE_RANGE, range);
+                                    bundle.putInt(ApplicationContext.LIST_VIEW_POSITION, position);
+                                    bundle.putString(ApplicationContext.PHOTO_NAME, photoName);
+                                    bundle.putString(ApplicationContext.CHILD_ID, cid);
+                                    intent.putExtras(bundle);
+                                    setResult(RESULT_OK, intent);
+                                    finish();
+                                } else {
+                                    Toast.makeText(AddNewDeviceActivity.this, "add child fail!", Toast.LENGTH_LONG).show();
+                                    progressDialog.dismiss();
+                                }
+                            }
+                        });
+                    }
                 }
-
+                else
+                    Toast.makeText(AddNewDeviceActivity.this, getString(R.string.internet_error), Toast.LENGTH_LONG).show();
                 break;
             case R.id.button_new_cancel:
                 finish();

@@ -24,6 +24,13 @@ public class ChildProfile {
         this.mPhotoFileName = "";
     }
 
+    public ChildProfile(String name, String deviceAddress, String photo) {
+        this.mName = name;
+        this.mDeviceAddress = deviceAddress;
+        this.mStatus = "miss";
+        this.mPhotoFileName = photo;
+    }
+
     public ChildProfile(String name, String PhotoURL, String deviceAddress, String gid, String place, String rssi, String status, String flag) {
         this.mName = name;
         this.mPhotoFileName = PhotoURL;

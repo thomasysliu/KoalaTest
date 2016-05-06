@@ -203,7 +203,7 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
         ApplicationContext.showProgressDialog(this);
         if (mListChildren.size() != num_of_children) {
             for (i=0; i<num_of_children; i++) {
-                ApplicationContext.show_child_by_id(cids[i], new CallBack() {
+                ApplicationContext.gateway_show_child_by_id(cids[i], new CallBack() {
                     @Override
                     public void done(CallBackContent content) {
                         if (content != null) {

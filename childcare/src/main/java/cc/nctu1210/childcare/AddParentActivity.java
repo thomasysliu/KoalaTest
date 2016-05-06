@@ -2,6 +2,7 @@ package cc.nctu1210.childcare;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -49,6 +50,7 @@ public class AddParentActivity extends Activity implements View.OnClickListener{
     private Button mButtonOk;
     private Button mButtonCancel;
     private String type = "parent";
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,9 @@ public class AddParentActivity extends Activity implements View.OnClickListener{
                 R.layout.title_bar);
         setFinishOnTouchOutside(false);
         setContentView(R.layout.add_parent);
+        progressDialog = new ProgressDialog(AddParentActivity.this);
+        progressDialog.setTitle(getString(R.string.processing_title));
+        progressDialog.setMessage(getString(R.string.processing_dialog));
         init();
     }
 
@@ -112,32 +117,61 @@ public class AddParentActivity extends Activity implements View.OnClickListener{
                         mid = ApplicationContext.login_mid;
                     else
                         mid = ApplicationContext.signup_mid;
-                    ApplicationContext.signUp_parent(type, account, password,mid, new CallBack() {
-                        @Override
-                        public void done(CallBackContent content) {
-                            if (content != null) {
-                                String pid = content.getParent().getPid();
-                                bundle.putString(ApplicationContext.PARENT_ACCOUNT, account);
-                                bundle.putString(ApplicationContext.PARENT_PASSWORD, password);
-                                bundle.putString(ApplicationContext.PARENT_CONFIRM, confirm);
-                                bundle.putString(ApplicationContext.PARENT_ID, pid);
-                                int num_child = mAdapter.getCount();
-                                if (num_child != 0) {
-                                    bundle.putInt(ApplicationContext.PARENT_CREATE_CHILD_NUM, num_child);
-                                    for (int i = 0; i < num_child; i++) {
-                                        bundle.putString(ApplicationContext.PARENT_CREATE_CHILD_ID + i, mNewChild.get(i).getID());
-                                        bundle.putInt(ApplicationContext.PARENT_CREATE_CHILD_SPINNER_SELECT + i, mNewChild.get(i).getSpinnerSelect());
-                                    }
-                                }
-                                intent.putExtras(bundle);
-                                setResult(RESULT_OK, intent);
-                                finish();
-                            } else {
-                                Toast.makeText(AddParentActivity.this, "add parent fail!", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                 });
+                    if(ApplicationContext.checkInternetConnection(this)) {
+                        progressDialog.show();
+                        ApplicationContext.signUp_parent(type, account, password, mid, new CallBack() {
+                            @Override
+                            public void done(CallBackContent content) {
+                                if (content != null) {
+                                    final String pid = content.getParent().getPid();
+                                    bundle.putString(ApplicationContext.PARENT_ACCOUNT, account);
+                                    bundle.putString(ApplicationContext.PARENT_PASSWORD, password);
+                                    bundle.putString(ApplicationContext.PARENT_CONFIRM, confirm);
+                                    bundle.putString(ApplicationContext.PARENT_ID, pid);
+                                    String childIdlist = "";
+                                    final int num_child = mAdapter.getCount();
+                                    if (num_child != 0) {
 
+                                        for (int i = 0; i < num_child; i++) {
+                                            childIdlist = childIdlist + mNewChild.get(i).getID() + ",";
+                                        }
+                                        ApplicationContext.parent_child_define(pid, childIdlist, new CallBack() {
+                                            @Override
+                                            public void done(CallBackContent content) {
+                                                if (content != null) {
+                                                    bundle.putInt(ApplicationContext.PARENT_CREATE_CHILD_NUM, num_child);
+                                                    for (int i = 0; i < num_child; i++) {
+                                                        bundle.putString(ApplicationContext.PARENT_CREATE_CHILD_ID + i, mNewChild.get(i).getID());
+                                                        bundle.putInt(ApplicationContext.PARENT_CREATE_CHILD_SPINNER_SELECT + i, mNewChild.get(i).getSpinnerSelect());
+                                                    }
+                                                    progressDialog.dismiss();
+                                                    intent.putExtras(bundle);
+                                                    setResult(RESULT_OK, intent);
+                                                    finish();
+                                                } else {
+                                                    Toast.makeText(AddParentActivity.this, "Sign up parent succeed, but child define fail! ", Toast.LENGTH_LONG).show();
+                                                    progressDialog.dismiss();
+                                                    intent.putExtras(bundle);
+                                                    setResult(RESULT_OK, intent);
+                                                    finish();
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        progressDialog.dismiss();
+                                        intent.putExtras(bundle);
+                                        setResult(RESULT_OK, intent);
+                                        finish();
+                                    }
+                                } else {
+                                    Toast.makeText(AddParentActivity.this, "add parent fail!", Toast.LENGTH_LONG).show();
+                                    progressDialog.dismiss();
+                                }
+                            }
+                        });
+                    }
+                    else
+                        Toast.makeText(AddParentActivity.this, getString(R.string.internet_error), Toast.LENGTH_LONG).show();
                 }
                 else
                     Toast.makeText(AddParentActivity.this, getString(R.string.error_password_confirm_not_same), Toast.LENGTH_LONG).show();

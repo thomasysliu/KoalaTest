@@ -86,4 +86,6 @@
 
     <string name="processing_title">資料處理中</string>
     <string name="processing_dialog">請稍等...</string>
+
+    <string name="internet_error">沒有網路 !!</string>
 </resources>

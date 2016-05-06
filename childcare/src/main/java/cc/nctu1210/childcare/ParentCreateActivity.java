@@ -92,7 +92,6 @@ public class ParentCreateActivity extends Activity implements View.OnClickListen
                             ParentCreateChildItem mChild = new ParentCreateChildItem(child_Id, child_spinner_select);
                             newParent.addChild(mChild);
                         }
-                        ApplicationContext.parent_child_define(pid,childIdlist);
                         Log.e("TAG", "TEST childList: " + childIdlist + "\n");
                     }
                     addANewParent(newParent);
@@ -119,15 +118,12 @@ public class ParentCreateActivity extends Activity implements View.OnClickListen
                             ParentCreateChildItem mChild = new ParentCreateChildItem(child_Id, child_spinner_select);
                             object.getmChildList().add(mChild);
                         }
-                        ApplicationContext.parent_child_define(pid,childIdlist);
                         mAdapter.notifyDataSetChanged();
                     }
                 } else if (resultCode == ApplicationContext.RESULT_CODE_REMOVE) {
                     final int position = data.getIntExtra(ApplicationContext.LIST_VIEW_POSITION, -1);
                     parentNum--;
-                    String pid = mAdapter.getData().get(position).getPid();
                     mAdapter.getData().remove(position);
-                    ApplicationContext.delete("parent", pid);
                     mAdapter.notifyDataSetChanged();
 
                 }

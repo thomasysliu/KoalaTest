@@ -163,20 +163,12 @@ public class GatewayListEditorActivity extends Activity  implements OnClickListe
                     final String place = bundle.getString(ApplicationContext.GATEWAY_PLACE);
                     final String near = bundle.getString(ApplicationContext.GATEWAY_NEAR);
                     final String far = bundle.getString(ApplicationContext.GATEWAY_FAR);
+                    final String gid = bundle.getString(ApplicationContext.GATEWAY_ID);
                     gatewayNum++;
-                    ApplicationContext.signUp_gateway("gateway", account, password, place, ApplicationContext.login_mid, near, far, new CallBack() {
-                        @Override
-                        public void done(CallBackContent content) {
-                            if (content != null) {
-                                NewGatewayItem newGateway = new NewGatewayItem(account, password, confirm, place, near, far);
-                                newGateway.setGid(content.getmGid());
-                                newGateway.setCheck(1);
-                                addANewGateway(newGateway);
-                            } else {
-                                Toast.makeText(GatewayListEditorActivity.this, "Sign Up Gateway fail!", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
+                    NewGatewayItem newGateway = new NewGatewayItem(account, password, confirm, place, near, far);
+                    newGateway.setGid(gid);
+                    newGateway.setCheck(1);
+                    addANewGateway(newGateway);
                 }
                 break;
             case ApplicationContext.REQUEST_CODE_GATEWAY_EDIT:
@@ -187,39 +179,15 @@ public class GatewayListEditorActivity extends Activity  implements OnClickListe
                     final String far = bundle.getString(ApplicationContext.GATEWAY_FAR);
                     final int position = bundle.getInt(ApplicationContext.LIST_VIEW_POSITION);
                     final String gid = bundle.getString(ApplicationContext.GATEWAY_ID);
-                    ApplicationContext.update_gateway("gateway", gid, place, new CallBack() {
-                        @Override
-                        public void done(CallBackContent content) {
-                            if (content != null) {
-                                NewGatewayItem object = mGatewayAdapter.getData().get(position);
-                                object.setPlace(place);
-                                object.setCheck(1);
-                                mGatewayAdapter.notifyDataSetChanged();
-                            } else {
-                                Toast.makeText(GatewayListEditorActivity.this, "update Gateway place fail!", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-
-                    ApplicationContext.update_distance("distance", gid, near, far, new CallBack() {
-                        @Override
-                        public void done(CallBackContent content) {
-                            if (content != null) {
-                                NewGatewayItem object = mGatewayAdapter.getData().get(position);
-                                object.setNear(near);
-                                object.setFar(far);
-                                mGatewayAdapter.notifyDataSetChanged();
-                            } else {
-                                Toast.makeText(GatewayListEditorActivity.this, "update Gateway pdistance fail!", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
+                    NewGatewayItem object = mGatewayAdapter.getData().get(position);
+                    object.setPlace(place);
+                    object.setCheck(1);
+                    object.setNear(near);
+                    object.setFar(far);
+                    mGatewayAdapter.notifyDataSetChanged();
                 } else if (resultCode == ApplicationContext.RESULT_CODE_REMOVE) {
                     final int position = data.getIntExtra(ApplicationContext.LIST_VIEW_POSITION, -1);
                     gatewayNum--;
-                    String gid = mGatewayAdapter.getData().get(position).getGid();
-                    ApplicationContext.delete("gateway", gid);
-
                     mGatewayAdapter.getData().remove(position);
                     ApplicationContext.mGateways.clear();
                     ApplicationContext.mGateways.addAll(mGateways);
