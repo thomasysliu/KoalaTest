@@ -148,7 +148,7 @@ public class EditGatewayActivity extends Activity implements View.OnClickListene
                                 setResult(ApplicationContext.RESULT_CODE_REMOVE, intent_remove);
                                 finish();
                             } else {
-                                Toast.makeText(EditGatewayActivity.this, "Remove parent fail! ", Toast.LENGTH_LONG).show();
+                                Toast.makeText(EditGatewayActivity.this, "Remove Gateway fail! ", Toast.LENGTH_LONG).show();
                                 ApplicationContext.dismissProgressDialog();
                             }
                         }

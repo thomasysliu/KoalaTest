@@ -202,14 +202,16 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
         final int num_of_children = cids.length;
         ApplicationContext.showProgressDialog(this);
         if (mListChildren.size() != num_of_children) {
+            ApplicationContext.mShowChildCount = 0;
             for (i=0; i<num_of_children; i++) {
                 ApplicationContext.gateway_show_child_by_id(cids[i], new CallBack() {
                     @Override
                     public void done(CallBackContent content) {
                         if (content != null) {
+                            ApplicationContext.mShowChildCount++;
                             ChildProfile mChild = content.getChild();
                             ApplicationContext.addANewChild(mChild);
-                            if (mListChildren.size() == num_of_children)
+                            if (ApplicationContext.mShowChildCount == num_of_children)
                                 populateList();
                         } else {
                             Log.e(TAG, "show_child_by_id fail" + "\n");

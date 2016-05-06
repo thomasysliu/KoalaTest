@@ -87,11 +87,12 @@ public class ApplicationContext extends Application {
     public static String mPlace;
     public static String mPid;
     public static boolean mIsLogin;
-    public static List<String> mSpinChildName;
+    //public static List<String> mSpinChildName;
     public static String mAccount;
     public static String mPassword;
     public static String mLoginFlag;
     public static ProgressDialog mProgress;
+    public static int mShowChildCount;
 
     public static int mLoginType;  // 0: master,  1: teacher , 2: parent , 3: gateway
     public static final int MASTER_TYPE = 0;
@@ -217,7 +218,7 @@ public class ApplicationContext extends Application {
         mGateways = new ArrayList<NewGatewayItem>();
         mParents = new ArrayList<NewParentItem>();
         mDeviceList = new ArrayList<BluetoothDevice>();
-        mSpinChildName = new ArrayList<String>();
+        //mSpinChildName = new ArrayList<String>();
         mProgress = null;
         mKoalaManager = null;
         mBooleanKoalaServiceCreated = false;
@@ -227,6 +228,7 @@ public class ApplicationContext extends Application {
         mIsScan = false;
         mIsLogin = false;
         mIsServiceOn = false;
+        mShowChildCount = 0;
 
         final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
         final int cacheSize = maxMemory / 8;
@@ -285,7 +287,8 @@ public class ApplicationContext extends Application {
             mMapChildren.put(child.getDeviceAddress(), child);
             mMapChildrenCid.put(child.getCid(), child);
             mListChildren.add(child);
-            mSpinChildName.add(child.getName());
+            //mSpinChildName.add(child.getName());
+            mShowChildCount++;
         }
     }
 
@@ -302,7 +305,7 @@ public class ApplicationContext extends Application {
             mListChildren.remove(child);
             mMapChildren.remove(child);
             mMapChildrenCid.remove(child);
-            mSpinChildName.remove(position);
+           // mSpinChildName.remove(position);
             return child;
         }
         return null;

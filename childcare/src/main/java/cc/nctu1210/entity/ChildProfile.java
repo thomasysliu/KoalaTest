@@ -1,11 +1,13 @@
 package cc.nctu1210.entity;
 
+import android.content.Intent;
+
 import java.io.File;
 
 /**
  * Created by Yi-Ta_Chuang on 2016/4/17.
  */
-public class ChildProfile {
+public class ChildProfile implements Comparable<ChildProfile>{
     private int mPosition;
     private String mName;
     private String mDeviceAddress;
@@ -114,5 +116,14 @@ public class ChildProfile {
 
     public String getCid()
     {return this.cid;}
+
+    @Override
+    public int compareTo(ChildProfile child) {
+        if (Integer.valueOf(this.cid) < Integer.valueOf(child.getCid())) {
+            return -1;
+        } else {
+            return 1;
+        }
+    }
 
 }

@@ -96,7 +96,7 @@ public class ParentCreateChildrenListAdapter extends BaseAdapter {
         // assign values if the object is not null
         if (mData != null) {
             // get the TextView from the ViewHolder and then set the text (item name) and other values
-            String [] mSpinChildName= new String[ApplicationContext.mSpinChildName.size()];
+            String [] mSpinChildName= new String[ApplicationContext.mListChildren.size()];
             ApplicationContext.mSpinChildName.toArray(mSpinChildName);
             ChildNameList = new ArrayAdapter<String>(mContext,android.R.layout.simple_spinner_item,mSpinChildName);
             ChildNameList.setDropDownViewResource(R.layout.spinner_dropdown_item);

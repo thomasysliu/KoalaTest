@@ -127,14 +127,16 @@ public class ParentLoginActivity extends Activity implements View.OnClickListene
         mListViewChildren.setAdapter(mChildListAdapter);
         final int num_of_children = cids.length;
         if (mListChildren.size() != num_of_children) {
+            ApplicationContext.mShowChildCount = 0;
             for (i=0; i<num_of_children; i++) {
                 ApplicationContext.show_child_by_id(cids[i], new CallBack() {
                     @Override
                     public void done(CallBackContent content) {
                         if (content != null) {
+                            ApplicationContext.mShowChildCount++;
                             ChildProfile mChild = content.getChild();
                             ApplicationContext.addANewChild(mChild);
-                            if (mListChildren.size() == num_of_children)
+                            if (ApplicationContext.mShowChildCount == num_of_children)
                                 populateList();
                         } else {
                             Log.e(TAG, "show_child_by_id fail" + "\n");

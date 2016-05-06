@@ -59,7 +59,7 @@ public class MasterLoginMainFragment extends Fragment implements View.OnClickLis
     @Override
     public void onResume() {
         super.onResume();
-        Log.i(TAG, "mIsServiceOn:"+ApplicationContext.mIsServiceOn);
+        Log.i(TAG, "mIsServiceOn:" + ApplicationContext.mIsServiceOn);
         if (ApplicationContext.mIsServiceOn) {
             ApplicationContext.notificationServiceStartBuilder(getActivity(), ApplicationContext.MASTER_TYPE);
             mPollingIntent = new Intent(getActivity(), MasterScheduledService.class);
@@ -120,6 +120,7 @@ public class MasterLoginMainFragment extends Fragment implements View.OnClickLis
         if (mListChildren.size() != num_of_children) {
             //ApplicationContext.mSpinChildName.clear();
             Log.i(TAG, "inside...");
+            ApplicationContext.mShowChildCount = 0;
             for (i=0; i<num_of_children; i++) {
                 ApplicationContext.show_child_by_id(cids[i], new CallBack() {
                     @Override
@@ -127,7 +128,7 @@ public class MasterLoginMainFragment extends Fragment implements View.OnClickLis
                         if (content != null) {
                             ChildProfile mChild = content.getChild();
                             ApplicationContext.addANewChild(mChild);
-                            if (mListChildren.size() == num_of_children)
+                            if (ApplicationContext.mShowChildCount == num_of_children)
                                 populateList();
                         } else {
                             Log.e(TAG, "show_child_by_id fail" + "\n");
@@ -143,6 +144,8 @@ public class MasterLoginMainFragment extends Fragment implements View.OnClickLis
     public void populateList() {
         mChildListAdapter.getData().clear();
         Log.i(TAG, "Initializing ListView....." + mChildListAdapter.getData().size());
+        Collections.sort(mListChildren);
+
         for (int i = 0, size = mListChildren.size(); i < size; i++) {
             ChildItem object = new ChildItem(mListChildren.get(i).getName(),mListChildren.get(i).getStatus());
             object.photoName = mListChildren.get(i).getPhotoName();

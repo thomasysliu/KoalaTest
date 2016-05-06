@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -78,6 +79,7 @@ public class ChildProfileCreateActivity extends Activity implements View.OnClick
     private void populateList() {
         mDeviceListAdapter.getData().clear();
         Log.i(TAG, "Initializing ListView....." + mDeviceListAdapter.getData().size());
+        Collections.sort(mListChildren);
         for (int i = 0, size = mListChildren.size(); i < size; i++) {
             DeviceItem object = new DeviceItem(mListChildren.get(i).getName());
             object.child_name = mListChildren.get(i).getName();
@@ -85,6 +87,7 @@ public class ChildProfileCreateActivity extends Activity implements View.OnClick
             object.photoName = mListChildren.get(i).getPhotoName();
             object.cid = mListChildren.get(i).getCid();
             mDeviceItems.add(object);
+            ApplicationContext.mSpinChildName.add(mListChildren.get(i).getName());
         }
         Log.i(TAG, "Initialized ListView....." + mDeviceListAdapter.getData().size());
         mDeviceListAdapter.notifyDataSetChanged();
