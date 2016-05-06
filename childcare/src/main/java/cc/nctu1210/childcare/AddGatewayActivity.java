@@ -28,7 +28,6 @@ public class AddGatewayActivity extends Activity implements View.OnClickListener
 
     private Button mButtonOk;
     private Button mButtonCancel;
-    private ProgressDialog progressDialog;
 
 
     @Override
@@ -38,9 +37,6 @@ public class AddGatewayActivity extends Activity implements View.OnClickListener
                 R.layout.title_bar);
         setFinishOnTouchOutside(false);
         setContentView(R.layout.add_gateway);
-        progressDialog = new ProgressDialog(AddGatewayActivity.this);
-        progressDialog.setTitle(getString(R.string.processing_title));
-        progressDialog.setMessage(getString(R.string.processing_dialog));
         init();
     }
 
@@ -89,12 +85,12 @@ public class AddGatewayActivity extends Activity implements View.OnClickListener
                     else
                         mid = ApplicationContext.signup_mid;
                     if(ApplicationContext.checkInternetConnection(this)) {
-                        progressDialog.show();
+                        ApplicationContext.showProgressDialog(this);
                         ApplicationContext.signUp_gateway("gateway", account, password, place, mid, near, far, new CallBack() {
                             @Override
                             public void done(CallBackContent content) {
                                 if (content != null) {
-                                    progressDialog.dismiss();
+                                    ApplicationContext.dismissProgressDialog();
                                     bundle.putString(ApplicationContext.GATEWAY_ACCOUNT, account);
                                     bundle.putString(ApplicationContext.GATEWAY_PASSWORD, password);
                                     bundle.putString(ApplicationContext.GATEWAY_CONFIRM, confirm);
@@ -106,7 +102,7 @@ public class AddGatewayActivity extends Activity implements View.OnClickListener
                                     setResult(RESULT_OK, intent);
                                     finish();
                                 } else {
-                                    progressDialog.dismiss();
+                                    ApplicationContext.dismissProgressDialog();
                                     Toast.makeText(AddGatewayActivity.this, "Sign Up Gateway fail!", Toast.LENGTH_LONG).show();
                                 }
                             }

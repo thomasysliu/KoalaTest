@@ -49,7 +49,6 @@ public class AddNewDeviceActivity extends Activity implements View.OnClickListen
     private int viewPosition;
     private File tmpFile = ApplicationContext.createImageFile(ApplicationContext.CHILD_PHOTO_FILE_PATH, "tmp.jpg");
     Bitmap photo = null;
-    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +58,6 @@ public class AddNewDeviceActivity extends Activity implements View.OnClickListen
                 R.layout.title_bar);
         setFinishOnTouchOutside(false);
         setContentView(R.layout.add_new_child);
-        progressDialog = new ProgressDialog(AddNewDeviceActivity.this);
-        progressDialog.setTitle(getString(R.string.processing_title));
-        progressDialog.setMessage(getString(R.string.processing_dialog));
         init();
     }
 
@@ -221,12 +217,12 @@ public class AddNewDeviceActivity extends Activity implements View.OnClickListen
                             mid = ApplicationContext.login_mid;
                         else
                             mid = ApplicationContext.signup_mid;
-                        progressDialog.show();
+                        ApplicationContext.showProgressDialog(this);
                         ApplicationContext.new_child(mid, addr, name, photo, new CallBack() {
                             @Override
                             public void done(CallBackContent content) {
                                 if (content != null) {
-                                    progressDialog.dismiss();
+                                    ApplicationContext.dismissProgressDialog();
                                     ApplicationContext.cids = content.getCids();
                                     String cid = content.getChild().getCid();
                                     bundle.putString(ApplicationContext.CHILD_NAME, name);
@@ -240,7 +236,7 @@ public class AddNewDeviceActivity extends Activity implements View.OnClickListen
                                     finish();
                                 } else {
                                     Toast.makeText(AddNewDeviceActivity.this, "add child fail!", Toast.LENGTH_LONG).show();
-                                    progressDialog.dismiss();
+                                    ApplicationContext.dismissProgressDialog();
                                 }
                             }
                         });
@@ -252,12 +248,12 @@ public class AddNewDeviceActivity extends Activity implements View.OnClickListen
                             mid = ApplicationContext.login_mid;
                         else
                             mid = ApplicationContext.signup_mid;
-                        progressDialog.show();
+                        ApplicationContext.showProgressDialog(this);
                         ApplicationContext.new_child(mid, addr, name, photo, new CallBack() {
                             @Override
                             public void done(CallBackContent content) {
                                 if (content != null) {
-                                    progressDialog.dismiss();
+                                    ApplicationContext.dismissProgressDialog();
                                     ApplicationContext.cids = content.getCids();
                                     String cid = content.getChild().getCid();
                                     bundle.putString(ApplicationContext.CHILD_NAME, name);
@@ -271,7 +267,7 @@ public class AddNewDeviceActivity extends Activity implements View.OnClickListen
                                     finish();
                                 } else {
                                     Toast.makeText(AddNewDeviceActivity.this, "add child fail!", Toast.LENGTH_LONG).show();
-                                    progressDialog.dismiss();
+                                    ApplicationContext.dismissProgressDialog();
                                 }
                             }
                         });

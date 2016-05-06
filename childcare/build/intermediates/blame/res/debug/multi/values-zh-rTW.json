@@ -1168,8 +1168,27 @@
                     "startLine": 68,
                     "startColumn": 4,
                     "startOffset": 4093,
+                    "endColumn": 50,
+                    "endOffset": 4139
+                },
+                "from": {
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 89,
+                        "startColumn": 4,
+                        "startOffset": 3789,
+                        "endColumn": 50,
+                        "endOffset": 3835
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 69,
+                    "startColumn": 4,
+                    "startOffset": 4144,
                     "endColumn": 40,
-                    "endOffset": 4129
+                    "endOffset": 4180
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1184,11 +1203,11 @@
             },
             {
                 "to": {
-                    "startLine": 69,
+                    "startLine": 70,
                     "startColumn": 4,
-                    "startOffset": 4134,
+                    "startOffset": 4185,
                     "endColumn": 37,
-                    "endOffset": 4167
+                    "endOffset": 4218
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1203,11 +1222,11 @@
             },
             {
                 "to": {
-                    "startLine": 70,
+                    "startLine": 71,
                     "startColumn": 4,
-                    "startOffset": 4172,
+                    "startOffset": 4223,
                     "endColumn": 36,
-                    "endOffset": 4204
+                    "endOffset": 4255
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1222,11 +1241,11 @@
             },
             {
                 "to": {
-                    "startLine": 71,
+                    "startLine": 72,
                     "startColumn": 4,
-                    "startOffset": 4209,
+                    "startOffset": 4260,
                     "endColumn": 40,
-                    "endOffset": 4245
+                    "endOffset": 4296
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1241,11 +1260,11 @@
             },
             {
                 "to": {
-                    "startLine": 72,
+                    "startLine": 73,
                     "startColumn": 4,
-                    "startOffset": 4250,
+                    "startOffset": 4301,
                     "endColumn": 45,
-                    "endOffset": 4291
+                    "endOffset": 4342
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1260,11 +1279,11 @@
             },
             {
                 "to": {
-                    "startLine": 73,
+                    "startLine": 74,
                     "startColumn": 4,
-                    "startOffset": 4296,
+                    "startOffset": 4347,
                     "endColumn": 40,
-                    "endOffset": 4332
+                    "endOffset": 4383
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1279,11 +1298,11 @@
             },
             {
                 "to": {
-                    "startLine": 74,
+                    "startLine": 75,
                     "startColumn": 4,
-                    "startOffset": 4337,
+                    "startOffset": 4388,
                     "endColumn": 42,
-                    "endOffset": 4375
+                    "endOffset": 4426
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1298,11 +1317,11 @@
             },
             {
                 "to": {
-                    "startLine": 75,
+                    "startLine": 76,
                     "startColumn": 4,
-                    "startOffset": 4380,
+                    "startOffset": 4431,
                     "endColumn": 63,
-                    "endOffset": 4439
+                    "endOffset": 4490
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1317,11 +1336,11 @@
             },
             {
                 "to": {
-                    "startLine": 76,
+                    "startLine": 77,
                     "startColumn": 4,
-                    "startOffset": 4444,
+                    "startOffset": 4495,
                     "endColumn": 40,
-                    "endOffset": 4480
+                    "endOffset": 4531
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1336,11 +1355,11 @@
             },
             {
                 "to": {
-                    "startLine": 77,
+                    "startLine": 78,
                     "startColumn": 4,
-                    "startOffset": 4485,
+                    "startOffset": 4536,
                     "endColumn": 43,
-                    "endOffset": 4524
+                    "endOffset": 4575
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1355,11 +1374,11 @@
             },
             {
                 "to": {
-                    "startLine": 78,
+                    "startLine": 79,
                     "startColumn": 4,
-                    "startOffset": 4529,
+                    "startOffset": 4580,
                     "endColumn": 37,
-                    "endOffset": 4562
+                    "endOffset": 4613
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1374,11 +1393,11 @@
             },
             {
                 "to": {
-                    "startLine": 79,
+                    "startLine": 80,
                     "startColumn": 4,
-                    "startOffset": 4567,
+                    "startOffset": 4618,
                     "endColumn": 40,
-                    "endOffset": 4603
+                    "endOffset": 4654
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1393,11 +1412,11 @@
             },
             {
                 "to": {
-                    "startLine": 80,
+                    "startLine": 81,
                     "startColumn": 4,
-                    "startOffset": 4608,
+                    "startOffset": 4659,
                     "endColumn": 43,
-                    "endOffset": 4647
+                    "endOffset": 4698
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1412,11 +1431,11 @@
             },
             {
                 "to": {
-                    "startLine": 81,
+                    "startLine": 82,
                     "startColumn": 4,
-                    "startOffset": 4652,
+                    "startOffset": 4703,
                     "endColumn": 38,
-                    "endOffset": 4686
+                    "endOffset": 4737
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1431,11 +1450,11 @@
             },
             {
                 "to": {
-                    "startLine": 82,
+                    "startLine": 83,
                     "startColumn": 4,
-                    "startOffset": 4691,
+                    "startOffset": 4742,
                     "endColumn": 43,
-                    "endOffset": 4730
+                    "endOffset": 4781
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1450,11 +1469,11 @@
             },
             {
                 "to": {
-                    "startLine": 83,
+                    "startLine": 84,
                     "startColumn": 4,
-                    "startOffset": 4735,
+                    "startOffset": 4786,
                     "endColumn": 36,
-                    "endOffset": 4767
+                    "endOffset": 4818
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1469,11 +1488,11 @@
             },
             {
                 "to": {
-                    "startLine": 84,
+                    "startLine": 85,
                     "startColumn": 4,
-                    "startOffset": 4772,
+                    "startOffset": 4823,
                     "endColumn": 32,
-                    "endOffset": 4800
+                    "endOffset": 4851
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1488,11 +1507,11 @@
             },
             {
                 "to": {
-                    "startLine": 85,
+                    "startLine": 86,
                     "startColumn": 4,
-                    "startOffset": 4805,
+                    "startOffset": 4856,
                     "endColumn": 51,
-                    "endOffset": 4852
+                    "endOffset": 4903
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1507,11 +1526,11 @@
             },
             {
                 "to": {
-                    "startLine": 86,
+                    "startLine": 87,
                     "startColumn": 4,
-                    "startOffset": 4857,
+                    "startOffset": 4908,
                     "endColumn": 33,
-                    "endOffset": 4886
+                    "endOffset": 4937
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1526,11 +1545,11 @@
             },
             {
                 "to": {
-                    "startLine": 87,
+                    "startLine": 88,
                     "startColumn": 4,
-                    "startOffset": 4891,
+                    "startOffset": 4942,
                     "endColumn": 37,
-                    "endOffset": 4924
+                    "endOffset": 4975
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1545,11 +1564,11 @@
             },
             {
                 "to": {
-                    "startLine": 88,
+                    "startLine": 89,
                     "startColumn": 4,
-                    "startOffset": 4929,
+                    "startOffset": 4980,
                     "endColumn": 54,
-                    "endOffset": 4979
+                    "endOffset": 5030
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1564,11 +1583,11 @@
             },
             {
                 "to": {
-                    "startLine": 89,
+                    "startLine": 90,
                     "startColumn": 4,
-                    "startOffset": 4984,
+                    "startOffset": 5035,
                     "endColumn": 44,
-                    "endOffset": 5024
+                    "endOffset": 5075
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1583,11 +1602,11 @@
             },
             {
                 "to": {
-                    "startLine": 90,
+                    "startLine": 91,
                     "startColumn": 4,
-                    "startOffset": 5029,
+                    "startOffset": 5080,
                     "endColumn": 51,
-                    "endOffset": 5076
+                    "endOffset": 5127
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1602,11 +1621,11 @@
             },
             {
                 "to": {
-                    "startLine": 91,
+                    "startLine": 92,
                     "startColumn": 4,
-                    "startOffset": 5081,
+                    "startOffset": 5132,
                     "endColumn": 42,
-                    "endOffset": 5119
+                    "endOffset": 5170
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1621,11 +1640,11 @@
             },
             {
                 "to": {
-                    "startLine": 92,
+                    "startLine": 93,
                     "startColumn": 4,
-                    "startOffset": 5124,
+                    "startOffset": 5175,
                     "endColumn": 48,
-                    "endOffset": 5168
+                    "endOffset": 5219
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1640,11 +1659,11 @@
             },
             {
                 "to": {
-                    "startLine": 93,
+                    "startLine": 94,
                     "startColumn": 4,
-                    "startOffset": 5173,
+                    "startOffset": 5224,
                     "endColumn": 37,
-                    "endOffset": 5206
+                    "endOffset": 5257
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1659,11 +1678,11 @@
             },
             {
                 "to": {
-                    "startLine": 94,
+                    "startLine": 95,
                     "startColumn": 4,
-                    "startOffset": 5211,
+                    "startOffset": 5262,
                     "endColumn": 41,
-                    "endOffset": 5248
+                    "endOffset": 5299
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1678,11 +1697,11 @@
             },
             {
                 "to": {
-                    "startLine": 95,
+                    "startLine": 96,
                     "startColumn": 4,
-                    "startOffset": 5253,
+                    "startOffset": 5304,
                     "endColumn": 45,
-                    "endOffset": 5294
+                    "endOffset": 5345
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1697,11 +1716,49 @@
             },
             {
                 "to": {
-                    "startLine": 96,
+                    "startLine": 97,
                     "startColumn": 4,
-                    "startOffset": 5299,
+                    "startOffset": 5350,
+                    "endColumn": 52,
+                    "endOffset": 5398
+                },
+                "from": {
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 87,
+                        "startColumn": 4,
+                        "startOffset": 3733,
+                        "endColumn": 52,
+                        "endOffset": 3781
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 98,
+                    "startColumn": 4,
+                    "startOffset": 5403,
+                    "endColumn": 50,
+                    "endOffset": 5449
+                },
+                "from": {
+                    "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
+                    "position": {
+                        "startLine": 86,
+                        "startColumn": 4,
+                        "startOffset": 3681,
+                        "endColumn": 50,
+                        "endOffset": 3727
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 99,
+                    "startColumn": 4,
+                    "startOffset": 5454,
                     "endColumn": 37,
-                    "endOffset": 5332
+                    "endOffset": 5487
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1716,11 +1773,11 @@
             },
             {
                 "to": {
-                    "startLine": 97,
+                    "startLine": 100,
                     "startColumn": 4,
-                    "startOffset": 5337,
+                    "startOffset": 5492,
                     "endColumn": 43,
-                    "endOffset": 5376
+                    "endOffset": 5531
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1735,11 +1792,11 @@
             },
             {
                 "to": {
-                    "startLine": 98,
+                    "startLine": 101,
                     "startColumn": 4,
-                    "startOffset": 5381,
+                    "startOffset": 5536,
                     "endColumn": 51,
-                    "endOffset": 5428
+                    "endOffset": 5583
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1754,11 +1811,11 @@
             },
             {
                 "to": {
-                    "startLine": 99,
+                    "startLine": 102,
                     "startColumn": 4,
-                    "startOffset": 5433,
+                    "startOffset": 5588,
                     "endColumn": 46,
-                    "endOffset": 5475
+                    "endOffset": 5630
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1773,11 +1830,11 @@
             },
             {
                 "to": {
-                    "startLine": 100,
+                    "startLine": 103,
                     "startColumn": 4,
-                    "startOffset": 5480,
+                    "startOffset": 5635,
                     "endColumn": 55,
-                    "endOffset": 5531
+                    "endOffset": 5686
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1792,11 +1849,11 @@
             },
             {
                 "to": {
-                    "startLine": 101,
+                    "startLine": 104,
                     "startColumn": 4,
-                    "startOffset": 5536,
+                    "startOffset": 5691,
                     "endColumn": 100,
-                    "endOffset": 5632
+                    "endOffset": 5787
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
@@ -1811,11 +1868,11 @@
             },
             {
                 "to": {
-                    "startLine": 102,
+                    "startLine": 105,
                     "startColumn": 4,
-                    "startOffset": 5637,
+                    "startOffset": 5792,
                     "endColumn": 43,
-                    "endOffset": 5676
+                    "endOffset": 5831
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1830,11 +1887,11 @@
             },
             {
                 "to": {
-                    "startLine": 103,
+                    "startLine": 106,
                     "startColumn": 4,
-                    "startOffset": 5681,
+                    "startOffset": 5836,
                     "endColumn": 55,
-                    "endOffset": 5732
+                    "endOffset": 5887
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1849,11 +1906,11 @@
             },
             {
                 "to": {
-                    "startLine": 104,
+                    "startLine": 107,
                     "startColumn": 4,
-                    "startOffset": 5737,
+                    "startOffset": 5892,
                     "endColumn": 41,
-                    "endOffset": 5774
+                    "endOffset": 5929
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1868,11 +1925,11 @@
             },
             {
                 "to": {
-                    "startLine": 105,
+                    "startLine": 108,
                     "startColumn": 4,
-                    "startOffset": 5779,
+                    "startOffset": 5934,
                     "endColumn": 40,
-                    "endOffset": 5815
+                    "endOffset": 5970
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",
@@ -1887,11 +1944,11 @@
             },
             {
                 "to": {
-                    "startLine": 106,
+                    "startLine": 109,
                     "startColumn": 4,
-                    "startOffset": 5820,
+                    "startOffset": 5975,
                     "endColumn": 33,
-                    "endOffset": 5849
+                    "endOffset": 6004
                 },
                 "from": {
                     "file": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\values-zh-rTW\\strings.xml",

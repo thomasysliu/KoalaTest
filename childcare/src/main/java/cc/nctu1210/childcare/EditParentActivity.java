@@ -47,7 +47,6 @@ public class EditParentActivity extends Activity implements View.OnClickListener
     private Button mButtonOk;
     private Button mButtonRemove;
     private String pid = "";
-    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +55,6 @@ public class EditParentActivity extends Activity implements View.OnClickListener
                 R.layout.title_bar);
         setFinishOnTouchOutside(false);
         setContentView(R.layout.edit_parent);
-        progressDialog = new ProgressDialog(EditParentActivity.this);
-        progressDialog.setTitle(getString(R.string.processing_title));
-        progressDialog.setMessage(getString(R.string.processing_dialog));
         init();
     }
 
@@ -125,7 +121,7 @@ public class EditParentActivity extends Activity implements View.OnClickListener
                         for (int i = 0; i < num_child; i++) {
                             childIdlist = childIdlist + mNewChild.get(i).getID() + ",";
                         }
-                        progressDialog.show();
+                        ApplicationContext.showProgressDialog(this);
                         ApplicationContext.parent_child_define(pid, childIdlist, new CallBack() {
                             @Override
                             public void done(CallBackContent content) {
@@ -135,13 +131,13 @@ public class EditParentActivity extends Activity implements View.OnClickListener
                                         bundle.putString(ApplicationContext.PARENT_CREATE_CHILD_ID + i, mNewChild.get(i).getID());
                                         bundle.putInt(ApplicationContext.PARENT_CREATE_CHILD_SPINNER_SELECT + i, mNewChild.get(i).getSpinnerSelect());
                                     }
-                                    progressDialog.dismiss();
+                                    ApplicationContext.dismissProgressDialog();
                                     intent.putExtras(bundle);
                                     setResult(RESULT_OK, intent);
                                     finish();
                                 } else {
                                     Toast.makeText(EditParentActivity.this, "Edit parent fail! ", Toast.LENGTH_LONG).show();
-                                    progressDialog.dismiss();
+                                    ApplicationContext.dismissProgressDialog();
                                 }
                             }
                         });
@@ -155,17 +151,18 @@ public class EditParentActivity extends Activity implements View.OnClickListener
                 if(ApplicationContext.checkInternetConnection(this)) {
                     final Intent intent_remove = getIntent();
                     final int position_remove = viewPosition;
+                    ApplicationContext.showProgressDialog(this);
                     ApplicationContext.delete("parent", pid, new CallBack() {
                         @Override
                         public void done(CallBackContent content) {
                             if (content != null) {
-                                progressDialog.dismiss();
+                                ApplicationContext.dismissProgressDialog();
                                 intent_remove.putExtra(ApplicationContext.LIST_VIEW_POSITION, position_remove);
                                 setResult(ApplicationContext.RESULT_CODE_REMOVE, intent_remove);
                                 finish();
                             } else {
                                 Toast.makeText(EditParentActivity.this, "Remove parent fail! ", Toast.LENGTH_LONG).show();
-                                progressDialog.dismiss();
+                                ApplicationContext.dismissProgressDialog();
                             }
                         }
                     });

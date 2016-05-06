@@ -50,7 +50,6 @@ public class AddParentActivity extends Activity implements View.OnClickListener{
     private Button mButtonOk;
     private Button mButtonCancel;
     private String type = "parent";
-    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +58,6 @@ public class AddParentActivity extends Activity implements View.OnClickListener{
                 R.layout.title_bar);
         setFinishOnTouchOutside(false);
         setContentView(R.layout.add_parent);
-        progressDialog = new ProgressDialog(AddParentActivity.this);
-        progressDialog.setTitle(getString(R.string.processing_title));
-        progressDialog.setMessage(getString(R.string.processing_dialog));
         init();
     }
 
@@ -118,7 +114,7 @@ public class AddParentActivity extends Activity implements View.OnClickListener{
                     else
                         mid = ApplicationContext.signup_mid;
                     if(ApplicationContext.checkInternetConnection(this)) {
-                        progressDialog.show();
+                        ApplicationContext.showProgressDialog(this);
                         ApplicationContext.signUp_parent(type, account, password, mid, new CallBack() {
                             @Override
                             public void done(CallBackContent content) {
@@ -144,13 +140,13 @@ public class AddParentActivity extends Activity implements View.OnClickListener{
                                                         bundle.putString(ApplicationContext.PARENT_CREATE_CHILD_ID + i, mNewChild.get(i).getID());
                                                         bundle.putInt(ApplicationContext.PARENT_CREATE_CHILD_SPINNER_SELECT + i, mNewChild.get(i).getSpinnerSelect());
                                                     }
-                                                    progressDialog.dismiss();
+                                                    ApplicationContext.dismissProgressDialog();
                                                     intent.putExtras(bundle);
                                                     setResult(RESULT_OK, intent);
                                                     finish();
                                                 } else {
                                                     Toast.makeText(AddParentActivity.this, "Sign up parent succeed, but child define fail! ", Toast.LENGTH_LONG).show();
-                                                    progressDialog.dismiss();
+                                                    ApplicationContext.dismissProgressDialog();
                                                     intent.putExtras(bundle);
                                                     setResult(RESULT_OK, intent);
                                                     finish();
@@ -158,14 +154,14 @@ public class AddParentActivity extends Activity implements View.OnClickListener{
                                             }
                                         });
                                     } else {
-                                        progressDialog.dismiss();
+                                        ApplicationContext.dismissProgressDialog();
                                         intent.putExtras(bundle);
                                         setResult(RESULT_OK, intent);
                                         finish();
                                     }
                                 } else {
                                     Toast.makeText(AddParentActivity.this, "add parent fail!", Toast.LENGTH_LONG).show();
-                                    progressDialog.dismiss();
+                                    ApplicationContext.dismissProgressDialog();
                                 }
                             }
                         });

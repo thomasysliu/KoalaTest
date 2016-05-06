@@ -49,7 +49,6 @@ public class ChildProfleEditActivity extends Activity implements View.OnClickLis
     private File tmpFile = ApplicationContext.createImageFile(ApplicationContext.CHILD_PHOTO_FILE_PATH, "tmp.jpg");
     Bitmap photo = null;
     private String type = "child";
-    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +57,6 @@ public class ChildProfleEditActivity extends Activity implements View.OnClickLis
                 R.layout.title_bar);
         setFinishOnTouchOutside(false);
         setContentView(R.layout.child_profie_edit);
-        progressDialog = new ProgressDialog(ChildProfleEditActivity.this);
-        progressDialog.setTitle(getString(R.string.processing_title));
-        progressDialog.setMessage(getString(R.string.processing_dialog));
         init();
     }
 
@@ -213,12 +209,12 @@ public class ChildProfleEditActivity extends Activity implements View.OnClickLis
                         //final File photoFile = ApplicationContext.createImageFile(ApplicationContext.CHILD_PHOTO_FILE_PATH, photoName);
                         //ApplicationContext.saveBitmap(photoFile, photo);
                         ApplicationContext.addBitmapToMemoryCache(photoName, photo);
-                        progressDialog.show();
+                        ApplicationContext.showProgressDialog(this);
                         ApplicationContext.update_child("child", cid, name, photo, new CallBack() {
                             @Override
                             public void done(CallBackContent content) {
                                 if (content != null) {
-                                    progressDialog.dismiss();
+                                    ApplicationContext.dismissProgressDialog();
                                     bundle.putString(ApplicationContext.CHILD_NAME, name);
                                     bundle.putInt(ApplicationContext.LIST_VIEW_POSITION, position);
                                     bundle.putString(ApplicationContext.PHOTO_NAME, photoName);
@@ -228,19 +224,19 @@ public class ChildProfleEditActivity extends Activity implements View.OnClickLis
 
                                 } else {
                                     Toast.makeText(ChildProfleEditActivity.this, "edit child fail!", Toast.LENGTH_LONG).show();
-                                    progressDialog.dismiss();
+                                    ApplicationContext.dismissProgressDialog();
                                 }
                             }
                         });
                         ApplicationContext.imageFileDelete(tmpFile);
                     } else {
                         photo = ApplicationContext.getBitMapById(this, R.drawable.default_user);
-                        progressDialog.show();
+                        ApplicationContext.showProgressDialog(this);
                         ApplicationContext.update_child("child", cid, name, photo, new CallBack() {
                             @Override
                             public void done(CallBackContent content) {
                                 if (content != null) {
-                                    progressDialog.dismiss();
+                                    ApplicationContext.dismissProgressDialog();
                                     bundle.putString(ApplicationContext.CHILD_NAME, name);
                                     bundle.putInt(ApplicationContext.LIST_VIEW_POSITION, position);
                                     bundle.putString(ApplicationContext.PHOTO_NAME, photoName);
@@ -250,7 +246,7 @@ public class ChildProfleEditActivity extends Activity implements View.OnClickLis
 
                                 } else {
                                     Toast.makeText(ChildProfleEditActivity.this, "edit child fail!", Toast.LENGTH_LONG).show();
-                                    progressDialog.dismiss();
+                                    ApplicationContext.dismissProgressDialog();
                                 }
                             }
                         });
@@ -265,11 +261,12 @@ public class ChildProfleEditActivity extends Activity implements View.OnClickLis
                 if(ApplicationContext.checkInternetConnection(this)) {
                     final Intent intent = getIntent();
                     final int position = viewPosition;
+                    ApplicationContext.showProgressDialog(this);
                     ApplicationContext.delete("child", cid, new CallBack() {
                         @Override
                         public void done(CallBackContent content) {
                             if (content != null) {
-                                progressDialog.dismiss();
+                                ApplicationContext.dismissProgressDialog();
                                 intent.putExtra(ApplicationContext.LIST_VIEW_POSITION, position);
                                 setResult(ApplicationContext.RESULT_CODE_REMOVE, intent);
                                 final String addr = deviceAddress;
@@ -277,7 +274,7 @@ public class ChildProfleEditActivity extends Activity implements View.OnClickLis
                                 finish();
                             } else {
                                 Toast.makeText(ChildProfleEditActivity.this, "Remove child fail! ", Toast.LENGTH_LONG).show();
-                                progressDialog.dismiss();
+                                ApplicationContext.dismissProgressDialog();
                             }
                         }
                     });

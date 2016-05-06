@@ -48,7 +48,6 @@ public class EditGatewayActivity extends Activity implements View.OnClickListene
     private Button mButtonOk;
     private Button mButtonRemove;
     private String gid = "";
-    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,9 +55,6 @@ public class EditGatewayActivity extends Activity implements View.OnClickListene
                 R.layout.title_bar);
         setFinishOnTouchOutside(false);
         setContentView(R.layout.edit_gateway);
-        progressDialog = new ProgressDialog(EditGatewayActivity.this);
-        progressDialog.setTitle(getString(R.string.processing_title));
-        progressDialog.setMessage(getString(R.string.processing_dialog));
         init();
     }
 
@@ -102,7 +98,7 @@ public class EditGatewayActivity extends Activity implements View.OnClickListene
                     final String place = editPlace.getText().toString();
                     final String near = editNear.getText().toString();
                     final String far = editFar.getText().toString();
-                    progressDialog.show();
+                    ApplicationContext.showProgressDialog(this);
                     ApplicationContext.update_gateway("gateway", gid, place, new CallBack() {
                         @Override
                         public void done(CallBackContent content) {
@@ -112,7 +108,7 @@ public class EditGatewayActivity extends Activity implements View.OnClickListene
                                     @Override
                                     public void done(CallBackContent content) {
                                         if (content != null) {
-                                            progressDialog.dismiss();
+                                            ApplicationContext.dismissProgressDialog();
                                             bundle.putString(ApplicationContext.GATEWAY_NEAR, near);
                                             bundle.putString(ApplicationContext.GATEWAY_FAR, far);
                                             bundle.putString(ApplicationContext.GATEWAY_ID, gid);
@@ -123,14 +119,14 @@ public class EditGatewayActivity extends Activity implements View.OnClickListene
                                             finish();
                                         } else {
                                             Toast.makeText(EditGatewayActivity.this, "update Gateway distance fail!", Toast.LENGTH_LONG).show();
-                                            progressDialog.dismiss();
+                                            ApplicationContext.dismissProgressDialog();
                                         }
                                     }
                                 });
 
                             } else {
                                 Toast.makeText(EditGatewayActivity.this, "update Gateway place fail!", Toast.LENGTH_LONG).show();
-                                progressDialog.dismiss();
+                                ApplicationContext.dismissProgressDialog();
                             }
                         }
                     });
@@ -142,17 +138,18 @@ public class EditGatewayActivity extends Activity implements View.OnClickListene
                 if(ApplicationContext.checkInternetConnection(this)) {
                     final Intent intent_remove = getIntent();
                     final int position_remove = viewPosition;
+                    ApplicationContext.showProgressDialog(this);
                     ApplicationContext.delete("gateway", gid, new CallBack() {
                         @Override
                         public void done(CallBackContent content) {
                             if (content != null) {
-                                progressDialog.dismiss();
+                                ApplicationContext.dismissProgressDialog();
                                 intent_remove.putExtra(ApplicationContext.LIST_VIEW_POSITION, position_remove);
                                 setResult(ApplicationContext.RESULT_CODE_REMOVE, intent_remove);
                                 finish();
                             } else {
                                 Toast.makeText(EditGatewayActivity.this, "Remove parent fail! ", Toast.LENGTH_LONG).show();
-                                progressDialog.dismiss();
+                                ApplicationContext.dismissProgressDialog();
                             }
                         }
                     });
