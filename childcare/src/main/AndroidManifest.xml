@@ -28,7 +28,8 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,71 +39,89 @@
         <activity
             android:name=".BaseTabViewActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".AddNewDeviceActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".ChildProfleEditActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".DeviceDiscoveryActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".MasterAccountCreateActivity"
             android:label="@string/master_account_create_title"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".TeacherCreateActivity"
             android:label="@string/teacher_create_title"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".GatewayCreateActivity"
             android:label="@string/gateway_create_title"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ChildProfileCreateActivity"
             android:label="@string/child_profile_create_title"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ParentCreateActivity"
             android:label="@string/parent_create_title"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".AddParentActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".EditParentActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".AddGatewayActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".EditGatewayActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".GatewayLoginActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".TeacherLoginActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MasterLoginTabViewActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ParentLoginActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".EditAlarmTimeActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
 
@@ -130,12 +149,15 @@
             android:label="@string/app_name" />
 
         <activity android:name=".GatewayListEditorActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".ParentListEditorActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".ChildProfileListEditorActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog"></activity>
 

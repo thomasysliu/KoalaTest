@@ -113,7 +113,7 @@ public class TeacherScheduledService  extends Service{
 
         final int requestCode = notifyID; // PendingIntent的Request Code
         final Intent intent = TeacherLoginActivity.mActivity.getIntent(); // 目前Activity的Intent
-        final int flags = PendingIntent.FLAG_CANCEL_CURRENT; // ONE_SHOT：PendingIntent只使用一次；CANCEL_CURRENT：PendingIntent執行前會先結束掉之前的；NO_CREATE：沿用先前的PendingIntent，不建立新的PendingIntent；UPDATE_CURRENT：更新先前PendingIntent所帶的額外資料，並繼續沿用
+        final int flags = PendingIntent.FLAG_UPDATE_CURRENT; // ONE_SHOT：PendingIntent只使用一次；CANCEL_CURRENT：PendingIntent執行前會先結束掉之前的；NO_CREATE：沿用先前的PendingIntent，不建立新的PendingIntent；UPDATE_CURRENT：更新先前PendingIntent所帶的額外資料，並繼續沿用
         final PendingIntent pendingIntent = PendingIntent.getActivity(TeacherLoginActivity.mActivity.getApplicationContext(), requestCode, intent, flags); // 取得PendingIntent
 
         final NotificationManager notificationManager = (NotificationManager) TeacherLoginActivity.mActivity.getSystemService(Context.NOTIFICATION_SERVICE); // 取得系統的通知服務

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -39,8 +40,6 @@ public class ParentScheduledService extends Service{
     private List<ChildItem> mChildItems = new ArrayList<ChildItem>();
     private List<ChildProfile> mListChildren = new ArrayList<ChildProfile>();
     private ChildrenListAdapter mChildListAdapter;
-    private String [] cids;
-    private int i;
 
     @Override
     public IBinder onBind(Intent intent)
@@ -51,11 +50,9 @@ public class ParentScheduledService extends Service{
     @Override
     public void onCreate()
     {
+        super.onCreate();
         mChildItems = ParentLoginActivity.mChildItems;
         mChildListAdapter = ParentLoginActivity.mChildListAdapter;
-        mListChildren = ApplicationContext.mListChildren;
-        cids = ApplicationContext.cids.split(",");
-        super.onCreate();
         count = 0;
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -64,25 +61,17 @@ public class ParentScheduledService extends Service{
                 if (count > 1) {
                     handler.post(new Runnable() {
                         public void run() {
-                            final int num_of_children = cids.length;
-                            mListChildren.clear();
-                            if (num_of_children != 0) {
-                                for (i=0; i<num_of_children; i++) {
-                                    ApplicationContext.show_child_by_id(cids[i], new CallBack() {
-                                        @Override
-                                        public void done(CallBackContent content) {
-                                            if (content != null) {
-                                                ChildProfile mChild = content.getChild();
-                                                ApplicationContext.updateChildProfile(mChild);
-                                                ApplicationContext.addANewChild(mChild);
-                                            } else {
-                                                Log.e(TAG, "show_child_by_id fail" + "\n");
-                                            }
-                                        }
-                                    });
+                            ApplicationContext.show_all_children(ApplicationContext.login_mid, true, Integer.valueOf(ApplicationContext.mPid), new CallBack() {
+                                @Override
+                                public void done(CallBackContent content) {
+                                    if (content != null) {
+                                        mListChildren = content.getShow_children();
+                                        populateList();
+                                    } else {
+                                        Log.e(TAG, "show_child_by_id fail" + "\n");
+                                    }
                                 }
-                                populateList();
-                            }
+                            });
                         }
                     });
                 }
@@ -97,6 +86,7 @@ public class ParentScheduledService extends Service{
 
     private void populateList() {
         mChildListAdapter.getData().clear();
+        Collections.sort(mListChildren);
         Log.i(TAG, "Initializing ListView....." + mChildListAdapter.getData().size());
         for (int i = 0, size = mListChildren.size(); i < size; i++) {
             ChildItem object = new ChildItem(mListChildren.get(i).getName(),mListChildren.get(i).getStatus());
@@ -126,7 +116,7 @@ public class ParentScheduledService extends Service{
 
         final int requestCode = notifyID; // PendingIntent的Request Code
         final Intent intent = ParentLoginActivity.mActivity.getIntent(); // 目前Activity的Intent
-        final int flags = PendingIntent.FLAG_CANCEL_CURRENT; // ONE_SHOT：PendingIntent只使用一次；CANCEL_CURRENT：PendingIntent執行前會先結束掉之前的；NO_CREATE：沿用先前的PendingIntent，不建立新的PendingIntent；UPDATE_CURRENT：更新先前PendingIntent所帶的額外資料，並繼續沿用
+        final int flags = PendingIntent.FLAG_UPDATE_CURRENT; // ONE_SHOT：PendingIntent只使用一次；CANCEL_CURRENT：PendingIntent執行前會先結束掉之前的；NO_CREATE：沿用先前的PendingIntent，不建立新的PendingIntent；UPDATE_CURRENT：更新先前PendingIntent所帶的額外資料，並繼續沿用
         final PendingIntent pendingIntent = PendingIntent.getActivity(ParentLoginActivity.mActivity.getApplicationContext(), requestCode, intent, flags); // 取得PendingIntent
 
         final NotificationManager notificationManager = (NotificationManager) ParentLoginActivity.mActivity.getSystemService(Context.NOTIFICATION_SERVICE); // 取得系統的通知服務

@@ -30,6 +30,7 @@
         <activity
             android:name="cc.nctu1210.childcare.LoginActivity"
             android:label="@string/app_name"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,71 +41,89 @@
         <activity
             android:name="cc.nctu1210.childcare.BaseTabViewActivity"
             android:label="@string/app_name"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name="cc.nctu1210.childcare.AddNewDeviceActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="cc.nctu1210.childcare.ChildProfleEditActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="cc.nctu1210.childcare.DeviceDiscoveryActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="cc.nctu1210.childcare.MasterAccountCreateActivity"
             android:label="@string/master_account_create_title"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name="cc.nctu1210.childcare.TeacherCreateActivity"
             android:label="@string/teacher_create_title"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name="cc.nctu1210.childcare.GatewayCreateActivity"
             android:label="@string/gateway_create_title"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="cc.nctu1210.childcare.ChildProfileCreateActivity"
             android:label="@string/child_profile_create_title"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name="cc.nctu1210.childcare.ParentCreateActivity"
             android:label="@string/parent_create_title"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="cc.nctu1210.childcare.AddParentActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="cc.nctu1210.childcare.EditParentActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="cc.nctu1210.childcare.AddGatewayActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="cc.nctu1210.childcare.EditGatewayActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="cc.nctu1210.childcare.GatewayLoginActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name="cc.nctu1210.childcare.TeacherLoginActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name="cc.nctu1210.childcare.MasterLoginTabViewActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name="cc.nctu1210.childcare.ParentLoginActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name="cc.nctu1210.childcare.EditAlarmTimeActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
 
@@ -130,14 +149,17 @@
 
         <activity
             android:name="cc.nctu1210.childcare.GatewayListEditorActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="cc.nctu1210.childcare.ParentListEditorActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="cc.nctu1210.childcare.ChildProfileListEditorActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
