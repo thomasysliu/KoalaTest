@@ -148,7 +148,7 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
                 this.stopService(mGatewayPollingIntent);
             }
         }
-        if (ApplicationContext.mIsLogin) {
+        if (ApplicationContext.mIsLogin && ApplicationContext.mIsServiceOn) {
             ApplicationContext.showProgressDialog(this);
             ApplicationContext.login_gateway(ApplicationContext.mLoginFlag, ApplicationContext.mAccount, ApplicationContext.mPassword, new CallBack() {
                 @Override
@@ -159,8 +159,7 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
                         ApplicationContext.mGid = content.getmGid();
                         ApplicationContext.mPlace = content.getPlace();
                         ApplicationContext.mIsLogin = true;
-                        ApplicationContext.mListChildren.clear();
-                        ApplicationContext.mMapChildren.clear();
+                        ApplicationContext.clearChildrenList();
                         initView();
                     } else {
                         Toast.makeText(GatewayLoginActivity.this, "Login fail !", Toast.LENGTH_LONG).show();
@@ -204,7 +203,7 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
         if (mListChildren.size() != num_of_children) {
             ApplicationContext.mShowChildCount = 0;
             for (i=0; i<num_of_children; i++) {
-                ApplicationContext.gateway_show_child_by_id(cids[i], new CallBack() {
+                ApplicationContext.show_child_by_id(cids[i], new CallBack() {
                     @Override
                     public void done(CallBackContent content) {
                         if (content != null) {

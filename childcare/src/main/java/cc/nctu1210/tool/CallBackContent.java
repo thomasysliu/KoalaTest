@@ -21,6 +21,7 @@ public class CallBackContent {
     NewParentItem parent;
     List<NewGatewayItem> show_gateway = new ArrayList<NewGatewayItem>();
     List<NewParentItem> show_parent = new ArrayList<NewParentItem>();
+    List<ChildProfile> show_children = new ArrayList<ChildProfile>();
     String mGid;
     String mPid;
     String mPlace;
@@ -59,6 +60,10 @@ public class CallBackContent {
 
     public String getPlace() {
         return this.mPlace;
+    }
+
+    public List<ChildProfile> getShow_children() {
+        return this.show_children;
     }
 
 }

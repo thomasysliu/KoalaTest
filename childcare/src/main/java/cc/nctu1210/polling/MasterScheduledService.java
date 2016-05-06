@@ -12,6 +12,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -41,8 +42,6 @@ public class MasterScheduledService extends Service{
     private List<ChildItem> mChildItems;
     private List<ChildProfile> mListChildren;
     private ChildrenListAdapter mChildListAdapter;
-    private String [] cids;
-    private int i;
 
     @Override
     public IBinder onBind(Intent intent)
@@ -57,8 +56,6 @@ public class MasterScheduledService extends Service{
         Log.i(TAG, "mIsServiceOn:" + ApplicationContext.mIsServiceOn);
         mChildItems = MasterLoginMainFragment.mChildItems;
         mChildListAdapter = MasterLoginMainFragment.mChildListAdapter;
-        mListChildren = ApplicationContext.mListChildren;
-        cids = ApplicationContext.cids.split(",");
         count = 0;
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -67,25 +64,17 @@ public class MasterScheduledService extends Service{
                 if (count > 1) {
                     handler.post(new Runnable() {
                         public void run() {
-                            final int num_of_children = cids.length;
-                            //mListChildren.clear();
-                            if (num_of_children != 0) {
-                                //ApplicationContext.mSpinChildName.clear();
-                                for (i = 0; i < num_of_children; i++) {
-                                    ApplicationContext.show_child_by_id(cids[i], new CallBack() {
-                                        @Override
-                                        public void done(CallBackContent content) {
-                                            if (content != null) {
-                                                ChildProfile mChild = content.getChild();
-                                                ApplicationContext.updateChildProfile(mChild);
-                                            } else {
-                                                Log.e("TAG", "show_child_by_id fail" + "\n");
-                                            }
-                                        }
-                                    });
+                            ApplicationContext.show_all_children(ApplicationContext.login_mid, false, -1, new CallBack() {
+                                @Override
+                                public void done(CallBackContent content) {
+                                    if (content != null) {
+                                        mListChildren = content.getShow_children();
+                                        populateList();
+                                    } else {
+                                        Log.e(TAG, "show_child_by_id fail" + "\n");
+                                    }
                                 }
-                                populateList();
-                            }
+                            });
                         }
                     });
                 }
@@ -96,6 +85,7 @@ public class MasterScheduledService extends Service{
 
     private void populateList() {
         mChildListAdapter.getData().clear();
+        Collections.sort(mListChildren);
         Log.i("TAG", "Initializing ListView....." + mChildListAdapter.getData().size());
         for (int i = 0, size = mListChildren.size(); i < size; i++) {
             ChildItem object = new ChildItem(mListChildren.get(i).getName(),mListChildren.get(i).getStatus());

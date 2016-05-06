@@ -23,6 +23,7 @@ public class ChildProfile implements Comparable<ChildProfile>{
         this.mName = name;
         this.mDeviceAddress = deviceAddress;
         this.mStatus = "miss";
+        this.mFlag = "1";
         this.mPhotoFileName = "";
     }
 
@@ -30,6 +31,7 @@ public class ChildProfile implements Comparable<ChildProfile>{
         this.mName = name;
         this.mDeviceAddress = deviceAddress;
         this.mStatus = "miss";
+        this.mFlag = "1";
         this.mPhotoFileName = photo;
     }
 

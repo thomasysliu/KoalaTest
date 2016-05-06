@@ -110,6 +110,10 @@ public class ParentListAdapter extends BaseAdapter {
         // assign values if the object is not null
         if (mData != null) {
             // get the TextView from the ViewHolder and then set the text (item name) and other values
+            String [] mSpinChildName= new String[ApplicationContext.mListChildren.size()];
+            for (int i=0; i<ApplicationContext.mListChildren.size(); i++) {
+                mSpinChildName[i] = ApplicationContext.mListChildren.get(i).getName();
+            }
             String title = mContext.getString(R.string.parent) + String.valueOf(position+1);
             viewHolder.parentTitle.setText(title);
             obj.setTitle(title);
@@ -132,7 +136,7 @@ public class ParentListAdapter extends BaseAdapter {
                     View newChildView = LayoutInflater.from(mContext).inflate(R.layout.new_child_in_parent_create_for_show, null);
                     TextView child = (TextView) newChildView.findViewById(R.id.text_child);
                     TextView name = (TextView) newChildView.findViewById(R.id.text_child_name);
-                    name.setText(ApplicationContext.mSpinChildName.get(obj.getmChildList().get(i).getSpinnerSelect()));
+                    name.setText(mSpinChildName[(obj.getmChildList().get(i).getSpinnerSelect())]);
                     viewHolder.newChild.addView(newChildView);
                 }
                 obj.setAddedChildNum(obj.getmChildList().size());
@@ -144,7 +148,7 @@ public class ParentListAdapter extends BaseAdapter {
                     View newChildView = LayoutInflater.from(mContext).inflate(R.layout.new_child_in_parent_create_for_show, null);
                     TextView child = (TextView) newChildView.findViewById(R.id.text_child);
                     TextView name = (TextView) newChildView.findViewById(R.id.text_child_name);
-                    name.setText(ApplicationContext.mSpinChildName.get(obj.getmChildList().get(i).getSpinnerSelect()));
+                    name.setText(mSpinChildName[(obj.getmChildList().get(i).getSpinnerSelect())]);
                     viewHolder.newChild.addView(newChildView);
                 }
             }

@@ -87,7 +87,6 @@ public class ApplicationContext extends Application {
     public static String mPlace;
     public static String mPid;
     public static boolean mIsLogin;
-    //public static List<String> mSpinChildName;
     public static String mAccount;
     public static String mPassword;
     public static String mLoginFlag;
@@ -200,6 +199,7 @@ public class ApplicationContext extends Application {
     public static final String UPATE_URL = BACKEND_API_URL + "update.php";
     public static final String SHOW_ALL_PARENT_URL = BACKEND_API_URL + "show_all_parent.php";
     public static final String SHOW_ALL_GATEWAY_URL = BACKEND_API_URL + "show_all_gateway.php";
+    public static final String SHOW_ALL_CHILDREN_URL = BACKEND_API_URL + "show_all_children.php";
     public static final String CHILD_PHOTO_FILE_UPLOAD_URL = BACKEND_API_URL + "up_image.php";
     public static final String CHILD_PHOTO_FILE_DELETE_URL = BACKEND_API_URL + "del_image.php";
 
@@ -218,7 +218,6 @@ public class ApplicationContext extends Application {
         mGateways = new ArrayList<NewGatewayItem>();
         mParents = new ArrayList<NewParentItem>();
         mDeviceList = new ArrayList<BluetoothDevice>();
-        //mSpinChildName = new ArrayList<String>();
         mProgress = null;
         mKoalaManager = null;
         mBooleanKoalaServiceCreated = false;
@@ -287,8 +286,6 @@ public class ApplicationContext extends Application {
             mMapChildren.put(child.getDeviceAddress(), child);
             mMapChildrenCid.put(child.getCid(), child);
             mListChildren.add(child);
-            //mSpinChildName.add(child.getName());
-            mShowChildCount++;
         }
     }
 
@@ -305,7 +302,6 @@ public class ApplicationContext extends Application {
             mListChildren.remove(child);
             mMapChildren.remove(child);
             mMapChildrenCid.remove(child);
-           // mSpinChildName.remove(position);
             return child;
         }
         return null;
@@ -927,58 +923,23 @@ public class ApplicationContext extends Application {
                     public void onResponse(JSONObject response) {
                         try{
                             Log.i(TAG, response.toString());
+                            ChildProfile child;
                             JSONObject data = response.getJSONObject("data");
                             CallBackContent content=new CallBackContent();
                             String name = data.getString("name");
                             String photo_url = data.getString("photo");
                             String mac =  data.getString("mac");
-                            String gid = data.getString("gid");
-                            String place = data.getString("place");
-                            String rssi = data.getString("rssi");
-                            String status = data.getString("status");
                             String flag = data.getString("flag");
-                            //mSpinChildName.add(name);
-                            ChildProfile child = new ChildProfile(name,photo_url,mac,gid,place,rssi,status,flag);
-                            child.setCid(cid);
-                            content.child = child;
-                            callBack.done(content);
-                        }catch (JSONException e){
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i(TAG, error.toString());
-                    }
-                });
-        //no cache
-        jsObjRequest.setShouldCache(false);
-        VolleyRequestManager.getInstance(getInstance().getApplicationContext()).addToRequestQueue(jsObjRequest);
-    }
+                            if (flag.equals("0")) {
+                                String gid = data.getString("gid");
+                                String place = data.getString("place");
+                                String rssi = data.getString("rssi");
+                                String status = data.getString("status");
+                                child = new ChildProfile(name,photo_url,mac,gid,place,rssi,status,flag);
 
-    public static void gateway_show_child_by_id(final String cid,final CallBack callBack) {
-        JSONObject json = new JSONObject();
-        try {
-            json.put("cid", cid);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.POST, SHOW_CHILD_BY_ID_URL, json, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try{
-                            Log.i(TAG, response.toString());
-                            JSONObject data = response.getJSONObject("data");
-                            CallBackContent content=new CallBackContent();
-                            String name = data.getString("name");
-                            String photo_url = data.getString("photo");
-                            String mac =  data.getString("mac");
-                            //mSpinChildName.add(name);
-                            ChildProfile child = new ChildProfile(name, mac, photo_url);
+                            } else {
+                                child = new ChildProfile(name, mac, photo_url);
+                            }
                             child.setCid(cid);
                             content.child = child;
                             callBack.done(content);
@@ -1276,6 +1237,63 @@ public class ApplicationContext extends Application {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.i(TAG, response.toString());
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i(TAG, error.toString());
+                    }
+                });
+        //no cache
+        jsObjRequest.setShouldCache(false);
+        VolleyRequestManager.getInstance(getInstance().getApplicationContext()).addToRequestQueue(jsObjRequest);
+    }
+
+    public static void show_all_children(int mid, boolean isParent, int pid, final CallBack callBack) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("mid", String.valueOf(mid));
+            if (isParent) {
+                json.put("type", String.valueOf("parent"));
+                json.put("pid", String.valueOf(pid));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.POST, SHOW_ALL_CHILDREN_URL, json, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+                            Log.i(TAG, response.toString());
+                            CallBackContent content=new CallBackContent();
+                            clearChildrenList();
+                            JSONArray data = response.getJSONArray("data");
+                            for(int i=0; i<data.length(); i++) {
+                                ChildProfile child;
+                                String cid = ((JSONObject) data.get(i)).getString("cid");
+                                String name = ((JSONObject) data.get(i)).getString("name");
+                                String photo_url = ((JSONObject) data.get(i)).getString("photo_url");
+                                String mac = ((JSONObject) data.get(i)).getString("mac");
+                                String flag = ((JSONObject) data.get(i)).getString("flag");
+                                if (flag.equals("0")) {
+                                    String gid =  ((JSONObject) data.get(i)).getString("gid");
+                                    String place = ((JSONObject) data.get(i)).getString("place");
+                                    String rssi = ((JSONObject) data.get(i)).getString("rssi");
+                                    String status = ((JSONObject) data.get(i)).getString("status");
+                                    child = new ChildProfile(name,photo_url,mac,gid,place,rssi,status,flag);
+                                } else {
+                                    child = new ChildProfile(name,mac,photo_url);
+                                }
+                                child.setCid(cid);
+                                addANewChild(child);
+                            }
+                            content.show_children = mListChildren;
+                            callBack.done(content);
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
                     }
                 }, new Response.ErrorListener() {
                     @Override

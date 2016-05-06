@@ -87,7 +87,6 @@ public class ChildProfileCreateActivity extends Activity implements View.OnClick
             object.photoName = mListChildren.get(i).getPhotoName();
             object.cid = mListChildren.get(i).getCid();
             mDeviceItems.add(object);
-            ApplicationContext.mSpinChildName.add(mListChildren.get(i).getName());
         }
         Log.i(TAG, "Initialized ListView....." + mDeviceListAdapter.getData().size());
         mDeviceListAdapter.notifyDataSetChanged();

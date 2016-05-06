@@ -22,7 +22,7 @@ import cc.nctu1210.tool.ApplicationContext;
  */
 public class ParentCreateChildrenListAdapter extends BaseAdapter {
     private final static String TAG = ParentCreateChildrenListAdapter.class.getSimpleName();
-    private ArrayAdapter<String> ChildNameList;
+    private ArrayAdapter<String> childNameList;
     /**
      * this is our own collection of data, can be anything we want it to be as long as we get the
      * abstract methods implemented using this data and work on this data (see getter) you should
@@ -97,10 +97,12 @@ public class ParentCreateChildrenListAdapter extends BaseAdapter {
         if (mData != null) {
             // get the TextView from the ViewHolder and then set the text (item name) and other values
             String [] mSpinChildName= new String[ApplicationContext.mListChildren.size()];
-            ApplicationContext.mSpinChildName.toArray(mSpinChildName);
-            ChildNameList = new ArrayAdapter<String>(mContext,android.R.layout.simple_spinner_item,mSpinChildName);
-            ChildNameList.setDropDownViewResource(R.layout.spinner_dropdown_item);
-            viewHolder.child_name.setAdapter(ChildNameList);
+            for (int i=0; i<ApplicationContext.mListChildren.size(); i++) {
+                mSpinChildName[i] = ApplicationContext.mListChildren.get(i).getName();
+            }
+            childNameList = new ArrayAdapter<String>(mContext,android.R.layout.simple_spinner_item,mSpinChildName);
+            childNameList.setDropDownViewResource(R.layout.spinner_dropdown_item);
+            viewHolder.child_name.setAdapter(childNameList);
             viewHolder.child_name.setSelection(obj.getSpinnerSelect());
             viewHolder.child_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
