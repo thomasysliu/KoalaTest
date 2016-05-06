@@ -13,6 +13,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -39,8 +40,6 @@ public class TeacherScheduledService  extends Service{
     private List<ChildItem> mChildItems = new ArrayList<ChildItem>();
     private List<ChildProfile> mListChildren = new ArrayList<ChildProfile>();
     private ChildrenListAdapter mChildListAdapter;
-    private String [] cids;
-    private int i;
 
     @Override
     public IBinder onBind(Intent intent)
@@ -53,8 +52,6 @@ public class TeacherScheduledService  extends Service{
     {
         mChildItems = TeacherLoginActivity.mChildItems;
         mChildListAdapter = TeacherLoginActivity.mChildListAdapter;
-        mListChildren = ApplicationContext.mListChildren;
-        cids = ApplicationContext.cids.split(",");
         super.onCreate();
         count = 0;
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -64,25 +61,17 @@ public class TeacherScheduledService  extends Service{
                 if (count > 1) {
                     handler.post(new Runnable() {
                         public void run() {
-                            final int num_of_children = cids.length;
-                            mListChildren.clear();
-                            if (num_of_children != 0) {
-                                for (i=0; i<num_of_children; i++) {
-                                    ApplicationContext.show_child_by_id(cids[i], new CallBack() {
-                                        @Override
-                                        public void done(CallBackContent content) {
-                                            if (content != null) {
-                                                ChildProfile mChild = content.getChild();
-                                                ApplicationContext.updateChildProfile(mChild);
-                                                ApplicationContext.addANewChild(mChild);
-                                            } else {
-                                                Log.e(TAG, "show_child_by_id fail" + "\n");
-                                            }
-                                        }
-                                    });
+                            ApplicationContext.show_all_children(ApplicationContext.login_mid, false, -1, new CallBack() {
+                                @Override
+                                public void done(CallBackContent content) {
+                                    if (content != null) {
+                                        mListChildren = content.getShow_children();
+                                        populateList();
+                                    } else {
+                                        Log.e(TAG, "show_child_by_id fail" + "\n");
+                                    }
                                 }
-                                populateList();
-                            }
+                            });
                         }
                     });
                 }
@@ -94,6 +83,7 @@ public class TeacherScheduledService  extends Service{
     private void populateList() {
         mChildListAdapter.getData().clear();
         Log.i(TAG, "Initializing ListView....." + mChildListAdapter.getData().size());
+        Collections.sort(mListChildren);
         for (int i = 0, size = mListChildren.size(); i < size; i++) {
             ChildItem object = new ChildItem(mListChildren.get(i).getName(),mListChildren.get(i).getStatus());
             object.photoName = mListChildren.get(i).getPhotoName();

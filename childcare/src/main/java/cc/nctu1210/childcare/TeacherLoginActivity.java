@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,10 +49,7 @@ public class TeacherLoginActivity extends Activity implements View.OnClickListen
     public static List<ChildItem> mChildItems = new ArrayList<ChildItem>();
     private ListView mListViewChildren;
     private List<ChildProfile> mListChildren;
-    private HashMap<String,ChildProfile> mMapChildren;
     private long exitTime = 0L;
-    private String [] cids;
-    private int i;
 
     private TextView mTextViewStatus;
     private ImageView mImageViewKoala;
@@ -64,9 +62,6 @@ public class TeacherLoginActivity extends Activity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.teacher_login);
         mActivity = TeacherLoginActivity.this;
-        mListChildren = ApplicationContext.mListChildren;
-        mMapChildren = ApplicationContext.mMapChildren;
-        cids = ApplicationContext.cids.split(",");
         initView();
     }
 
@@ -81,25 +76,6 @@ public class TeacherLoginActivity extends Activity implements View.OnClickListen
             ApplicationContext.cancelNotificationService(this);
             mTeacherPollingIntent = new Intent(TeacherLoginActivity.this, TeacherScheduledService.class);
             TeacherLoginActivity.this.stopService(mTeacherPollingIntent);
-        }
-        if (ApplicationContext.mIsLogin) {
-            ApplicationContext.showProgressDialog(this);
-            ApplicationContext.login_admin(ApplicationContext.mLoginFlag, ApplicationContext.mAccount, ApplicationContext.mPassword, new CallBack() {
-                @Override
-                public void done(CallBackContent content) {
-                    if (content != null) {
-                        ApplicationContext.login_mid = content.getMid();
-                        ApplicationContext.cids = content.getCids();
-                        ApplicationContext.mIsLogin = true;
-                        ApplicationContext.mListChildren.clear();
-                        ApplicationContext.mMapChildren.clear();
-                        initView();
-                    } else {
-                        Toast.makeText(TeacherLoginActivity.this, "Login fail !", Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
-            ApplicationContext.dismissProgressDialog();
         }
     }
 
@@ -124,34 +100,25 @@ public class TeacherLoginActivity extends Activity implements View.OnClickListen
         mChildListAdapter = new ChildrenListAdapter(TeacherLoginActivity.this, mChildItems,0);
         mListViewChildren = (ListView) findViewById(R.id.list_main_child);
         mListViewChildren.setAdapter(mChildListAdapter);
-        final int num_of_children = cids.length;
         ApplicationContext.showProgressDialog(this);
-        if (mListChildren.size() != num_of_children) {
-            for (i=0; i<num_of_children; i++) {
-                ApplicationContext.show_child_by_id(cids[i], new CallBack() {
-                    @Override
-                    public void done(CallBackContent content) {
-                        if (content != null) {
-                            ChildProfile mChild = content.getChild();
-
-
-                            ApplicationContext.addANewChild(mChild);
-                            if (mListChildren.size() == num_of_children)
-                                populateList();
-                        } else {
-                            Log.e(TAG, "show_child_by_id fail" + "\n");
-                        }
-                    }
-                });
+        ApplicationContext.show_all_children(ApplicationContext.login_mid, false, -1, new CallBack() {
+            @Override
+            public void done(CallBackContent content) {
+                if (content != null) {
+                    mListChildren = content.getShow_children();
+                    populateList();
+                } else {
+                    Log.e(TAG, "show_child_by_id fail" + "\n");
+                }
             }
-            populateList();
-        }
+        });
         ApplicationContext.dismissProgressDialog();
     }
 
     private void populateList() {
         mChildListAdapter.getData().clear();
         Log.i(TAG, "Initializing ListView....." + mChildListAdapter.getData().size());
+        Collections.sort(mListChildren);
         for (int i = 0, size = mListChildren.size(); i < size; i++) {
             ChildItem object = new ChildItem(mListChildren.get(i).getName(),mListChildren.get(i).getStatus());
             object.photoName = mListChildren.get(i).getPhotoName();
