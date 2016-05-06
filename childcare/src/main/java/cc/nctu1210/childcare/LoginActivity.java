@@ -1,6 +1,7 @@
 package cc.nctu1210.childcare;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -29,7 +30,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     private Spinner login_type;
     private int type = 0;  // 0: master,  1: teacher , 2: parent , 3: gateway
     private EditText edtAccount,edtPassword;
-    private String [] LoginType= {"admin","teacher","parent","gateway"};
+    private final String [] LOGINTYPE= {"admin","teacher","parent","gateway"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -113,12 +114,14 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         switch (v.getId()){
             case R.id.bt_logIn:
                 ApplicationContext.mLoginType = type;
+                ApplicationContext.mLoginFlag = LOGINTYPE[type];
                 String account=edtAccount.getText().toString();
                 String password=edtPassword.getText().toString();
                 final Intent intent_login = new Intent();
+                ApplicationContext.showProgressDialog(this);
                 if(type == ApplicationContext.MASTER_TYPE) {
                     intent_login.setClass(LoginActivity.this, MasterLoginTabViewActivity.class);
-                    ApplicationContext.login_admin(LoginType[type], account, password, new CallBack() {
+                    ApplicationContext.login_admin(LOGINTYPE[type], account, password, new CallBack() {
                         @Override
                         public void done(CallBackContent content) {
                             if (content != null) {
@@ -139,7 +142,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                 else if(type == ApplicationContext.TEACHER_TYPE)
                 {
                     intent_login.setClass(LoginActivity.this, TeacherLoginActivity.class);
-                    ApplicationContext.login_teacher(LoginType[type], account, password, new CallBack() {
+                    ApplicationContext.login_teacher(LOGINTYPE[type], account, password, new CallBack() {
                         @Override
                         public void done(CallBackContent content) {
                             if (content != null) {
@@ -158,7 +161,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                 else if(type == ApplicationContext.PARENT_TYPE)
                 {
                     intent_login.setClass(LoginActivity.this, ParentLoginActivity.class);
-                    ApplicationContext.login_parent(LoginType[type], account, password, new CallBack() {
+                    ApplicationContext.login_parent(LOGINTYPE[type], account, password, new CallBack() {
                         @Override
                         public void done(CallBackContent content) {
                             if (content != null) {
@@ -178,13 +181,14 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                 else if(type == ApplicationContext.GATEWAY_TYPE)
                 {
                     intent_login.setClass(LoginActivity.this, GatewayLoginActivity.class);
-                    ApplicationContext.login_gateway(LoginType[type], account, password, new CallBack() {
+                    ApplicationContext.login_gateway(LOGINTYPE[type], account, password, new CallBack() {
                         @Override
                         public void done(CallBackContent content) {
                             if (content != null) {
                                 ApplicationContext.login_mid = content.getMid();
                                 ApplicationContext.cids = content.getCids();
                                 ApplicationContext.mGid = content.getmGid();
+                                ApplicationContext.mPlace = content.getPlace();
                                 ApplicationContext.mIsLogin = true;
                                 ApplicationContext.mListChildren.clear();
                                 ApplicationContext.mMapChildren.clear();
@@ -195,6 +199,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                         }
                     });
                 }
+                ApplicationContext.dismissProgressDialog();
                 break;
             case R.id.bt_new_garden:
                 Intent intent_new_garden = new Intent();
@@ -207,26 +212,49 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-
         switch (requestCode) {
-            case ApplicationContext.REQUEST_COARSE_LOCATION: {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d(TAG, "coarse location permission granted");
-                } else {
-                    final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Functionality limited");
-                    builder.setMessage("Since location access has not been granted, this app will not be able to discover beacons when in the background.");
-                    builder.setPositiveButton(android.R.string.ok, null);
-                    builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                        }
+            case ApplicationContext.REQUEST_COARSE_LOCATION:
+                if (grantResults.length > 0) {
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        Log.d(TAG, "coarse location permission granted");
+                    } else {
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setTitle("Functionality limited");
+                        builder.setMessage("Since location access has not been granted, this app will not be able to discover beacons when in the background.");
+                        builder.setPositiveButton(android.R.string.ok, null);
+                        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                            }
 
-                    });
-                    builder.show();
+                        });
+                        builder.show();
+                    }
+                } else {
+                    Log.w(TAG, "no permission granted!!");
                 }
-                return;
-            }
+                break;
+            case ApplicationContext.REQUEST_EXTERNAL_STORAGE:
+                if (grantResults.length > 0) {
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        Log.d(TAG, "coarse location permission granted");
+                    } else {
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setTitle("Functionality limited");
+                        builder.setMessage("Since storage access has not been granted, this app will not be able to store any images.");
+                        builder.setPositiveButton(android.R.string.ok, null);
+                        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                            }
+
+                        });
+                        builder.show();
+                    }
+                } else {
+                    Log.w(TAG, "no permission granted!!");
+                }
+                break;
         }
     }
 }

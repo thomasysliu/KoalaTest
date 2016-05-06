@@ -23,6 +23,7 @@ public class CallBackContent {
     List<NewParentItem> show_parent = new ArrayList<NewParentItem>();
     String mGid;
     String mPid;
+    String mPlace;
     public CallBackContent(){
     }
 
@@ -55,5 +56,9 @@ public class CallBackContent {
 
     public  List<NewParentItem> getShow_parent()
     {return this.show_parent;}
+
+    public String getPlace() {
+        return this.mPlace;
+    }
 
 }

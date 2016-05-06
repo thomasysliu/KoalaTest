@@ -160,8 +160,8 @@ public class ChildProfleEditActivity extends Activity implements View.OnClickLis
             int rotation = picData.getIntExtra(ApplicationContext.EXTRA_ORIENTATION, 0);
             Matrix matrix = new Matrix();
             matrix.postRotate(rotation);
-            photo = Bitmap.createBitmap(tmp, 0, 0, tmp.getWidth(), tmp.getHeight(), matrix, true);
-            Log.i("TAG", "TTTTTTTTTTTTTT");
+            Bitmap tmp2 = Bitmap.createBitmap(tmp, 0, 0, tmp.getWidth(), tmp.getHeight(), matrix, true);
+            photo = ApplicationContext.scaleBitmap(tmp2, 100, 100);
             mImageViewPhoto.setImageBitmap(photo);
         } catch (Exception e) {
 

@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import cc.nctu1210.entity.ChildProfile;
+import cc.nctu1210.polling.GatewayScheduledService;
 import cc.nctu1210.tool.ApplicationContext;
 import cc.nctu1210.tool.BLESanner;
 import cc.nctu1210.tool.CallBack;
@@ -33,11 +34,12 @@ import cc.nctu1210.view.ScanItem;
 import cc.nctu1210.view.ScanListAdapter;
 
 public class GatewayLoginActivity extends Activity implements View.OnClickListener {
-    private long exitTime = 0L;
     private final String TAG = GatewayLoginActivity.class.getSimpleName();
+    private long exitTime = 0L;
+
     private BluetoothAdapter mBtAdapter = null;
     private BLESanner mBLEScanner = null;
-    private ChildrenListAdapterForGateway mChildListAdapter;
+    public static ChildrenListAdapterForGateway mChildListAdapter;
     public static List<ChildItem> mChildItems = new ArrayList<ChildItem>();
     private ListView mListViewChildren;
     private List<ChildProfile> mListChildren;
@@ -48,7 +50,10 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
 
     private TextView mTextViewStatus;
     private TextView mTextViewPlace;
+    private String place;
     private ImageView mImageViewKoala;
+
+    private Intent mGatewayPollingIntent;
 
     private List<ChildProfile> mListDevices = new ArrayList<ChildProfile>();
     private HashMap<String, ChildProfile> mMapDevices = new HashMap<String, ChildProfile>();
@@ -81,6 +86,7 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
                         child.setStatus(status);
                         item.rssi = status;
                         int unixTime = (int) (System.currentTimeMillis() / 1000L);
+                        Log.i(TAG, "scan a device:"+device.getAddress()+" rssi:"+status+" time:"+unixTime);
                         ApplicationContext.gateway_upload(ApplicationContext.mGid,item.cid,item.rssi,String.valueOf(unixTime));
                         mChildListAdapter.notifyDataSetChanged();
                     }
@@ -93,6 +99,10 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gateway_login);
+        mListChildren = ApplicationContext.mListChildren;
+        mMapChildren = ApplicationContext.mMapChildren;
+        cids = ApplicationContext.cids.split(",");
+        initView();
 
         Log.i(TAG, "getPackageManager");
         if (!GatewayLoginActivity.this.getPackageManager().hasSystemFeature(
@@ -110,10 +120,7 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
             finish();
             return;
         }
-        mListChildren = ApplicationContext.mListChildren;
-        mMapChildren = ApplicationContext.mMapChildren;
-        cids = ApplicationContext.cids.split(",");
-        initView();
+
     }
 
     @Override
@@ -129,28 +136,63 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
             ApplicationContext.mBluetoothAdapter = mBtAdapter;
             ApplicationContext.mBLEScanner = mBLEScanner;
             if (ApplicationContext.mIsServiceOn) {
+                Log.i(TAG, "onResume start service...");
                 ApplicationContext.notificationServiceStartBuilder(this, ApplicationContext.GATEWAY_TYPE);
                 startMonitoring();
+                mGatewayPollingIntent = new Intent(this, GatewayScheduledService.class);
+                this.startService(mGatewayPollingIntent);
             } else {
                 ApplicationContext.cancelNotificationService(this);
                 stopMonitoring();
+                mGatewayPollingIntent = new Intent(this, GatewayScheduledService.class);
+                this.stopService(mGatewayPollingIntent);
             }
+        }
+        if (ApplicationContext.mIsLogin) {
+            ApplicationContext.showProgressDialog(this);
+            ApplicationContext.login_gateway(ApplicationContext.mLoginFlag, ApplicationContext.mAccount, ApplicationContext.mPassword, new CallBack() {
+                @Override
+                public void done(CallBackContent content) {
+                    if (content != null) {
+                        ApplicationContext.login_mid = content.getMid();
+                        ApplicationContext.cids = content.getCids();
+                        ApplicationContext.mGid = content.getmGid();
+                        ApplicationContext.mPlace = content.getPlace();
+                        ApplicationContext.mIsLogin = true;
+                        ApplicationContext.mListChildren.clear();
+                        ApplicationContext.mMapChildren.clear();
+                        initView();
+                    } else {
+                        Toast.makeText(GatewayLoginActivity.this, "Login fail !", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+            ApplicationContext.dismissProgressDialog();
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mBLEScanner != null) {
+        if (ApplicationContext.mIsServiceOn) {
             ApplicationContext.mIsServiceOn = false;
-            ApplicationContext.cancelNotificationService(this);
-            stopMonitoring();
+            mGatewayPollingIntent = new Intent(this, GatewayScheduledService.class);
+            this.stopService(mGatewayPollingIntent);
         }
+        ApplicationContext.cancelNotificationService(this);
+        if (mBLEScanner != null)
+            stopMonitoring();
     }
 
     private void initView() {
         mTextViewStatus = (TextView) findViewById(R.id.text_gateway_status);
+        if(ApplicationContext.mIsServiceOn) {
+            mTextViewStatus.setText(getString(R.string.toggle_on));
+        } else {
+            mTextViewStatus.setText(getString(R.string.toggle_off));
+        }
         mTextViewPlace = (TextView) findViewById(R.id.text_place);
+        mTextViewPlace.setText(ApplicationContext.mPlace);
         mImageViewKoala = (ImageView) findViewById(R.id.image_gateway_user);
         mImageViewKoala.setOnClickListener(this);
 
@@ -158,8 +200,8 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
         mListViewChildren = (ListView) findViewById(R.id.list_main_child);
         mListViewChildren.setAdapter(mChildListAdapter);
         final int num_of_children = cids.length;
-
-        if (num_of_children != 0) {
+        ApplicationContext.showProgressDialog(this);
+        if (mListChildren.size() != num_of_children) {
             for (i=0; i<num_of_children; i++) {
                 ApplicationContext.show_child_by_id(cids[i], new CallBack() {
                     @Override
@@ -167,7 +209,8 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
                         if (content != null) {
                             ChildProfile mChild = content.getChild();
                             ApplicationContext.addANewChild(mChild);
-                            populateList();
+                            if (mListChildren.size() == num_of_children)
+                                populateList();
                         } else {
                             Log.e(TAG, "show_child_by_id fail" + "\n");
                         }
@@ -175,6 +218,7 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
                 });
             }
         }
+        ApplicationContext.dismissProgressDialog();
     }
 
     private void startMonitoring() {
@@ -244,6 +288,11 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
                 return true;
             }
             ApplicationContext.cancelNotificationService(this);
+            if (ApplicationContext.mIsServiceOn) {
+                ApplicationContext.mIsServiceOn = false;
+                mGatewayPollingIntent = new Intent(this, GatewayScheduledService.class);
+                this.stopService(mGatewayPollingIntent);
+            }
             exitPrograms();
         }
         return super.dispatchKeyEvent(event);
@@ -267,11 +316,15 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
             mTextViewStatus.setText(getString(R.string.toggle_off));
             ApplicationContext.cancelNotificationService(this);
             stopMonitoring();
+            mGatewayPollingIntent = new Intent(this, GatewayScheduledService.class);
+            this.stopService(mGatewayPollingIntent);
         } else {
             ApplicationContext.mIsServiceOn = true;
             mTextViewStatus.setText(getString(R.string.toggle_on));
             ApplicationContext.notificationServiceStartBuilder(this, ApplicationContext.GATEWAY_TYPE);
             startMonitoring();
+            mGatewayPollingIntent = new Intent(this, GatewayScheduledService.class);
+            this.startService(mGatewayPollingIntent);
         }
     }
 }

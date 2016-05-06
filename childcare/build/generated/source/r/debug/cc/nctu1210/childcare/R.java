@@ -2048,17 +2048,19 @@ containing a value of this type.
         public static final int photo=0x7f050056;
         public static final int place=0x7f050057;
         public static final int place_hint=0x7f050058;
-        public static final int remove=0x7f050059;
-        public static final int scanning=0x7f05005a;
-        public static final int select_login_type=0x7f05005b;
-        public static final int set_alarm_time=0x7f05005c;
-        public static final int set_alarm_time_title=0x7f05005d;
+        public static final int processing_dialog=0x7f050059;
+        public static final int processing_title=0x7f05005a;
+        public static final int remove=0x7f05005b;
+        public static final int scanning=0x7f05005c;
+        public static final int select_login_type=0x7f05005d;
+        public static final int set_alarm_time=0x7f05005e;
+        public static final int set_alarm_time_title=0x7f05005f;
         public static final int status_bar_notification_info_overflow=0x7f050013;
-        public static final int take_photo=0x7f05005e;
-        public static final int teacher_create_title=0x7f05005f;
-        public static final int toggle_off=0x7f050060;
-        public static final int toggle_on=0x7f050061;
-        public static final int yes=0x7f050062;
+        public static final int take_photo=0x7f050060;
+        public static final int teacher_create_title=0x7f050061;
+        public static final int toggle_off=0x7f050062;
+        public static final int toggle_on=0x7f050063;
+        public static final int yes=0x7f050064;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f080086;

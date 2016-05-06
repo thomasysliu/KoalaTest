@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,12 +53,12 @@ public class MasterLoginMainFragment extends Fragment implements View.OnClickLis
         mMapChildren = ApplicationContext.mMapChildren;
         cids = ApplicationContext.cids.split(",");
         initView();
-
-}
+    }
 
     @Override
     public void onResume() {
         super.onResume();
+        Log.i(TAG, "mIsServiceOn:"+ApplicationContext.mIsServiceOn);
         if (ApplicationContext.mIsServiceOn) {
             ApplicationContext.notificationServiceStartBuilder(getActivity(), ApplicationContext.MASTER_TYPE);
             mPollingIntent = new Intent(getActivity(), MasterScheduledService.class);
@@ -66,6 +67,28 @@ public class MasterLoginMainFragment extends Fragment implements View.OnClickLis
             ApplicationContext.cancelNotificationService(getActivity());
             mPollingIntent = new Intent(getActivity(), MasterScheduledService.class);
             getActivity().stopService(mPollingIntent);
+        }
+        if (ApplicationContext.mIsLogin) {
+            ApplicationContext.showProgressDialog(getActivity());
+            ApplicationContext.login_admin(ApplicationContext.mLoginFlag, ApplicationContext.mAccount, ApplicationContext.mPassword, new CallBack() {
+                @Override
+                public void done(CallBackContent content) {
+                    if (content != null) {
+                        ApplicationContext.login_mid = content.getMid();
+                        ApplicationContext.gids = content.getGids();
+                        ApplicationContext.cids = content.getCids();
+                        ApplicationContext.pids = content.getPids();
+                        ApplicationContext.mIsLogin = true;
+                        ApplicationContext.mListChildren.clear();
+                        ApplicationContext.mMapChildren.clear();
+                        cids = ApplicationContext.cids.split(",");
+                        initView();
+                    } else {
+                        Toast.makeText(getActivity(), "Login fail !", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+            ApplicationContext.dismissProgressDialog();
         }
     }
 
@@ -81,14 +104,22 @@ public class MasterLoginMainFragment extends Fragment implements View.OnClickLis
     private void initView() {
         mChildListAdapter = new ChildrenListAdapter(getActivity(), mChildItems,1);
         mTextViewStatus = (TextView) this.getView().findViewById(R.id.text_master_status);
+        if(ApplicationContext.mIsServiceOn) {
+            mTextViewStatus.setText(getString(R.string.toggle_on));
+        } else {
+            mTextViewStatus.setText(getString(R.string.toggle_off));
+        }
         mImageViewKoala = (ImageView) this.getView().findViewById(R.id.image_main_user);
         mImageViewKoala.setOnClickListener(this);
 
         mListViewChildren = (ListView) this.getView().findViewById(R.id.list_main_child);
         mListViewChildren.setAdapter(mChildListAdapter);
         final int num_of_children = cids.length;
-        if (num_of_children != 0) {
-            ApplicationContext.mSpinChildName.clear();
+        Log.i(TAG, "num of children:"+num_of_children+" mListChildren:"+mListChildren.size());
+        ApplicationContext.showProgressDialog(getActivity());
+        if (mListChildren.size() != num_of_children) {
+            //ApplicationContext.mSpinChildName.clear();
+            Log.i(TAG, "inside...");
             for (i=0; i<num_of_children; i++) {
                 ApplicationContext.show_child_by_id(cids[i], new CallBack() {
                     @Override
@@ -96,7 +127,8 @@ public class MasterLoginMainFragment extends Fragment implements View.OnClickLis
                         if (content != null) {
                             ChildProfile mChild = content.getChild();
                             ApplicationContext.addANewChild(mChild);
-                            populateList();
+                            if (mListChildren.size() == num_of_children)
+                                populateList();
                         } else {
                             Log.e(TAG, "show_child_by_id fail" + "\n");
                         }
@@ -104,10 +136,11 @@ public class MasterLoginMainFragment extends Fragment implements View.OnClickLis
                 });
             }
         }
+        ApplicationContext.dismissProgressDialog();
     }
 
 
-    private void populateList() {
+    public void populateList() {
         mChildListAdapter.getData().clear();
         Log.i(TAG, "Initializing ListView....." + mChildListAdapter.getData().size());
         for (int i = 0, size = mListChildren.size(); i < size; i++) {

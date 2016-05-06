@@ -83,4 +83,7 @@
     <string name="monitor">孩童監控</string>
     <string name="toggle_on">啟動</string>
     <string name="toggle_off">關閉</string>
+
+    <string name="processing_title">資料處理中</string>
+    <string name="processing_dialog">請稍等...</string>
 </resources>

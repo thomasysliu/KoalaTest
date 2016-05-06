@@ -82,6 +82,7 @@ public class ParentListEditorActivity extends Activity implements OnClickListene
         parentList.setOnItemClickListener(this);
         imgAddParent = (ImageView)findViewById(R.id.image_add_parent);
         imgAddParent.setOnClickListener(this);
+        ApplicationContext.showProgressDialog(this);
         ApplicationContext.show_all_parent(ApplicationContext.login_mid, new CallBack() {
             @Override
             public void done(CallBackContent content) {
@@ -93,6 +94,7 @@ public class ParentListEditorActivity extends Activity implements OnClickListene
                 }
             }
         });
+        ApplicationContext.dismissProgressDialog();
     }
 
     private void populateParentList() {

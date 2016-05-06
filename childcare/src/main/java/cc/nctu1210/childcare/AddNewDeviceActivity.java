@@ -145,7 +145,8 @@ public class AddNewDeviceActivity extends Activity implements View.OnClickListen
             int rotation = picData.getIntExtra(ApplicationContext.EXTRA_ORIENTATION, 0);
             Matrix matrix = new Matrix();
             matrix.postRotate(rotation);
-            photo = Bitmap.createBitmap(tmp, 0, 0, tmp.getWidth(), tmp.getHeight(), matrix, true);
+            Bitmap tmp2 = Bitmap.createBitmap(tmp, 0, 0, tmp.getWidth(), tmp.getHeight(), matrix, true);
+            photo = ApplicationContext.scaleBitmap(tmp2, 100,100);
             mImageViewPhoto.setImageBitmap(photo);
         } catch (Exception e) {
 
@@ -207,7 +208,8 @@ public class AddNewDeviceActivity extends Activity implements View.OnClickListen
                     final File photoFile = ApplicationContext.createImageFile(ApplicationContext.CHILD_PHOTO_FILE_PATH, photoName);
                     ApplicationContext.saveBitmap(photoFile, photo);
                     ApplicationContext.imageFileDelete(tmpFile);
-                    */        ApplicationContext.addBitmapToMemoryCache(photoName, photo);
+                    */
+                    ApplicationContext.addBitmapToMemoryCache(photoName, photo);
                     int mid;
                     if(ApplicationContext.mIsLogin)
                         mid = ApplicationContext.login_mid;

@@ -118,10 +118,13 @@ public class ChildrenListAdapterForGateway extends BaseAdapter {
                         new Response.Listener<Bitmap>() {
                             @Override
                             public void onResponse(Bitmap response) {
-                                //File photoFile = new File(ApplicationContext.CHILD_PHOTO_FILE_PATH, photoName);
-                                photoImage.setImageBitmap(response);
+                                Bitmap out = null;
+                                //Log.i(TAG, "Before compressed: " + photoName + ":size: " + response.getByteCount() + "bytes");
+                                out = ApplicationContext.scaleBitmap(response, 100, 100);
+                                //Log.i(TAG, "After compressed: "+photoName+":size: "+out.getByteCount()+"bytes");
+                                photoImage.setImageBitmap(out);
                                 //ApplicationContext.saveBitmap(photoFile, response);
-                                ApplicationContext.addBitmapToMemoryCache(photoName, response);
+                                ApplicationContext.addBitmapToMemoryCache(photoName, out);
                             }
                         }, 0, 0, ImageView.ScaleType.CENTER_INSIDE, null,
                         new Response.ErrorListener() {

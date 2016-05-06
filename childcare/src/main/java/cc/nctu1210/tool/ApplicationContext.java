@@ -6,6 +6,7 @@ import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
@@ -80,13 +82,16 @@ public class ApplicationContext extends Application {
     public static String cids;
     public static String pids;
     public static String mGid;
+    public static String mPlace;
     public static String mPid;
     public static boolean mIsLogin;
     public static List<String> mSpinChildName;
     public static String mAccount;
     public static String mPassword;
-    public static int mLoginType;  // 0: master,  1: teacher , 2: parent , 3: gateway
+    public static String mLoginFlag;
+    public static ProgressDialog mProgress;
 
+    public static int mLoginType;  // 0: master,  1: teacher , 2: parent , 3: gateway
     public static final int MASTER_TYPE = 0;
     public static final int TEACHER_TYPE = 1;
     public static final int PARENT_TYPE = 2;
@@ -211,6 +216,7 @@ public class ApplicationContext extends Application {
         mParents = new ArrayList<NewParentItem>();
         mDeviceList = new ArrayList<BluetoothDevice>();
         mSpinChildName = new ArrayList<String>();
+        mProgress = null;
         mKoalaManager = null;
         mBooleanKoalaServiceCreated = false;
         mBluetoothAdapter = null;
@@ -222,6 +228,7 @@ public class ApplicationContext extends Application {
 
         final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
         final int cacheSize = maxMemory / 8;
+        Log.i(TAG, "cache size:"+cacheSize+"KB");
         mMemoryCache = new LruCache<String, Bitmap>(cacheSize) {
             @Override
             protected int sizeOf(String key, Bitmap bitmap) {
@@ -230,14 +237,25 @@ public class ApplicationContext extends Application {
         };
     }
 
+    public static void showProgressDialog(Activity activity) {
+        mProgress = ProgressDialog.show(activity, activity.getString(R.string.processing_title), activity.getString(R.string.processing_dialog), true);
+    }
+
+    public static void dismissProgressDialog() {
+        mProgress.dismiss();
+    }
+
 
     public static void addBitmapToMemoryCache(String key, Bitmap bitmap) {
+        mMemoryCache.put(key, bitmap);
+        /*
         if (getBitmapFromMemCache(key) == null) {
             mMemoryCache.put(key, bitmap);
         } else {
             mMemoryCache.remove(key);
             mMemoryCache.put(key, bitmap);
         }
+        */
     }
 
     public static Bitmap getBitmapFromMemCache(String key) {
@@ -260,20 +278,30 @@ public class ApplicationContext extends Application {
         String mTeacherName = mPref.getString(TEACHER_NAME_PREFERENCE, "Teacher Name");
     }
 
-    public static void addANewChild(ChildProfile child) {
+    public static synchronized void addANewChild(ChildProfile child) {
         if (findChild(child.getDeviceAddress()) == -1) {
             mMapChildren.put(child.getDeviceAddress(), child);
             mMapChildrenCid.put(child.getCid(), child);
             mListChildren.add(child);
+            mSpinChildName.add(child.getName());
         }
     }
 
-    public static ChildProfile removeAChild(String addr) {
-        if (findChild(addr) != -1) {
+    public static synchronized  void clearChildrenList() {
+        for (int i=0; i<mListChildren.size(); i++) {
+            removeAChild(mListChildren.get(i).getDeviceAddress());
+        }
+    }
+
+    public static synchronized ChildProfile removeAChild(String addr) {
+        final int position = findChild(addr);
+        if (position != -1) {
             ChildProfile child = mMapChildren.get(addr);
             mListChildren.remove(child);
             mMapChildren.remove(child);
             mMapChildrenCid.remove(child);
+            mSpinChildName.remove(position);
+            return child;
         }
         return null;
     }
@@ -291,6 +319,23 @@ public class ApplicationContext extends Application {
     public static int findChildById(String id) {
         if (mMapChildrenCid.containsKey(id)) {
             ChildProfile child = mMapChildrenCid.get(id);
+            int position = mListChildren.indexOf(child);
+            return position;
+        } else {
+            return -1;
+        }
+    }
+
+    public static synchronized int updateChildProfile(ChildProfile child) {
+        if (mMapChildrenCid.containsKey(child.getCid())) {
+            ChildProfile tmp = mMapChildrenCid.get(child.getCid());
+            tmp.setName(child.getName());
+            tmp.setStatus(child.getStatus());
+            tmp.setDeviceAddress(child.getDeviceAddress());
+            tmp.setPhotoName(child.getPhotoName());
+            tmp.setRssi(child.getRssi());
+            tmp.setGatewayId(child.getGatewayId());
+            tmp.setFlag(child.getFlag());
             int position = mListChildren.indexOf(child);
             return position;
         } else {
@@ -425,6 +470,18 @@ public class ApplicationContext extends Application {
         } catch (Exception e) {
             // TODO: handle exception
         }
+    }
+
+    public static Bitmap scaleBitmap(Bitmap origin, int reqWidth, int reqHeight) {
+        Bitmap bm;
+        int width = origin.getWidth();
+        int height = origin.getHeight();
+        float scaledWidth = ((float) reqWidth/width);
+        float scaledHeight = ((float) reqHeight/height);
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaledWidth, scaledHeight);
+        bm = Bitmap.createBitmap(origin, 0,0,width,height,matrix, true);
+        return bm;
     }
 
     private static String encodeImagetoString(Bitmap bitmap) {
@@ -759,6 +816,7 @@ public class ApplicationContext extends Application {
                             CallBackContent content=new CallBackContent();
                             content.mid=Integer.parseInt(data.getString("mid"));
                             content.mGid=data.getString("gid");
+                            content.mPlace=data.getString("place");
                             content.cids=data.getString("cids");
                             callBack.done(content);
                         }catch (JSONException e){
@@ -874,7 +932,7 @@ public class ApplicationContext extends Application {
                             String rssi = data.getString("rssi");
                             String status = data.getString("status");
                             String flag = data.getString("flag");
-                            mSpinChildName.add(name);
+                            //mSpinChildName.add(name);
                             ChildProfile child = new ChildProfile(name,photo_url,mac,gid,place,rssi,status,flag);
                             child.setCid(cid);
                             content.child = child;

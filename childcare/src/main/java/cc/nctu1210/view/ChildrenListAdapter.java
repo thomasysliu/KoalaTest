@@ -3,6 +3,7 @@ package cc.nctu1210.view;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,7 +18,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import cc.nctu1210.childcare.R;
@@ -119,9 +122,11 @@ public class ChildrenListAdapter extends BaseAdapter {
                 // get the TextView from the ViewHolder and then set the text (item name) and other values
                 final String photoName = obj.photoName;
                 //Bitmap photo = ApplicationContext.getBitmapByFileName(photoName);
+                //Log.i(TAG, "position: "+position+" photoName:"+photoName);
                 Bitmap photo = ApplicationContext.getBitmapFromMemCache(photoName);
 
                 if (photo == null) {
+                    Log.i(TAG, "get image  from volley!");
                     //viewHolder.photo.setBackground(ApplicationContext.controlBitMap(mContext, R.drawable.default_user));
                     String photoURL = ApplicationContext.CHILD_PHOTO_FILE_URL + photoName;
                     final ImageView photoImage = viewHolder.photo;
@@ -131,20 +136,26 @@ public class ChildrenListAdapter extends BaseAdapter {
                             new Response.Listener<Bitmap>() {
                                 @Override
                                 public void onResponse(Bitmap response) {
-                                    //File photoFile = new File(ApplicationContext.CHILD_PHOTO_FILE_PATH, photoName);
-                                    photoImage.setImageBitmap(response);
+                                    //File photoFile = new File(ApplicationContext.CHILD_PHOTO_FILE_PATH, photoName);\
+                                    Bitmap out = null;
+                                    //Log.i(TAG, "Before compressed: " + photoName + ":size: " + response.getByteCount() + "bytes");
+                                    out = ApplicationContext.scaleBitmap(response, 100, 100);
+                                    //Log.i(TAG, "After compressed: "+photoName+":size: "+out.getByteCount()+"bytes");
+                                    photoImage.setImageBitmap(out);
                                     //ApplicationContext.saveBitmap(photoFile, response);
-                                    ApplicationContext.addBitmapToMemoryCache(photoName, response);
+                                    ApplicationContext.addBitmapToMemoryCache(photoName, out);
                                 }
                             }, 0, 0, ImageView.ScaleType.CENTER_INSIDE, null,
                             new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
+                                    Log.w(TAG, "image access fail!!!");
                                     photoImage.setImageResource(R.drawable.default_user);
                                 }
                             });
                     VolleyRequestManager.getInstance(mContext).addToRequestQueue(request);
                 } else {
+                    Log.i(TAG, "image set from cache!");
                     viewHolder.photo.setImageBitmap(photo);
                 }
 

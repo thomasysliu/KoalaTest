@@ -84,4 +84,6 @@
     <string name="toggle_on">On</string>
     <string name="toggle_off">Off</string>
 
+    <string name="processing_title">Data Processing</string>
+    <string name="processing_dialog">Please wait...</string>
 </resources>

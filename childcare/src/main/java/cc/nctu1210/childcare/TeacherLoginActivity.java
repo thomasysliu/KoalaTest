@@ -46,7 +46,6 @@ public class TeacherLoginActivity extends Activity implements View.OnClickListen
     private BluetoothAdapter mBtAdapter = null;
     public static ChildrenListAdapter mChildListAdapter;
     public static List<ChildItem> mChildItems = new ArrayList<ChildItem>();
-    public static Activity activity;
     private ListView mListViewChildren;
     private List<ChildProfile> mListChildren;
     private HashMap<String,ChildProfile> mMapChildren;
@@ -58,14 +57,16 @@ public class TeacherLoginActivity extends Activity implements View.OnClickListen
     private ImageView mImageViewKoala;
     private Intent mTeacherPollingIntent;
 
+    public static Activity mActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.teacher_login);
+        mActivity = TeacherLoginActivity.this;
         mListChildren = ApplicationContext.mListChildren;
         mMapChildren = ApplicationContext.mMapChildren;
         cids = ApplicationContext.cids.split(",");
-        activity = TeacherLoginActivity.this;
         initView();
     }
 
@@ -81,6 +82,25 @@ public class TeacherLoginActivity extends Activity implements View.OnClickListen
             mTeacherPollingIntent = new Intent(TeacherLoginActivity.this, TeacherScheduledService.class);
             TeacherLoginActivity.this.stopService(mTeacherPollingIntent);
         }
+        if (ApplicationContext.mIsLogin) {
+            ApplicationContext.showProgressDialog(this);
+            ApplicationContext.login_admin(ApplicationContext.mLoginFlag, ApplicationContext.mAccount, ApplicationContext.mPassword, new CallBack() {
+                @Override
+                public void done(CallBackContent content) {
+                    if (content != null) {
+                        ApplicationContext.login_mid = content.getMid();
+                        ApplicationContext.cids = content.getCids();
+                        ApplicationContext.mIsLogin = true;
+                        ApplicationContext.mListChildren.clear();
+                        ApplicationContext.mMapChildren.clear();
+                        initView();
+                    } else {
+                        Toast.makeText(TeacherLoginActivity.this, "Login fail !", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+            ApplicationContext.dismissProgressDialog();
+        }
     }
 
     @Override
@@ -92,30 +112,41 @@ public class TeacherLoginActivity extends Activity implements View.OnClickListen
         TeacherLoginActivity.this.stopService(mTeacherPollingIntent);
     }
     private void initView() {
-        mTextViewStatus = (TextView) findViewById(R.id.text_parent_status);
-        mImageViewKoala = (ImageView) findViewById(R.id.image_parent_user);
+        mTextViewStatus = (TextView) findViewById(R.id.text_teacher_status);
+        if(ApplicationContext.mIsServiceOn) {
+            mTextViewStatus.setText(getString(R.string.toggle_on));
+        } else {
+            mTextViewStatus.setText(getString(R.string.toggle_off));
+        }
+        mImageViewKoala = (ImageView) findViewById(R.id.image_teacher_user);
         mImageViewKoala.setOnClickListener(this);
 
         mChildListAdapter = new ChildrenListAdapter(TeacherLoginActivity.this, mChildItems,0);
         mListViewChildren = (ListView) findViewById(R.id.list_main_child);
         mListViewChildren.setAdapter(mChildListAdapter);
         final int num_of_children = cids.length;
-        if (num_of_children != 0) {
+        ApplicationContext.showProgressDialog(this);
+        if (mListChildren.size() != num_of_children) {
             for (i=0; i<num_of_children; i++) {
                 ApplicationContext.show_child_by_id(cids[i], new CallBack() {
                     @Override
                     public void done(CallBackContent content) {
                         if (content != null) {
                             ChildProfile mChild = content.getChild();
+
+
                             ApplicationContext.addANewChild(mChild);
-                            populateList();
+                            if (mListChildren.size() == num_of_children)
+                                populateList();
                         } else {
                             Log.e(TAG, "show_child_by_id fail" + "\n");
                         }
                     }
                 });
             }
+            populateList();
         }
+        ApplicationContext.dismissProgressDialog();
     }
 
     private void populateList() {
@@ -145,6 +176,11 @@ public class TeacherLoginActivity extends Activity implements View.OnClickListen
                 return true;
             }
             ApplicationContext.cancelNotificationService(this);
+            if (ApplicationContext.mIsServiceOn) {
+                ApplicationContext.mIsServiceOn = false;
+                mTeacherPollingIntent = new Intent(this, TeacherLoginActivity.class);
+                this.stopService(mTeacherPollingIntent);
+            }
             exitPrograms();
         }
         return super.dispatchKeyEvent(event);
@@ -168,13 +204,13 @@ public class TeacherLoginActivity extends Activity implements View.OnClickListen
             mTextViewStatus.setText(getString(R.string.toggle_off));
             ApplicationContext.mIsServiceOn=false;
             ApplicationContext.cancelNotificationService(this);
-            mTeacherPollingIntent = new Intent(TeacherLoginActivity.this, ParentScheduledService.class);
+            mTeacherPollingIntent = new Intent(TeacherLoginActivity.this, TeacherScheduledService.class);
             TeacherLoginActivity.this.stopService(mTeacherPollingIntent);
         } else {
             mTextViewStatus.setText(getString(R.string.toggle_on));
             ApplicationContext.mIsServiceOn=true;
             ApplicationContext.notificationServiceStartBuilder(this, ApplicationContext.TEACHER_TYPE);
-            mTeacherPollingIntent = new Intent(TeacherLoginActivity.this, ParentScheduledService.class);
+            mTeacherPollingIntent = new Intent(TeacherLoginActivity.this, TeacherScheduledService.class);
             TeacherLoginActivity.this.startService(mTeacherPollingIntent);
         }
     }

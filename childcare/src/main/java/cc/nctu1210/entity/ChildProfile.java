@@ -14,7 +14,7 @@ public class ChildProfile {
     private String mGatewayId;
     private String mPlace;
     private String rssi;
-    private String mFlag;
+    private String mFlag; //missing flag; 1 is missing. 0 is not missing.
     private String cid;
 
     public ChildProfile(String name, String deviceAddress) {
@@ -38,6 +38,7 @@ public class ChildProfile {
     public ChildProfile(String cid) {
         this.cid = cid;
     }
+
     public void setPosition(int position) {
         this.mPosition = position;
     }
@@ -59,6 +60,18 @@ public class ChildProfile {
     }
 
     public void setCid(String cid){this.cid = cid;}
+
+    public void setRssi(String rssi) {
+        this.rssi = rssi;
+    }
+
+    public void setGatewayId(String gatewayId) {
+        this.mGatewayId = gatewayId;
+    }
+
+    public void setFlag(String flag) {
+        this.mFlag =flag;
+    }
 
     public int getPosition() {
         return this.mPosition;
@@ -82,6 +95,7 @@ public class ChildProfile {
 
     public String getGatewayId()
     {return this.mGatewayId; }
+
     public String getPlace()
     {return this.mPlace;}
 

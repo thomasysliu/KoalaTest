@@ -27,8 +27,6 @@ public class MasterLoginTabViewActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.master_login_tab_view);
         init();
-        Intent intent_service_start= new Intent(MasterLoginTabViewActivity.this, MasterScheduledService.class);
-        MasterLoginTabViewActivity.this.startService(intent_service_start);
     }
 
     private void init() {

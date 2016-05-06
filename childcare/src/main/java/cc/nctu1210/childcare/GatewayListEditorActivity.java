@@ -81,6 +81,7 @@ public class GatewayListEditorActivity extends Activity  implements OnClickListe
         gatewayList.setOnItemClickListener(this);
         imgAddGateway = (ImageView)findViewById(R.id.image_add_gateway);
         imgAddGateway.setOnClickListener(this);
+        ApplicationContext.showProgressDialog(this);
         ApplicationContext.show_all_gateway(ApplicationContext.login_mid, new CallBack() {
             @Override
             public void done(CallBackContent content) {
@@ -92,6 +93,7 @@ public class GatewayListEditorActivity extends Activity  implements OnClickListe
                 }
             }
         });
+        ApplicationContext.dismissProgressDialog();
     }
 
     private void populateGatewayList() {

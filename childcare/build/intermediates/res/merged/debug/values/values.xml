@@ -296,6 +296,8 @@
     <string name="photo">Photo</string>
     <string name="place">Place : </string>
     <string name="place_hint">ex:Grade 1 Class A</string>
+    <string name="processing_dialog">Please wait...</string>
+    <string name="processing_title">Data Processing</string>
     <string name="remove">Remove</string>
     <string name="scanning">Scanning</string>
     <string name="select_login_type">Login As : </string>

@@ -1,27 +1,17 @@
 package cc.nctu1210.polling;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
+
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import cc.nctu1210.childcare.GatewayLoginActivity;
 import cc.nctu1210.childcare.MasterLoginMainFragment;
-import cc.nctu1210.childcare.MasterLoginTabViewActivity;
-import cc.nctu1210.childcare.R;
-import cc.nctu1210.childcare.TeacherCreateActivity;
-import cc.nctu1210.childcare.TeacherLoginActivity;
 import cc.nctu1210.entity.ChildProfile;
 import cc.nctu1210.tool.ApplicationContext;
 import cc.nctu1210.tool.CallBack;
@@ -31,16 +21,16 @@ import cc.nctu1210.view.ChildrenListAdapter;
 import cc.nctu1210.view.ChildrenListAdapterForGateway;
 
 /**
- * Created by User on 2016/5/2.
+ * Created by Yi-Ta_Chuang on 2016/5/5.
  */
-public class MasterScheduledService extends Service{
-    private static final String TAG= MasterScheduledService.class.getSimpleName();
+public class GatewayScheduledService extends Service {
+    private static final String TAG = GatewayScheduledService.class.getSimpleName();
     private Timer timer = new Timer();
     private Handler handler = new Handler();
     private int count;
     private List<ChildItem> mChildItems;
     private List<ChildProfile> mListChildren;
-    private ChildrenListAdapter mChildListAdapter;
+    private ChildrenListAdapterForGateway mChildListAdapter;
     private String [] cids;
     private int i;
 
@@ -55,8 +45,8 @@ public class MasterScheduledService extends Service{
     {
         super.onCreate();
         Log.i(TAG, "mIsServiceOn:" + ApplicationContext.mIsServiceOn);
-        mChildItems = MasterLoginMainFragment.mChildItems;
-        mChildListAdapter = MasterLoginMainFragment.mChildListAdapter;
+        mChildItems = GatewayLoginActivity.mChildItems;
+        mChildListAdapter = GatewayLoginActivity.mChildListAdapter;
         mListChildren = ApplicationContext.mListChildren;
         cids = ApplicationContext.cids.split(",");
         count = 0;
@@ -78,6 +68,7 @@ public class MasterScheduledService extends Service{
                                             if (content != null) {
                                                 ChildProfile mChild = content.getChild();
                                                 ApplicationContext.updateChildProfile(mChild);
+                                                ApplicationContext.addANewChild(mChild);
                                             } else {
                                                 Log.e("TAG", "show_child_by_id fail" + "\n");
                                             }

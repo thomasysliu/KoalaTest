@@ -32,7 +32,7 @@ import cc.nctu1210.view.ChildrenListAdapter;
  * Created by User on 2016/5/2.
  */
 public class TeacherScheduledService  extends Service{
-
+    private final String TAG = TeacherScheduledService.class.getSimpleName();
     private Timer timer = new Timer();
     private Handler handler = new Handler();
     private int count;
@@ -73,30 +73,27 @@ public class TeacherScheduledService  extends Service{
                                         public void done(CallBackContent content) {
                                             if (content != null) {
                                                 ChildProfile mChild = content.getChild();
+                                                ApplicationContext.updateChildProfile(mChild);
                                                 ApplicationContext.addANewChild(mChild);
-                                                populateList();
                                             } else {
-                                                Log.e("TAG", "show_child_by_id fail" + "\n");
+                                                Log.e(TAG, "show_child_by_id fail" + "\n");
                                             }
                                         }
                                     });
                                 }
+                                populateList();
                             }
                         }
                     });
                 }
             }
-        }, 0, 1 * 60 * 1000);//60 sec
+        }, 0, 1 * 10 * 1000);//60 sec
     }
-    @Override
-    public void onDestroy()
-    {
-        super.onDestroy();
-    }
+
 
     private void populateList() {
         mChildListAdapter.getData().clear();
-        Log.i("TAG", "Initializing ListView....." + mChildListAdapter.getData().size());
+        Log.i(TAG, "Initializing ListView....." + mChildListAdapter.getData().size());
         for (int i = 0, size = mListChildren.size(); i < size; i++) {
             ChildItem object = new ChildItem(mListChildren.get(i).getName(),mListChildren.get(i).getStatus());
             object.photoName = mListChildren.get(i).getPhotoName();
@@ -111,9 +108,7 @@ public class TeacherScheduledService  extends Service{
             else if(mListChildren.get(i).getStatus().equals("far"))
                 notificationBuilder(i,1);
         }
-        Log.i("TAG", "Initialized ListView....." + mChildListAdapter.getData().size());
-        TeacherLoginActivity.mChildItems = mChildItems;
-        TeacherLoginActivity.mChildListAdapter = mChildListAdapter;
+        Log.i(TAG, "Initialized ListView....." + mChildListAdapter.getData().size());
         mChildListAdapter.notifyDataSetChanged();
 
     }
@@ -127,19 +122,19 @@ public class TeacherScheduledService  extends Service{
         final String childName = child.getName();
 
         final int requestCode = notifyID; // PendingIntent的Request Code
-        final Intent intent = TeacherLoginActivity.activity.getIntent(); // 目前Activity的Intent
+        final Intent intent = TeacherLoginActivity.mActivity.getIntent(); // 目前Activity的Intent
         final int flags = PendingIntent.FLAG_CANCEL_CURRENT; // ONE_SHOT：PendingIntent只使用一次；CANCEL_CURRENT：PendingIntent執行前會先結束掉之前的；NO_CREATE：沿用先前的PendingIntent，不建立新的PendingIntent；UPDATE_CURRENT：更新先前PendingIntent所帶的額外資料，並繼續沿用
-        final PendingIntent pendingIntent = PendingIntent.getActivity(TeacherLoginActivity.activity.getApplicationContext(), requestCode, intent, flags); // 取得PendingIntent
+        final PendingIntent pendingIntent = PendingIntent.getActivity(TeacherLoginActivity.mActivity.getApplicationContext(), requestCode, intent, flags); // 取得PendingIntent
 
-        final NotificationManager notificationManager = (NotificationManager) TeacherLoginActivity.activity.getSystemService(Context.NOTIFICATION_SERVICE); // 取得系統的通知服務
+        final NotificationManager notificationManager = (NotificationManager) TeacherLoginActivity.mActivity.getSystemService(Context.NOTIFICATION_SERVICE); // 取得系統的通知服務
 
         if(type == 0) {
-            final Notification notification = new Notification.Builder(TeacherLoginActivity.activity.getApplicationContext()).setSmallIcon(R.drawable.base_main).setContentTitle(getString(R.string.notification_title)).setContentText(childName + " " + getString(R.string.is_miss)).setSound(soundUri).setContentIntent(pendingIntent).setAutoCancel(autoCancel).build(); // 建立通知
+            final Notification notification = new Notification.Builder(TeacherLoginActivity.mActivity.getApplicationContext()).setSmallIcon(R.drawable.base_main).setContentTitle(getString(R.string.notification_title)).setContentText(childName + " " + getString(R.string.is_miss)).setSound(soundUri).setContentIntent(pendingIntent).setAutoCancel(autoCancel).build(); // 建立通知
             notificationManager.notify(notifyID, notification);
         }
         else
         {
-            final Notification notification = new Notification.Builder(TeacherLoginActivity.activity.getApplicationContext()).setSmallIcon(R.drawable.base_main).setContentTitle(getString(R.string.notification_title)).setContentText(childName + " away " + mListChildren.get(position).getPlace()).setSound(soundUri).setContentIntent(pendingIntent).setAutoCancel(autoCancel).build(); // 建立通知
+            final Notification notification = new Notification.Builder(TeacherLoginActivity.mActivity.getApplicationContext()).setSmallIcon(R.drawable.base_main).setContentTitle(getString(R.string.notification_title)).setContentText(childName + " away " + mListChildren.get(position).getPlace()).setSound(soundUri).setContentIntent(pendingIntent).setAutoCancel(autoCancel).build(); // 建立通知
             notificationManager.notify(notifyID, notification);
         }
 
