@@ -1168,7 +1168,7 @@ public class ApplicationContext extends Application {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        //Log.i(TAG, "type="+type+", cid="+cid+", nam="+name+", photoBase64="+base64);
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.POST, UPATE_URL, json, new Response.Listener<JSONObject>() {
                     @Override

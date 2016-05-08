@@ -13,6 +13,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -85,7 +86,7 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
                         child.setStatus(status);
                         child.setRssi(String.valueOf(rssi));
                         int unixTime = (int) (System.currentTimeMillis() / 1000L);
-                        Log.i(TAG, "scan a device:"+device.getAddress()+" rssi:"+status+" time:"+unixTime);
+                        Log.i(TAG, "scan a device:"+device.getAddress()+" name:"+child.getName()+" rssi:"+rssi+" time:"+unixTime);
                         ApplicationContext.gateway_upload(ApplicationContext.mGid,child.getCid(),child.getRssi(),String.valueOf(unixTime));
                     }
                     break;
@@ -97,6 +98,7 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gateway_login);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         initView();
 
         Log.i(TAG, "getPackageManager");
