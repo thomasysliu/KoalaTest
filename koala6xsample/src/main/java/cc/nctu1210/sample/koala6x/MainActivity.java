@@ -1,5 +1,6 @@
 package cc.nctu1210.sample.koala6x;
 
+import android.Manifest;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -14,6 +15,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,6 +37,8 @@ import cc.nctu1210.view.ModelObject;
 
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener, SensorEventListener {
     private final static String TAG = MainActivity.class.getSimpleName();
+    private static final int REQUEST_COARSE_LOCATION = 0x01 << 1;
+    private static final int REQUEST_EXTERNAL_STORAGE = 0x01 << 2;
 
     private boolean startScan = false;
     private KoalaServiceManager mServiceManager;
@@ -53,7 +57,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     public static final int REQUEST_CODE = 30;
 
     private Button btScan;
-    private Button btStart;
+    private Button btDisconnect;
 
     /* ListView Related */
     private String DEVICE_NAME = "name";
@@ -97,8 +101,13 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         Log.i(TAG, "onCreate");
         setContentView(R.layout.activity_main);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            verifyStoragePermissions(this);
+            verifyCoaseLocationPermissions(this);
+        }
+
         btScan = (Button) findViewById(R.id.bt_scan);
-        btStart = (Button) findViewById(R.id.bt_log);
+        btDisconnect = (Button) findViewById(R.id.bt_disconnect);
         listView = (ListView) findViewById(R.id.listView);
 
         mAdapter = new CustomAdapter(this, mObjects);
@@ -107,6 +116,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         listView.setOnItemClickListener(this);
 
         btScan.setOnClickListener(scanListener);
+        btDisconnect.setOnClickListener(disConnectListener);
 
         Log.i(TAG, "getPackageManager");
         if (!getPackageManager().hasSystemFeature(
@@ -132,6 +142,47 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     }
 
+    public static String[] PERMISSIONS = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+    };
+
+    /**
+     * Checks if the app has permission to write to device storage
+     *
+     * If the app does not has permission then the user will be prompted to grant permissions
+     *
+     * @param activity current activity
+     */
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, PERMISSIONS[1]);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
+    }
+
+    public static void verifyCoaseLocationPermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, PERMISSIONS[2]);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS,
+                    REQUEST_COARSE_LOCATION
+            );
+        }
+    }
+
     private Button.OnClickListener scanListener = new Button.OnClickListener() {
         public void onClick(View v) {
             if (!startScan) {
@@ -140,23 +191,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 mDevices.clear();
                 mFlags.clear();
                 // Start to scan the ble device
-                scanLeDevice();
-
-                try {
-                    Thread.sleep(SCAN_PERIOD+1000);
-
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                setupListView();
+                scanLeDevice(startScan);
             } else {
                 startScan = false;
-                mServiceManager.disconnect();
-                mServiceManager.close();
-                mDevices.clear();
-                mFlags.clear();
-                setupListView();
+                scanLeDevice(startScan);
                 btScan.setText("Scan");
             }
 
@@ -177,9 +215,13 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     }
 
-    private Button.OnClickListener logListener = new Button.OnClickListener() {
+    private Button.OnClickListener disConnectListener = new Button.OnClickListener() {
         public void onClick(View v) {
-
+            mServiceManager.disconnect();
+            //mServiceManager.close();
+            mDevices.clear();
+            mFlags.clear();
+            setupListView();
         }
     };
 
@@ -202,45 +244,18 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         }
     }
 
-    private void scanLeDevice() {
-        new Thread() {
-
-            @Override
-            public void run() {
-
-                if (Build.VERSION.SDK_INT < 21) {
-                    mBluetoothAdapter.startLeScan(mLeScanCallback);
-
-                    try {
-                        Thread.sleep(SCAN_PERIOD);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                    mBluetoothAdapter.stopLeScan(mLeScanCallback);
-                } else {
-                    mBLEScanner.startScan(mScanCallback);
-
-                    try {
-                        Thread.sleep(SCAN_PERIOD);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                    mBLEScanner.stopScan(mScanCallback);
-                }
-                
-                /*
-                runOnUiThread(new Runnable() {
-		            @Override
-		            public void run() {
-		                // This code will always run on the UI thread, therefore is safe to modify UI elements.
-		            	setupListView();
-		            }
-		        });
-		        */
-            }
-        }.start();
+    private void scanLeDevice(boolean scanFlag) {
+        if (Build.VERSION.SDK_INT < 21) {
+            if (scanFlag)
+                mBluetoothAdapter.startLeScan(mLeScanCallback);
+            else
+                mBluetoothAdapter.stopLeScan(mLeScanCallback);
+        } else {
+            if (scanFlag)
+                mBLEScanner.startScan(mScanCallback);
+            else
+                mBLEScanner.stopScan(mScanCallback);
+        }
     }
 
     /**

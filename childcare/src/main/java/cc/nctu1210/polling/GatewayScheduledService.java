@@ -32,6 +32,7 @@ public class GatewayScheduledService extends Service {
     private List<ChildItem> mChildItems;
     private List<ChildProfile> mListChildren;
     private ChildrenListAdapterForGateway mChildListAdapter;
+    private List<ChildProfile> mListScan;
 
     @Override
     public IBinder onBind(Intent intent)
@@ -45,6 +46,7 @@ public class GatewayScheduledService extends Service {
         super.onCreate();
         Log.i(TAG, "mIsServiceOn:" + ApplicationContext.mIsServiceOn);
         mChildItems = GatewayLoginActivity.mChildItems;
+        mListScan = GatewayLoginActivity.mListScan;
         mChildListAdapter = GatewayLoginActivity.mChildListAdapter;
         count = 0;
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -54,6 +56,18 @@ public class GatewayScheduledService extends Service {
                 if (count > 1) {
                     handler.post(new Runnable() {
                         public void run() {
+                            synchronized(mListScan) {
+                                StringBuilder cids = new StringBuilder("");
+                                StringBuilder status = new StringBuilder("");
+                                int unixTime = (int) (System.currentTimeMillis() / 1000L);
+                                for (int i=0; i<mListScan.size(); i++) {
+                                    ChildProfile child = mListScan.get(i);
+                                    cids.append(child.getCid()).append(",");
+                                    status.append(child.getRssi()).append(",");
+                                }
+                                mListScan.clear();
+                                ApplicationContext.gateway_upload(ApplicationContext.mGid, cids.toString(), status.toString(), String.valueOf(unixTime));
+                            }
                             ApplicationContext.show_all_children(ApplicationContext.login_mid, false, -1, new CallBack() {
                                 @Override
                                 public void done(CallBackContent content) {

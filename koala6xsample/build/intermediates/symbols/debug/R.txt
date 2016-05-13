@@ -484,7 +484,7 @@ int id activity_chooser_view_content 0x7f0c0024
 int id alertTitle 0x7f0c0030
 int id always 0x7f0c001b
 int id beginning 0x7f0c0018
-int id bt_log 0x7f0c005b
+int id bt_disconnect 0x7f0c005b
 int id bt_scan 0x7f0c0057
 int id buttonPanel 0x7f0c002b
 int id cancel_action 0x7f0c0065

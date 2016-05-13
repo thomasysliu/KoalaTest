@@ -8,12 +8,14 @@ public class SensorEvent {
 
     public final int type;
     public final BluetoothDevice device;
+    public int seq;
     public final float values[];
 
-    protected SensorEvent(final int type, BluetoothDevice device, int valueSize) {
+    protected SensorEvent(final int type, BluetoothDevice device, int valueSize, int seq) {
         this.type = type;
         this.device = device;
         this.values = new float[valueSize];
+        this.seq = seq;
     }
 
     protected void setValues(float values[]) {

@@ -40,6 +40,7 @@ public class KoalaService extends Service {
     public final static String ACTION_DATA_AVAILABLE = "ACTION_DATA_AVAILABLE";
 
     public final static String EXTRA_DATA = "EXTRA_DATA";
+    public final static String EXTRA_DATA_SEQ = "EXTRA_DATA_SEQ";
     public final static String EXTRA_NAME = "EXTRA_NAME";
 
     public static final UUID CCCD = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb"); //CLIENT_CHARACTERISTIC_CONFIG
@@ -274,10 +275,12 @@ public class KoalaService extends Service {
         Intent intent_acc = new Intent(KoalaService.ACTION_RAW_ACC_DATA_AVAILABLE);
         intent_acc.putExtra(KoalaService.EXTRA_NAME, String.valueOf(addr));
         intent_acc.putExtra(KoalaService.EXTRA_DATA, accData);
+        intent_acc.putExtra(KoalaService.EXTRA_DATA_SEQ, sequence);
         sendBroadcast(intent_acc);
 
         Intent intent_gyro = new Intent(KoalaService.ACTION_RAW_GYRO_DATA_AVAILABLE);
         intent_gyro.putExtra(KoalaService.EXTRA_NAME, String.valueOf(addr));
+        intent_acc.putExtra(KoalaService.EXTRA_DATA_SEQ, sequence);
         intent_gyro.putExtra(KoalaService.EXTRA_DATA, gyroData);
         sendBroadcast(intent_gyro);
     }

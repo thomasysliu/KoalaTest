@@ -45,8 +45,8 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
     public static List<ChildItem> mChildItems = new ArrayList<ChildItem>();
     private ListView mListViewChildren;
     private List<ChildProfile> mListChildren;
-    private String [] cids;
-    private int i;
+    public static List<ChildProfile> mListScan = new ArrayList<ChildProfile>();
+
     private static final int REQUEST_ENABLE_BT = 1;
 
     private TextView mTextViewStatus;
@@ -86,8 +86,13 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
                         child.setStatus(status);
                         child.setRssi(String.valueOf(rssi));
                         int unixTime = (int) (System.currentTimeMillis() / 1000L);
-                        Log.i(TAG, "scan a device:"+device.getAddress()+" name:"+child.getName()+" rssi:"+rssi+" time:"+unixTime);
-                        ApplicationContext.gateway_upload(ApplicationContext.mGid,child.getCid(),child.getRssi(),String.valueOf(unixTime));
+                        Log.i(TAG, "scan a device:" + device.getAddress() + " name:" + child.getName() + " rssi:" + rssi + " time:" + unixTime);
+                        synchronized (mListScan) {
+                            if (!mListScan.contains(child)) {
+                                mListScan.add(child);
+                                //ApplicationContext.gateway_upload(ApplicationContext.mGid,child.getCid(),child.getRssi(),String.valueOf(unixTime));
+                            }
+                        }
                     }
                     break;
             }

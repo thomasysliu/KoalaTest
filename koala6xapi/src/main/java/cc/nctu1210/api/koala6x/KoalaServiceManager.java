@@ -112,12 +112,13 @@ public class KoalaServiceManager {
             } else if (KoalaService.ACTION_RAW_GYRO_DATA_AVAILABLE.equals(action)) {
                 final String addr = intent.getStringExtra(KoalaService.EXTRA_NAME);
                 final double values [] = intent.getDoubleArrayExtra(KoalaService.EXTRA_DATA);
+                final int seq = intent.getIntExtra(KoalaService.EXTRA_DATA_SEQ, -1);
                 Log.i(TAG, "ACTION_GYRO_DATA_AVAILABLE received!!");
                 //fire a pdr data event
                 BluetoothGatt gattServer = mBluetoothLeService.getGattbyAddr(addr);
                 if (gattServer != null) {
                     BluetoothDevice device = gattServer.getDevice();
-                    SensorEvent e = new SensorEvent(SensorEvent.TYPE_GYROSCOPE, device, 5);
+                    SensorEvent e = new SensorEvent(SensorEvent.TYPE_GYROSCOPE, device, 3, seq);
                     e.values[0] = (float) values[0];
                     e.values[1] = (float) values[1];
                     e.values[2] = (float) values[2];
@@ -131,12 +132,13 @@ public class KoalaServiceManager {
             } else if (KoalaService.ACTION_RAW_ACC_DATA_AVAILABLE.equals(action)) {
                 final String addr = intent.getStringExtra(KoalaService.EXTRA_NAME);
                 final double values [] = intent.getDoubleArrayExtra(KoalaService.EXTRA_DATA);
+                final int seq = intent.getIntExtra(KoalaService.EXTRA_DATA_SEQ, -1);
                 Log.i(TAG, "ACTION_RAW_ACC_DATA_AVAILABLE received!!");
                 //fire a raw acc data event
                 BluetoothGatt gattServer = mBluetoothLeService.getGattbyAddr(addr);
                 if (gattServer != null) {
                     BluetoothDevice device = gattServer.getDevice();
-                    SensorEvent e = new SensorEvent(SensorEvent.TYPE_ACCELEROMETER, device, 3);
+                    SensorEvent e = new SensorEvent(SensorEvent.TYPE_ACCELEROMETER, device, 3, seq);
                     e.values[0] = (float) values[0];
                     e.values[1] = (float) values[1];
                     e.values[2] = (float) values[2];

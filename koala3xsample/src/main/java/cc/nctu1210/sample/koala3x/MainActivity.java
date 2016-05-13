@@ -1,5 +1,6 @@
 package cc.nctu1210.sample.koala3x;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -21,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -41,6 +43,8 @@ import cc.nctu1210.view.ModelObject;
 
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener, SensorEventListener {
     private final static String TAG = MainActivity.class.getSimpleName();
+    private static final int REQUEST_COARSE_LOCATION = 0x01 << 1;
+    private static final int REQUEST_EXTERNAL_STORAGE = 0x01 << 2;
 
     private boolean startScan = false;
     private KoalaServiceManager mServiceManager;
@@ -108,7 +112,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     private void displayPDRData(final int position, final float step) {
         ModelObject object = mObjects.get(position);
-        object.setPedometerData(step, 0,0,0);
+        object.setPedometerData(step, 0, 0, 0);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -124,6 +128,11 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate");
         setContentView(R.layout.activity_main);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            verifyStoragePermissions(this);
+            verifyCoaseLocationPermissions(this);
+        }
 
         btScan = (Button) findViewById(R.id.bt_scan);
         btDisconnect = (Button) findViewById(R.id.bt_disconnect);
@@ -158,6 +167,47 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         //mServiceManager.registerSensorEventListener(this, SensorEvent.TYPE_ACCELEROMETER);
         mServiceManager.registerSensorEventListener(this, SensorEvent.TYPE_PEDOMETER);
 
+    }
+
+    public static String[] PERMISSIONS = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+    };
+
+    /**
+     * Checks if the app has permission to write to device storage
+     *
+     * If the app does not has permission then the user will be prompted to grant permissions
+     *
+     * @param activity current activity
+     */
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, PERMISSIONS[1]);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
+    }
+
+    public static void verifyCoaseLocationPermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, PERMISSIONS[2]);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS,
+                    REQUEST_COARSE_LOCATION
+            );
+        }
     }
 
     private Button.OnClickListener scanListener = new Button.OnClickListener() {

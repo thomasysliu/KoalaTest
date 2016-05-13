@@ -1,158 +1,158 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:2:1-57:12
-	xmlns:android
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:2:11-69
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:2:1-57:12
 	package
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:3:5-36
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:3:5-36
 	android:versionName
-		INJECTED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml
-		INJECTED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:2:11-69
 uses-sdk
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support:appcompat-v7:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:support-vector-drawable:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:5:5-43
-MERGED from [com.android.support:support-v4:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:animated-vector-drawable:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\AndroidManifest.xml:5:5-44
-MERGED from [com.android.support:support-vector-drawable:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:5:5-43
-MERGED from [com.android.support:support-v4:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
-MERGED from [KoalaTest:koala3xapi:unspecified] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:appcompat-v7:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:support-vector-drawable:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:5:5-43
-MERGED from [com.android.support:support-v4:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:animated-vector-drawable:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\AndroidManifest.xml:5:5-44
-MERGED from [com.android.support:support-vector-drawable:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:5:5-43
-MERGED from [com.android.support:support-v4:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
-MERGED from [com.android.volley:volley:unspecified] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.volley\volley\unspecified\AndroidManifest.xml:7:5-43
-MERGED from [KoalaTest:cropLib:unspecified] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\cropLib\unspecified\AndroidManifest.xml:6:5-8:41
-MERGED from [com.android.support:support-v4:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
-	android:targetSdkVersion
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:7:9-38
-		INJECTED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml
-		INJECTED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml
-	android:minSdkVersion
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:6:9-35
-		INJECTED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml
-		INJECTED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:appcompat-v7:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-vector-drawable:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:animated-vector-drawable:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:support-vector-drawable:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
+MERGED from [KoalaTest:koala3xapi:unspecified] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:appcompat-v7:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-vector-drawable:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:animated-vector-drawable:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:support-vector-drawable:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.volley:volley:unspecified] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.volley\volley\unspecified\AndroidManifest.xml:7:5-43
+MERGED from [KoalaTest:cropLib:unspecified] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\cropLib\unspecified\AndroidManifest.xml:6:5-8:41
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:20:5-43
 	tools:overrideLibrary
-		ADDED from [com.android.support:appcompat-v7:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:23:9-75
+		ADDED from [com.android.support:appcompat-v7:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:7:9-38
+		INJECTED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:6:9-35
+		INJECTED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml
 uses-feature#android.hardware.bluetooth_le
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:9:5-11:35
-MERGED from [KoalaTest:koala3xapi:unspecified] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\AndroidManifest.xml:11:5-13:35
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:9:5-11:35
+MERGED from [KoalaTest:koala3xapi:unspecified] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\AndroidManifest.xml:11:5-13:35
 	android:required
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:11:9-32
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:11:9-32
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:10:9-53
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:10:9-53
 uses-permission#android.permission.BLUETOOTH
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:12:5-68
-MERGED from [KoalaTest:koala3xapi:unspecified] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\AndroidManifest.xml:15:5-68
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:12:5-68
+MERGED from [KoalaTest:koala3xapi:unspecified] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\AndroidManifest.xml:15:5-68
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:12:22-65
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:12:22-65
 uses-permission#android.permission.BLUETOOTH_ADMIN
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:13:5-74
-MERGED from [KoalaTest:koala3xapi:unspecified] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\AndroidManifest.xml:16:5-74
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:13:5-74
+MERGED from [KoalaTest:koala3xapi:unspecified] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\AndroidManifest.xml:16:5-74
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:13:22-71
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:13:22-71
 uses-permission#android.permission.INTERNET
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:14:5-66
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:14:5-66
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:14:22-64
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:14:22-64
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:15:5-80
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:15:5-80
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:15:22-78
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:15:22-78
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:16:5-80
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:16:5-80
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:16:22-78
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:16:22-78
 application
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:18:5-55:19
-MERGED from [com.android.support:appcompat-v7:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-vector-drawable:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-v4:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:animated-vector-drawable:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-vector-drawable:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-v4:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
-MERGED from [KoalaTest:koala3xapi:unspecified] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\AndroidManifest.xml:18:5-23:19
-MERGED from [com.android.support:appcompat-v7:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-vector-drawable:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-v4:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:animated-vector-drawable:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-vector-drawable:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-v4:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
-MERGED from [com.android.volley:volley:unspecified] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.volley\volley\unspecified\AndroidManifest.xml:9:5-20
-MERGED from [com.android.support:support-v4:23.3.0] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:18:5-55:19
+MERGED from [com.android.support:appcompat-v7:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-vector-drawable:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:animated-vector-drawable:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-vector-drawable:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
+MERGED from [KoalaTest:koala3xapi:unspecified] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\AndroidManifest.xml:18:5-23:19
+MERGED from [com.android.support:appcompat-v7:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-vector-drawable:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:animated-vector-drawable:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-vector-drawable:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.volley:volley:unspecified] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.volley\volley\unspecified\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-v4:23.3.0] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\AndroidManifest.xml:22:5-20
+	android:label
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:21:9-41
 	android:supportsRtl
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:23:9-35
-	android:label
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:21:9-41
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:23:9-35
 	android:allowBackup
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:20:9-35
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:20:9-35
 	android:icon
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:22:9-44
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:22:9-44
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:19:9-59
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:19:9-59
 activity#cc.nctu1210.childcare.BaseTabViewActivity
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:24:9-33:20
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:24:9-33:20
 	android:screenOrientation
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:26:13-49
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:26:13-49
 	android:label
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:28:13-45
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:28:13-45
 	android:theme
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:27:13-51
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:27:13-51
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:25:13-69
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:25:13-69
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:29:13-32:29
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:29:13-32:29
 action#android.intent.action.MAIN
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:30:17-69
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:30:17-69
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:30:25-66
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:30:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:31:17-77
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:31:17-77
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:31:27-74
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:31:27-74
 activity#cc.nctu1210.childcare.AddNewDeviceActivity
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:34:9-38:20
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:34:9-38:20
 	android:screenOrientation
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:36:13-49
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:36:13-49
 	android:theme
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:37:13-56
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:37:13-56
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:35:13-70
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:35:13-70
 activity#cc.nctu1210.childcare.ChildProfleEditActivity
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:39:9-43:20
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:39:9-43:20
 	android:screenOrientation
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:41:13-49
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:41:13-49
 	android:theme
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:42:13-56
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:42:13-56
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:40:13-73
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:40:13-73
 activity#cc.nctu1210.childcare.DeviceDiscoveryActivity
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:44:9-48:20
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:44:9-48:20
 	android:screenOrientation
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:46:13-49
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:46:13-49
 	android:theme
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:47:13-56
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:47:13-56
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:45:13-73
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:45:13-73
 activity#com.soundcloud.android.crop.CropImageActivity
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:49:9-82
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:49:9-82
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:49:19-79
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:49:19-79
 service#cc.nctu1210.api.koala3x.KoalaService
-ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:51:9-54:19
+ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:51:9-54:19
 	android:enabled
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:53:13-35
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:53:13-35
 	android:name
-		ADDED from D:\Children-Care-App\KoalaTest\childcare2\src\main\AndroidManifest.xml:52:13-64
+		ADDED from C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\src\main\AndroidManifest.xml:52:13-64
 service#cc.nctu1210.koala3xapi.KoalaService
-ADDED from [KoalaTest:koala3xapi:unspecified] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\AndroidManifest.xml:19:9-22:19
+ADDED from [KoalaTest:koala3xapi:unspecified] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\AndroidManifest.xml:19:9-22:19
 	android:enabled
-		ADDED from [KoalaTest:koala3xapi:unspecified] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\AndroidManifest.xml:21:13-35
+		ADDED from [KoalaTest:koala3xapi:unspecified] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\AndroidManifest.xml:21:13-35
 	android:name
-		ADDED from [KoalaTest:koala3xapi:unspecified] D:\Children-Care-App\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\AndroidManifest.xml:20:13-63
+		ADDED from [KoalaTest:koala3xapi:unspecified] C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\childcare2\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\AndroidManifest.xml:20:13-63

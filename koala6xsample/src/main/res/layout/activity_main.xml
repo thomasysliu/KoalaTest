@@ -106,12 +106,12 @@
 				android:layout_height="wrap_content" >
 
 				<Button
-					android:id="@+id/bt_log"
+					android:id="@+id/bt_disconnect"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:background="@android:color/holo_red_light"
 					android:height="40dp"
-					android:text="Start"
+					android:text="Disconnect"
 					android:textColor="@android:color/white"
 					android:textColorHint="@android:color/white"
 					android:textSize="30sp"
