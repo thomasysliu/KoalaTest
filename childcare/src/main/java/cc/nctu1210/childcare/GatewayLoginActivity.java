@@ -85,6 +85,13 @@ public class GatewayLoginActivity extends Activity implements View.OnClickListen
                             status = String.valueOf(range);
                         child.setStatus(status);
                         child.setRssi(String.valueOf(rssi));
+                        if(child.mScanedRssiList.size() > 0)
+                        {
+                            String rssi_filtered = String.valueOf(Math.round(Double.parseDouble(child.mScanedRssiList.get(child.mScanedRssiList.size()-1))*0.2 + rssi*0.8));
+                            child.mScanedRssiList.add(rssi_filtered);
+                        }
+                        else
+                            child.mScanedRssiList.add(String.valueOf(rssi));
                         int unixTime = (int) (System.currentTimeMillis() / 1000L);
                         Log.i(TAG, "scan a device:" + device.getAddress() + " name:" + child.getName() + " rssi:" + rssi + " time:" + unixTime);
                         synchronized (mListScan) {
