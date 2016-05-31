@@ -280,7 +280,7 @@ public class KoalaService extends Service {
 
         Intent intent_gyro = new Intent(KoalaService.ACTION_RAW_GYRO_DATA_AVAILABLE);
         intent_gyro.putExtra(KoalaService.EXTRA_NAME, String.valueOf(addr));
-        intent_acc.putExtra(KoalaService.EXTRA_DATA_SEQ, sequence);
+        intent_gyro.putExtra(KoalaService.EXTRA_DATA_SEQ, sequence);
         intent_gyro.putExtra(KoalaService.EXTRA_DATA, gyroData);
         sendBroadcast(intent_gyro);
     }
