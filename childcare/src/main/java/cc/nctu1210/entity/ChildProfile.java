@@ -3,6 +3,8 @@ package cc.nctu1210.entity;
 import android.content.Intent;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Yi-Ta_Chuang on 2016/4/17.
@@ -18,6 +20,7 @@ public class ChildProfile implements Comparable<ChildProfile>{
     private String rssi;
     private String mFlag; //missing flag; 1 is missing. 0 is not missing.
     private String cid;
+    public List<String> mScanedRssiList = new ArrayList<String>();
 
     public ChildProfile(String name, String deviceAddress) {
         this.mName = name;
@@ -118,6 +121,7 @@ public class ChildProfile implements Comparable<ChildProfile>{
 
     public String getCid()
     {return this.cid;}
+
 
     @Override
     public int compareTo(ChildProfile child) {
