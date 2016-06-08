@@ -14,6 +14,11 @@ public class ChildItem {
     public String cid;
     public String rssi;
 
+    //for demo
+    public int control_click;      //near = 1, mediate  = 2, far = 3
+    public int control_rssi;
+    //
+
     public ChildItem(String name, String status) {
         this.name = name;
         this.status = status;

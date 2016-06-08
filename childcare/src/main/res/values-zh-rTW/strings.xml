@@ -24,7 +24,7 @@
     <string name="base_main">主頁</string>
     <string name="base_setting">設定</string>
     <string name="scanning">掃描中...</string>
-    <string name="edit_child_name">編輯性名</string>
+    <string name="edit_child_name">編輯姓名</string>
     <string name="notification_title">孩童監控</string>
     <string name="take_photo">拍照新增</string>
     <string name="photo">大頭貼</string>

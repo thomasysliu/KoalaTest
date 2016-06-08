@@ -65,8 +65,17 @@ public class ParentScheduledService extends Service{
                                 @Override
                                 public void done(CallBackContent content) {
                                     if (content != null) {
+                                        mListChildren.clear();
+                                        int j=0;
+                                        for(int i=0; i<content.getShow_children().size(); i++) {
+                                            mListChildren.add(content.getShow_children().get(i));
+                                            if(mListChildren.size() == content.getShow_children().size())
+                                                populateList();
+                                        }
+                                        /*
                                         mListChildren = content.getShow_children();
-                                        populateList();
+                                        */
+                                        //populateList();
                                     } else {
                                         Log.e(TAG, "show_child_by_id fail" + "\n");
                                     }
@@ -76,11 +85,13 @@ public class ParentScheduledService extends Service{
                     });
                 }
             }
-        }, 0, 1 * 10 * 1000);//60 sec
+        }, 0, 1 * 1 * 1000);//60 sec
     }
     @Override
     public void onDestroy()
     {
+        timer.cancel();
+        stopSelf();
         super.onDestroy();
     }
 

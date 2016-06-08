@@ -62,16 +62,17 @@ public class GatewayScheduledService extends Service {
                                 int unixTime = (int) (System.currentTimeMillis() / 1000L);
                                 for (int i=0; i<mListScan.size(); i++) {
                                     ChildProfile child = mListScan.get(i);
+                                    /*
                                     double average_rssi = 0;
                                     for(int j=0; j<child.mScanedRssiList.size();j++)
                                     {
                                         average_rssi += Double.parseDouble(child.mScanedRssiList.get(j));
                                     }
                                     average_rssi /= child.mScanedRssiList.size();
-
+*/
                                     cids.append(child.getCid()).append(",");
-                                    status.append(String.valueOf(Math.round(average_rssi))).append(",");
-
+                                   // status.append(String.valueOf(Math.round(average_rssi))).append(",");
+                                    status.append(child.getRssi()).append(",");
                                     child.mScanedRssiList.clear();
                                 }
                                 mListScan.clear();
@@ -112,5 +113,12 @@ public class GatewayScheduledService extends Service {
         Log.i("TAG", "Initialized ListView....." + mChildListAdapter.getData().size());
         mChildListAdapter.notifyDataSetChanged();
 
+    }
+
+    @Override
+    public void onDestroy() {
+        timer.cancel();
+        stopSelf();
+        super.onDestroy();
     }
 }

@@ -248,6 +248,10 @@
         "source": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\layout\\notification_template_part_chronometer.xml"
     },
     {
+        "merged": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\demo_gateway_login.xml",
+        "source": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\layout\\demo_gateway_login.xml"
+    },
+    {
         "merged": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
         "source": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\layout\\abc_action_bar_title_item.xml"
     },
@@ -414,6 +418,10 @@
     {
         "merged": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\child_profile_list_editor.xml",
         "source": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\layout\\child_profile_list_editor.xml"
+    },
+    {
+        "merged": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\demo_list_child_item.xml",
+        "source": "D:\\Children-Care-App\\KoalaTest\\childcare\\src\\main\\res\\layout\\demo_list_child_item.xml"
     },
     {
         "merged": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",

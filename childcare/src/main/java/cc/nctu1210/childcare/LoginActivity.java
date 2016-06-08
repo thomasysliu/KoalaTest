@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import cc.nctu1210.demo.DemoGatewayLoginActivity;
 import cc.nctu1210.entity.ChildProfile;
 import cc.nctu1210.tool.ApplicationContext;
 import cc.nctu1210.tool.CallBack;
@@ -180,7 +181,9 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                 }
                 else if(type == ApplicationContext.GATEWAY_TYPE)
                 {
+                    //for demo
                     intent_login.setClass(LoginActivity.this, GatewayLoginActivity.class);
+                    //intent_login.setClass(LoginActivity.this, GatewayLoginActivity.class);
                     ApplicationContext.login_gateway(LOGINTYPE[type], account, password, new CallBack() {
                         @Override
                         public void done(CallBackContent content) {

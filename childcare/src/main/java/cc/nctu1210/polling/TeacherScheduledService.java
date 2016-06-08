@@ -65,8 +65,17 @@ public class TeacherScheduledService  extends Service{
                                 @Override
                                 public void done(CallBackContent content) {
                                     if (content != null) {
+                                        mListChildren.clear();
+                                        int j=0;
+                                        for(int i=0; i<content.getShow_children().size(); i++) {
+                                            mListChildren.add(content.getShow_children().get(i));
+                                            if(mListChildren.size() == content.getShow_children().size())
+                                                populateList();
+                                        }
+                                        /*
                                         mListChildren = content.getShow_children();
-                                        populateList();
+                                        */
+                                        //populateList();
                                     } else {
                                         Log.e(TAG, "show_child_by_id fail" + "\n");
                                     }
@@ -76,7 +85,7 @@ public class TeacherScheduledService  extends Service{
                     });
                 }
             }
-        }, 0, 1 * 10 * 1000);//60 sec
+        }, 0, 1 * 1 * 1000);//60 sec
     }
 
 
@@ -92,7 +101,9 @@ public class TeacherScheduledService  extends Service{
             object.cid = mListChildren.get(i).getCid();
             object.rssi = mListChildren.get(i).getRssi();
             mChildItems.add(object);
-
+           /* Log.e("TAG", mListChildren.get(i).getStatus());
+            if(!mListChildren.get(i).getFlag().equals("1"))
+                Log.e("TAG", object.getPlace());*/
             if(mListChildren.get(i).getFlag().equals("1"))
                 notificationBuilder(i,0);
             else if(mListChildren.get(i).getStatus().equals("far"))
@@ -128,6 +139,13 @@ public class TeacherScheduledService  extends Service{
             notificationManager.notify(notifyID, notification);
         }
 
+    }
+
+    @Override
+    public void onDestroy() {
+        timer.cancel();
+        stopSelf();
+        super.onDestroy();
     }
 }
 

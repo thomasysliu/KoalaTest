@@ -40,7 +40,7 @@ public class MasterScheduledService extends Service{
     private Handler handler = new Handler();
     private int count;
     private List<ChildItem> mChildItems;
-    private List<ChildProfile> mListChildren;
+    private List<ChildProfile> mListChildren = new ArrayList<ChildProfile>();
     private ChildrenListAdapter mChildListAdapter;
 
     @Override
@@ -68,8 +68,17 @@ public class MasterScheduledService extends Service{
                                 @Override
                                 public void done(CallBackContent content) {
                                     if (content != null) {
+                                        mListChildren.clear();
+                                        int j=0;
+                                        for(int i=0; i<content.getShow_children().size(); i++) {
+                                            mListChildren.add(content.getShow_children().get(i));
+                                            if(mListChildren.size() == content.getShow_children().size())
+                                                populateList();
+                                        }
+                                        /*
                                         mListChildren = content.getShow_children();
-                                        populateList();
+                                        */
+                                        //populateList();
                                     } else {
                                         Log.e(TAG, "show_child_by_id fail" + "\n");
                                     }
@@ -99,5 +108,12 @@ public class MasterScheduledService extends Service{
         Log.i("TAG", "Initialized ListView....." + mChildListAdapter.getData().size());
         mChildListAdapter.notifyDataSetChanged();
 
+    }
+
+    @Override
+    public void onDestroy() {
+        timer.cancel();
+        stopSelf();
+        super.onDestroy();
     }
 }

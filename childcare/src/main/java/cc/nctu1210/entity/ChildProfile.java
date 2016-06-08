@@ -22,6 +22,12 @@ public class ChildProfile implements Comparable<ChildProfile>{
     private String cid;
     public List<String> mScanedRssiList = new ArrayList<String>();
 
+    //for demo
+    public int control_click = 2;      //near = 1, mediate  = 2, far = 3
+    public int control_rssi = -75;
+    //
+
+
     public ChildProfile(String name, String deviceAddress) {
         this.mName = name;
         this.mDeviceAddress = deviceAddress;

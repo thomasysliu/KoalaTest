@@ -100,6 +100,7 @@ public class ParentLoginActivity extends Activity implements View.OnClickListene
         mChildListAdapter = new ChildrenListAdapter(ParentLoginActivity.this, mChildItems,0);
         mListViewChildren = (ListView) findViewById(R.id.list_main_child);
         mListViewChildren.setAdapter(mChildListAdapter);
+        /*
         ApplicationContext.showProgressDialog(this);
         ApplicationContext.show_all_children(ApplicationContext.login_mid, true, Integer.valueOf(ApplicationContext.mPid), new CallBack() {
             @Override
@@ -113,6 +114,7 @@ public class ParentLoginActivity extends Activity implements View.OnClickListene
             }
         });
         ApplicationContext.dismissProgressDialog();
+        */
     }
 
     private void populateList() {
@@ -173,12 +175,29 @@ public class ParentLoginActivity extends Activity implements View.OnClickListene
             ApplicationContext.cancelNotificationService(this);
             mParentPollingIntent = new Intent(ParentLoginActivity.this, ParentScheduledService.class);
             ParentLoginActivity.this.stopService(mParentPollingIntent);
+
+            mChildListAdapter.getData().clear();
+            mChildListAdapter.notifyDataSetChanged();
         } else {
             mTextViewStatus.setText(getString(R.string.toggle_on));
             ApplicationContext.mIsServiceOn=true;
             ApplicationContext.notificationServiceStartBuilder(this, ApplicationContext.PARENT_TYPE);
             mParentPollingIntent = new Intent(ParentLoginActivity.this, ParentScheduledService.class);
             ParentLoginActivity.this.startService(mParentPollingIntent);
+
+            ApplicationContext.showProgressDialog(this);
+            ApplicationContext.show_all_children(ApplicationContext.login_mid, true, Integer.valueOf(ApplicationContext.mPid), new CallBack() {
+                @Override
+                public void done(CallBackContent content) {
+                    if (content != null) {
+                        mListChildren = content.getShow_children();
+                        populateList();
+                    } else {
+                        Log.e(TAG, "show_child_by_id fail" + "\n");
+                    }
+                }
+            });
+            ApplicationContext.dismissProgressDialog();
         }
     }
 }

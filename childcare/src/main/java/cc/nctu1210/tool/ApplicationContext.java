@@ -1269,6 +1269,9 @@ public class ApplicationContext extends Application {
                             Log.i(TAG, response.toString());
                             CallBackContent content=new CallBackContent();
                             clearChildrenList();
+                            mListChildren.clear();
+                            mMapChildren.clear();
+                            mMapChildrenCid.clear();
                             JSONArray data = response.getJSONArray("data");
                             for(int i=0; i<data.length(); i++) {
                                 ChildProfile child;
