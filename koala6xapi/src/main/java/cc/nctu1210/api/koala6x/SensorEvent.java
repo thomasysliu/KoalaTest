@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothDevice;
 public class SensorEvent {
     public static final int TYPE_ACCELEROMETER = 1 << 0;
     public static final int TYPE_GYROSCOPE = 1 << 1;
+    public static final int TYPE_MAGNETOMETER = 1 << 2;
 
     public final int type;
     public final BluetoothDevice device;

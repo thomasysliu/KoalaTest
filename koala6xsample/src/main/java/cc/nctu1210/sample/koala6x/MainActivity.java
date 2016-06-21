@@ -139,6 +139,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         mServiceManager.registerSensorEventListener(this, SensorEvent.TYPE_ACCELEROMETER, KoalaService.MOTION_WRITE_RATE_10, KoalaService.MOTION_ACCEL_SCALE_2G, KoalaService.MOTION_GYRO_SCALE_250);
         //mServiceManager.registerSensorEventListener(this, SensorEvent.TYPE_ACCELEROMETER);
         mServiceManager.registerSensorEventListener(this, SensorEvent.TYPE_GYROSCOPE);
+        //mServiceManager.registerSensorEventListener(this, SensorEvent.TYPE_MAGNETOMETER);
 
     }
 

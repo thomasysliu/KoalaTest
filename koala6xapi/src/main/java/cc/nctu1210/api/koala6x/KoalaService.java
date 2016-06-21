@@ -37,6 +37,7 @@ public class KoalaService extends Service {
     public final static String ACTION_GATT_RSSI = "ACTION_GATT_RSSI";
     public final static String ACTION_RAW_ACC_DATA_AVAILABLE = "ACTION_RAW_ACC_DATA_AVAILABLE";
     public final static String ACTION_RAW_GYRO_DATA_AVAILABLE = "ACTION_RAW_GYRO_DATA_AVAILABLE";
+    public final static String ACTION_RAW_MAG_DATA_AVAILABLE = "ACTION_RAW_MAG_DATA_AVAILABLE";
     public final static String ACTION_DATA_AVAILABLE = "ACTION_DATA_AVAILABLE";
 
     public final static String EXTRA_DATA = "EXTRA_DATA";
@@ -202,12 +203,16 @@ public class KoalaService extends Service {
         int sequence = values[0];
         double accData[] = new double[3];
         double gyroData[] = new double[3];
+        double magData[] = new double[3];
         double accel_x = 0.0;
         double accel_y = 0.0;
         double accel_z = 0.0;
         double gyro_x = 0.0;
         double gyro_y = 0.0;
         double gyro_z = 0.0;
+        double mag_x = 0.0;
+        double mag_y = 0.0;
+        double mag_z = 0.0;
 
 
         short s_accel_x = (short)( (short)values[1] *256  + values[2]) ;
@@ -216,6 +221,9 @@ public class KoalaService extends Service {
         short s_gyro_x = (short)( (short)values[7]*256 + values[8]) ;
         short s_gyro_y = (short)((short)values[9] *256  + values[10]) ;
         short s_gyro_z = (short)((short)values[11] *256 + values[12]) ;
+        short s_mag_x = (short)((short)values[13] *256 + values[13]);
+        short s_mag_y = (short)((short)values[14] *256 + values[15]);
+        short s_mag_z = (short)((short)values[16] *256 + values[17]);
 
 
         switch (acc_fsr) {
@@ -272,6 +280,10 @@ public class KoalaService extends Service {
         gyroData[1] = gyro_y;
         gyroData[2] = gyro_z;
 
+        magData[0] = (double) (s_mag_x * 9824 / 65520);  //+-4800 effective for 14bits data
+        magData[1] = (double) (s_mag_y * 9824 / 65520);
+        magData[2] = (double) (s_mag_z * 9824 / 65520);
+
         Intent intent_acc = new Intent(KoalaService.ACTION_RAW_ACC_DATA_AVAILABLE);
         intent_acc.putExtra(KoalaService.EXTRA_NAME, String.valueOf(addr));
         intent_acc.putExtra(KoalaService.EXTRA_DATA, accData);
@@ -283,6 +295,12 @@ public class KoalaService extends Service {
         intent_gyro.putExtra(KoalaService.EXTRA_DATA_SEQ, sequence);
         intent_gyro.putExtra(KoalaService.EXTRA_DATA, gyroData);
         sendBroadcast(intent_gyro);
+
+        Intent intent_mag = new Intent(KoalaService.ACTION_RAW_MAG_DATA_AVAILABLE);
+        intent_mag.putExtra(KoalaService.EXTRA_NAME, String.valueOf(addr));
+        intent_mag.putExtra(KoalaService.EXTRA_DATA_SEQ, sequence);
+        intent_mag.putExtra(KoalaService.EXTRA_DATA, magData);
+        sendBroadcast(intent_mag);
     }
 
     /**

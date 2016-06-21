@@ -149,6 +149,26 @@ public class KoalaServiceManager {
                         }
                     }
                 }
+            } else if (KoalaService.ACTION_RAW_MAG_DATA_AVAILABLE.equals(action)) {
+                final String addr = intent.getStringExtra(KoalaService.EXTRA_NAME);
+                final double values [] = intent.getDoubleArrayExtra(KoalaService.EXTRA_DATA);
+                final int seq = intent.getIntExtra(KoalaService.EXTRA_DATA_SEQ, -1);
+                Log.i(TAG, "ACTION_RAW_MAG_DATA_AVAILABLE received!!");
+                //fire a raw acc data event
+                BluetoothGatt gattServer = mBluetoothLeService.getGattbyAddr(addr);
+                if (gattServer != null) {
+                    BluetoothDevice device = gattServer.getDevice();
+                    SensorEvent e = new SensorEvent(SensorEvent.TYPE_MAGNETOMETER, device, 3, seq);
+                    e.values[0] = (float) values[0];
+                    e.values[1] = (float) values[1];
+                    e.values[2] = (float) values[2];
+                    for (int i = 0, size = eventListeners.size(); i < size; i++) {
+                        if (eventListeners.get(i).get(SensorEvent.TYPE_MAGNETOMETER) != null) {
+                            SensorEventListener l = eventListeners.get(i).get(SensorEvent.TYPE_MAGNETOMETER);
+                            l.onSensorChange(e);
+                        }
+                    }
+                }
             }
         }
     };
@@ -163,6 +183,7 @@ public class KoalaServiceManager {
         //intentFilter.addAction(KoalaService.ACTION_DATA_AVAILABLE);
         intentFilter.addAction(KoalaService.ACTION_RAW_GYRO_DATA_AVAILABLE);
         intentFilter.addAction(KoalaService.ACTION_RAW_ACC_DATA_AVAILABLE);
+        intentFilter.addAction(KoalaService.ACTION_RAW_MAG_DATA_AVAILABLE);
 
         return intentFilter;
     }
