@@ -23,6 +23,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -61,6 +62,7 @@ public class TeacherLoginActivity extends Activity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.teacher_login);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mActivity = TeacherLoginActivity.this;
         initView();
     }
