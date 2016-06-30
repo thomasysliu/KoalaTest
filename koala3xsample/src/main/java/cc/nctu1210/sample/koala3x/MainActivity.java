@@ -278,10 +278,13 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             else
                 mBluetoothAdapter.stopLeScan(mLeScanCallback);
         } else {
-            if (scanFlag)
+            if (scanFlag) {
+                Log.d(TAG, "start scnning!!!");
                 mBLEScanner.startScan(mScanCallback);
-            else
+            }
+            else {
                 mBLEScanner.stopScan(mScanCallback);
+            }
         }
     }
 
@@ -473,27 +476,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         final int eventType = e.type;
         final double values [] = new double[3];
         switch (eventType) {
-            case SensorEvent.TYPE_ACCELEROMETER:
-                final int position = findKoalaDevice(e.device.getAddress());
-                if (position != -1) {
-                    final KoalaDevice d = mDevices.get(position);
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            try {
-                                d.addRecvItem();
-                                values[0] = e.values[0];
-                                values[1] = e.values[1];
-                                values[2] = e.values[2];
-                                Log.d(TAG, "time="+System.currentTimeMillis()+ "gX:" + values[0]+"gY:" + values[1]+"gZ:" + values[2]+"\n");
-                                updateSamplingRate(position, d.getCurrentSamplingRate());
-                                displayAccData(position, values);
-                            } catch (Exception e) {
-                                Log.e(TAG, e.toString());
-                            }
-                        }
-                    });
-                }
-                break;
             case SensorEvent.TYPE_PEDOMETER:
                 final int position2 = findKoalaDevice(e.device.getAddress());
                 if (position2 != -1) {
@@ -506,6 +488,11 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     @Override
     public void onConnectionStatusChange(boolean status) {
+
+    }
+
+    @Override
+    public void onPedometerServiceChange(int serviceType) {
 
     }
 

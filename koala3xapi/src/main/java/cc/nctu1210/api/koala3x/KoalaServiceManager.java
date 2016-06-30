@@ -22,7 +22,7 @@ import java.util.List;
 public class KoalaServiceManager {
     private final static String TAG = KoalaServiceManager.class.getSimpleName();
     private final List<SparseArray<SensorEventListener>> eventListeners = new ArrayList<SparseArray<SensorEventListener>>();
-    private byte enableSensor = 0; // a bit map to indicate which sensor should turn on.
+    private int enableService = SensorEvent.TYPE_PEDOMETER;
     private Activity mActivity;
     private KoalaService mBluetoothLeService; // the main service to control the ble device
 
@@ -38,10 +38,6 @@ public class KoalaServiceManager {
             } else {
                 Log.i(TAG, "Success!");
                 for (int i=0, size=eventListeners.size(); i<size; i++) {
-                    if (eventListeners.get(i).get(SensorEvent.TYPE_ACCELEROMETER) != null) {
-                        SensorEventListener l = eventListeners.get(i).get(SensorEvent.TYPE_ACCELEROMETER);
-                        l.onKoalaServiceStatusChanged(true);
-                    }
                     if (eventListeners.get(i).get(SensorEvent.TYPE_PEDOMETER) != null) {
                         SensorEventListener l = eventListeners.get(i).get(SensorEvent.TYPE_PEDOMETER);
                         l.onKoalaServiceStatusChanged(true);
@@ -53,10 +49,6 @@ public class KoalaServiceManager {
         public void onServiceDisconnected(ComponentName componentName) {
             mBluetoothLeService = null;
             for (int i=0, size=eventListeners.size(); i<size; i++) {
-                if (eventListeners.get(i).get(SensorEvent.TYPE_ACCELEROMETER) != null) {
-                    SensorEventListener l = eventListeners.get(i).get(SensorEvent.TYPE_ACCELEROMETER);
-                    l.onKoalaServiceStatusChanged(false);
-                }
                 if (eventListeners.get(i).get(SensorEvent.TYPE_PEDOMETER) != null) {
                     SensorEventListener l = eventListeners.get(i).get(SensorEvent.TYPE_PEDOMETER);
                     l.onKoalaServiceStatusChanged(false);
@@ -80,8 +72,8 @@ public class KoalaServiceManager {
                 //getSportInformation(addr);
                 //setToFactoryMode(addr);
                 for (int i=0, size=eventListeners.size(); i<size; i++) {
-                    if (eventListeners.get(i).get(SensorEvent.TYPE_ACCELEROMETER) != null) {
-                        SensorEventListener l = eventListeners.get(i).get(SensorEvent.TYPE_ACCELEROMETER);
+                    if (eventListeners.get(i).get(SensorEvent.TYPE_PEDOMETER) != null) {
+                        SensorEventListener l = eventListeners.get(i).get(SensorEvent.TYPE_PEDOMETER);
                         l.onConnectionStatusChange(true);
                     }
                 }
@@ -89,8 +81,8 @@ public class KoalaServiceManager {
                 final String addr = intent.getStringExtra(KoalaService.EXTRA_NAME);
                 //fire a disconnected event
                 for (int i=0, size=eventListeners.size(); i<size; i++) {
-                    if (eventListeners.get(i).get(SensorEvent.TYPE_ACCELEROMETER) != null) {
-                        SensorEventListener l = eventListeners.get(i).get(SensorEvent.TYPE_ACCELEROMETER);
+                    if (eventListeners.get(i).get(SensorEvent.TYPE_PEDOMETER) != null) {
+                        SensorEventListener l = eventListeners.get(i).get(SensorEvent.TYPE_PEDOMETER);
                         l.onConnectionStatusChange(false);
                     }
                 }
@@ -98,13 +90,7 @@ public class KoalaServiceManager {
                 final String addr = intent.getStringExtra(KoalaService.EXTRA_NAME);
                 Log.d(TAG, "ACTION_GATT_SERVICES_DISCOVERED! mac Address:" + addr);
                 //startToReadData(addr);
-                Log.d(TAG, "enable sensors:" + enableSensor);
-                if ((byte)(enableSensor & SensorEvent.TYPE_ACCELEROMETER) > 0) {
-                    startToReadData(addr);
-                }
-                if ((byte)(enableSensor & SensorEvent.TYPE_PEDOMETER) > 0) {
-                    startToReadPDRData(addr);
-                }
+
 
             } else if (KoalaService.ACTION_GATT_RSSI.equals(action)) {
                 final String addr = intent.getStringExtra(KoalaService.EXTRA_NAME);
@@ -112,10 +98,6 @@ public class KoalaServiceManager {
                 Log.d(TAG, "mac Address:" + addr + " rssi:" + rssi);
                 //fire a rssi event
                 for (int i=0, size=eventListeners.size(); i<size; i++) {
-                    if (eventListeners.get(i).get(SensorEvent.TYPE_ACCELEROMETER) != null) {
-                        SensorEventListener l = eventListeners.get(i).get(SensorEvent.TYPE_ACCELEROMETER);
-                        l.onRSSIChange(addr, rssi);
-                    }
                     if (eventListeners.get(i).get(SensorEvent.TYPE_PEDOMETER) != null) {
                         SensorEventListener l = eventListeners.get(i).get(SensorEvent.TYPE_PEDOMETER);
                         l.onRSSIChange(addr, rssi);
@@ -143,25 +125,6 @@ public class KoalaServiceManager {
                         }
                     }
                 }
-            } else if (KoalaService.ACTION_RAW_ACC_DATA_AVAILABLE.equals(action)) {
-                final String addr = intent.getStringExtra(KoalaService.EXTRA_NAME);
-                final float values [] = intent.getFloatArrayExtra(KoalaService.EXTRA_DATA);
-                Log.i(TAG, "ACTION_RAW_ACC_DATA_AVAILABLE received!!");
-                //fire a raw acc data event
-                BluetoothGatt gattServer = mBluetoothLeService.getGattbyAddr(addr);
-                if (gattServer != null) {
-                    BluetoothDevice device = gattServer.getDevice();
-                    SensorEvent e = new SensorEvent(SensorEvent.TYPE_ACCELEROMETER, device, 3);
-                    e.values[0] = values[0];
-                    e.values[1] = values[1];
-                    e.values[2] = values[2];
-                    for (int i = 0, size = eventListeners.size(); i < size; i++) {
-                        if (eventListeners.get(i).get(SensorEvent.TYPE_ACCELEROMETER) != null) {
-                            SensorEventListener l = eventListeners.get(i).get(SensorEvent.TYPE_ACCELEROMETER);
-                            l.onSensorChange(e);
-                        }
-                    }
-                }
             }
         }
     };
@@ -175,8 +138,7 @@ public class KoalaServiceManager {
         intentFilter.addAction(KoalaService.ACTION_GATT_SERVICES_DISCOVERED);
         //intentFilter.addAction(KoalaService.ACTION_DATA_AVAILABLE);
         intentFilter.addAction(KoalaService.ACTION_PDR_DATA_AVAILABLE);
-        intentFilter.addAction(KoalaService.ACTION_RAW_ACC_DATA_AVAILABLE);
-
+        intentFilter.addAction(KoalaService.ACTION_SLEEP_DATA_AVAILABLE);
         return intentFilter;
     }
 
@@ -211,7 +173,7 @@ public class KoalaServiceManager {
     }
 
     public void registerSensorEventListener(SensorEventListener listener, final int type) {
-        enableSensor = (byte) (enableSensor | (byte)type);
+        enableService = type;
         SparseArray<SensorEventListener> e = new SparseArray<SensorEventListener>();
         e.put(type, listener);
         this.eventListeners.add(e);
@@ -240,36 +202,6 @@ public class KoalaServiceManager {
         }.start();
     }
 
-    private void startToReadData(final String addr) {
-        new Thread() {
-            public void run() {
-                try {
-                    sleep(1000);   // update every 500ms
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                // we enable the raw data notification here
-                mBluetoothLeService.enableMotionRawService(addr);
-
-            }
-        }.start();
-    }
-
-    private void stopReadingData(final String addr) {
-        new Thread() {
-            public void run() {
-                try {
-                    sleep(1000);   // update every 500ms
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                // we enable the raw data notification here
-                mBluetoothLeService.disableMotionRawService(addr);
-            }
-        }.start();
-    }
-
     private void startToReadPDRData(final String addr) {
         new Thread() {
             public void run() {
@@ -292,19 +224,6 @@ public class KoalaServiceManager {
                     e.printStackTrace();
                 }
                 mBluetoothLeService.disablePedometerService(addr);
-            }
-        }.start();
-    }
-
-    private void setGSensor(final String addr) {
-        new Thread() {
-            public void run() {
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                mBluetoothLeService.setMotionParameter(addr);
             }
         }.start();
     }

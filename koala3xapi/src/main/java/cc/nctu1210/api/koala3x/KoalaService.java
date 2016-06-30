@@ -41,8 +41,8 @@ public class KoalaService extends Service {
     public final static String ACTION_GATT_DISCONNECTED = "ACTION_GATT_DISCONNECTED";
     public final static String ACTION_GATT_SERVICES_DISCOVERED = "ACTION_GATT_SERVICES_DISCOVERED";
     public final static String ACTION_GATT_RSSI = "ACTION_GATT_RSSI";
-    public final static String ACTION_RAW_ACC_DATA_AVAILABLE = "ACTION_RAW_ACC_DATA_AVAILABLE";
     public final static String ACTION_PDR_DATA_AVAILABLE = "ACTION_PDR_DATA_AVAILABLE";
+    public final static String ACTION_SLEEP_DATA_AVAILABLE = "ACTION_SLEEP_DATA_AVAILABLE";
     public final static String ACTION_DATA_AVAILABLE = "ACTION_DATA_AVAILABLE";
 
 
@@ -382,8 +382,6 @@ public class KoalaService extends Service {
         return true;
     }
 
-
-
     /**
      *
      * @param addr
@@ -434,15 +432,6 @@ public class KoalaService extends Service {
         return true;
     }
 
-    public boolean setMotionParameter(String addr) {
-        Pedometer tmpPDR = this.pedometers.get(addr);
-        if (tmpPDR == null) {
-            Log.e(TAG, "Pedometer can not be found!!");
-            return false;
-        }
-        tmpPDR.sendPedometerCommand(Pedometer.GET_G_SENSOR_CONTROL);
-        return true;
-    }
 
     public boolean getSportInformation(String addr) {
         Pedometer tmpPDR = this.pedometers.get(addr);
@@ -451,22 +440,6 @@ public class KoalaService extends Service {
             return false;
         }
         tmpPDR.sendPedometerCommand(Pedometer.GET_DAY_TARGET_ACHIEVEMNET);
-        return true;
-    }
-
-    /**
-     *
-     * @param addr
-     * @return return true if the operation is successful.
-     */
-    public boolean enableMotionRawService(String addr) {
-        //Log.w(TAG, "not support yet!!");
-        Pedometer tmpPDR = this.pedometers.get(addr);
-        if (tmpPDR == null) {
-            Log.e(TAG, "Pedometer can not be found!!");
-            return false;
-        }
-        tmpPDR.sendPedometerCommand(Pedometer.GET_G_SENSOR_RAW_DATA);
         return true;
     }
 

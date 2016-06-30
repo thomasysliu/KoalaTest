@@ -42,6 +42,7 @@ public class Pedometer {
     public static final byte SET_USER_INFO = 0x02;
     public static final byte SET_CLEAR_SPORT = 0x04;
     public static final byte SET_DEVICE_ID = 0x05;
+    public static final byte SET_DEVICE_NAME = 0x3D;
     public static final byte GET_DAY_TOTAL_SPORT_INFORMATION = 0x07;
     public static final byte GET_DAY_TARGET_ACHIEVEMNET = 0x08;
     public static final byte SET_START_TIME_PEDOMETER = 0x09;
@@ -60,8 +61,6 @@ public class Pedometer {
     public static final byte GET_CURRENT_SPORT_INFORMATION = 0x48;
     public static final byte SET_START_SLEEP_MONITORING = 0x49;
     public static final byte GET_SLEEP_MONITOR_STATE = 0x6B;
-    public static final byte GET_G_SENSOR_CONTROL = (byte) 0x98;
-    public static final byte GET_G_SENSOR_RAW_DATA = (byte) 0x99;
 
 
 
@@ -136,22 +135,6 @@ public class Pedometer {
             case GET_SLEEP_MONITOR_STATE:
                 Log.e(TAG, "not support yet!!");
                 break;
-            case GET_G_SENSOR_CONTROL:
-                Log.d(TAG, "GET_G_SENSOR_CONTROL!!");
-                command[1] = 0x01;
-                command[2] = 0x01;
-                command[3] = 0x07;
-                while (true) {
-                    if (index >= 15) {
-                        break;
-                    }
-                    if (index >=3 ) {
-                        command[index + 1] = 0;
-                    }
-                    crc += command[index + 1];
-                    ++index;
-                }
-                break;
             case GET_DAY_TARGET_ACHIEVEMNET:
                 Log.d(TAG, "GET_DAY_TARGET_ACHIEVEMNET!!");
                 while (true) {
@@ -165,17 +148,6 @@ public class Pedometer {
                 break;
             case SET_FIRMWARE_UPGRADE:
                 Log.d(TAG, "SET_FIRMWARE_UPGRADE!!");
-                while (true) {
-                    if (index >= 15) {
-                        break;
-                    }
-                    command[index + 1] = 0;
-                    crc += command[index + 1];
-                    ++index;
-                }
-                break;
-            case GET_G_SENSOR_RAW_DATA:
-                Log.d(TAG, "GET_G_SENSOR_RAW_DATA");
                 while (true) {
                     if (index >= 15) {
                         break;
@@ -262,55 +234,11 @@ public class Pedometer {
                 case SET_FACTORY_CONFIG:
                     Log.d(TAG, "recv a SET_FACTORY_CONFIG event!!");
                     break;
-                case GET_G_SENSOR_CONTROL:
-                    Log.d(TAG, "recv a GET_G_SENSOR_CONTROL event!!");
-                    byte b_accel_z = data[4];
-                    float acc_z = (float) (b_accel_z * 4.0d/Math.pow(2,8));
-                    Log.d(TAG, "time="+System.currentTimeMillis()+" gZ:"+acc_z+"\n");
-                    break;
                 case GET_DAY_TARGET_ACHIEVEMNET:
                     Log.d(TAG, "recv a GET_DAY_TARGET_ACHIEVEMNET event!!");
                     break;
                 case SET_FIRMWARE_UPGRADE:
                     Log.d(TAG, "recv a SET_FIRMWARE_UPGRADE event!!");
-                    break;
-                case GET_G_SENSOR_RAW_DATA:
-                    Log.d(TAG, "recv a GET_G_SENSOR_RAW_DATA event!!");
-
-
-                    short s_accel_x = (short)( (short)data[4]) ;
-                    short s_accel_y = (short)( (short)data[8]) ;
-                    short s_accel_z = (short)( (short)data[12]) ;
-
-                    //short s_accel_x = (short)( (short)data[4] *256  + (short)data[3]) ;
-                    //short s_accel_y = (short)( (short)data[8] *256  + (short)data[7]) ;
-                    //short s_accel_z = (short)( (short)data[12]*256  + (short)data[11]) ;
-
-                    double accel_x = (double) (s_accel_x * 4.0d / Math.pow(2,8)) ; // +-2g
-                    double accel_y = (double) (s_accel_y * 4.0d/ Math.pow(2,8)) ;
-                    double accel_z = (double) (s_accel_z * 4.0d / Math.pow(2,8)) ;
-
-                    accData[0] = (float) accel_x;
-                    accData[1] = (float) accel_y;
-                    accData[2] = (float) accel_z;
-                    //fire sensor event
-                    //e = new SensorEvent(SensorEvent.TYPE_ACCEROMETER, device, 3);
-                    intent = new Intent(KoalaService.ACTION_RAW_ACC_DATA_AVAILABLE);
-                    intent.putExtra(KoalaService.EXTRA_NAME, String.valueOf(device.getAddress()));
-                    intent.putExtra(KoalaService.EXTRA_DATA, accData);
-                    mBluetoothLeService.sendBroadcast(intent);
-                    /*
-                    for (int i=0, size=eventListeners.size(); i<size; i++) {
-                        if (eventListeners.get(i).get(SensorEvent.TYPE_ACCEROMETER) != null) {
-                            SensorEventListener l = eventListeners.get(i).get(SensorEvent.TYPE_ACCEROMETER);
-                            e.values[0] = accData[0];
-                            e.values[1] = accData[1];
-                            e.values[2] = accData[2];
-                            l.onSensorChange(e);
-                            Log.d(TAG, "time="+System.currentTimeMillis()+ "gX:" + e.values[0]+"gY:" + e.values[1]+"gZ:" + e.values[2]+"\n");
-                        }
-                    }*/
-                    sendPedometerCommand(GET_G_SENSOR_RAW_DATA);
                     break;
                 case SET_START_TIME_PEDOMETER:
                     //step count data
