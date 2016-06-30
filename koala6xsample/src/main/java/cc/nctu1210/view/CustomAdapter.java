@@ -89,7 +89,15 @@ public class CustomAdapter extends BaseAdapter {
             viewHolder.addr     = (TextView) view.findViewById(R.id.tv_addr);
             viewHolder.rssi     = (TextView) view.findViewById(R.id.tv_rssi);
             viewHolder.sampling = (TextView) view.findViewById(R.id.tv_sampling);
-            viewHolder.rawData = (TextView) view.findViewById(R.id.tv_raw);
+            viewHolder.gX = (TextView) view.findViewById(R.id.tv_gsenosr_x);
+            viewHolder.gY = (TextView) view.findViewById(R.id.tv_gsenosr_y);
+            viewHolder.gZ = (TextView) view.findViewById(R.id.tv_gsenosr_z);
+            viewHolder.aX = (TextView) view.findViewById(R.id.tv_gyrosenosr_x);
+            viewHolder.aY = (TextView) view.findViewById(R.id.tv_gyrosenosr_y);
+            viewHolder.aZ = (TextView) view.findViewById(R.id.tv_gyrosenosr_z);
+            viewHolder.mX = (TextView) view.findViewById(R.id.tv_msenosr_x);
+            viewHolder.mY = (TextView) view.findViewById(R.id.tv_msenosr_y);
+            viewHolder.mZ = (TextView) view.findViewById(R.id.tv_msenosr_z);
 
             // store the holder with the view.
             view.setTag(viewHolder);
@@ -110,7 +118,16 @@ public class CustomAdapter extends BaseAdapter {
             viewHolder.addr.setText(obj.getAddress());
             viewHolder.rssi.setText(obj.getRssi());
             viewHolder.sampling.setText(obj.getSampling());
-            viewHolder.rawData.setText(obj.getGx()+" "+obj.getGy()+" "+obj.getGz());
+            viewHolder.gX.setText(obj.getGx());
+            viewHolder.gY.setText(obj.getGy());
+            viewHolder.gZ.setText(obj.getGz());
+            viewHolder.aX.setText(obj.getAx());
+            viewHolder.aY.setText(obj.getAy());
+            viewHolder.aZ.setText(obj.getAz());
+            viewHolder.mX.setText(obj.getMx());
+            viewHolder.mY.setText(obj.getMy());
+            viewHolder.mZ.setText(obj.getMz());
+            //viewHolder.rawData.setText(obj.getGx()+" "+obj.getGy()+" "+obj.getGz());
         }
         return view;
     }
@@ -120,6 +137,15 @@ public class CustomAdapter extends BaseAdapter {
         public TextView addr;
         public TextView rssi;
         public TextView sampling;
+        public TextView gX;
+        public TextView gY;
+        public TextView gZ;
+        public TextView aX;
+        public TextView aY;
+        public TextView aZ;
+        public TextView mX;
+        public TextView mY;
+        public TextView mZ;
         public TextView rawData;
         public TextView step;
         public TextView cal;

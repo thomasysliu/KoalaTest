@@ -8,6 +8,14 @@ public class ModelObject {
 	private String gX;
 	private String gY;
 	private String gZ;
+
+	private String aX;
+	private String aY;
+	private String aZ;
+
+	private String mX;
+	private String mY;
+	private String mZ;
 	
 	private String step;
 	private String cal;
@@ -22,6 +30,12 @@ public class ModelObject {
 		this.gX = "";
 		this.gY = "";
 		this.gZ = "";
+		this.aX = "";
+		this.aY = "";
+		this.aZ = "";
+		this.mX = "";
+		this.mY = "";
+		this.mZ = "";
 		this.step ="";
 		this.cal="";
 		this.distance="";
@@ -72,6 +86,18 @@ public class ModelObject {
 		this.gY = String.valueOf(gY);
 		this.gZ = String.valueOf(gZ);
 	}
+
+	public void setGyroscopeData(double aX, double aY, double aZ) {
+		this.aX = String.valueOf(aX);
+		this.aY = String.valueOf(aY);
+		this.aZ = String.valueOf(aZ);
+	}
+
+	public void setmagnetometerData(double mX, double mY, double mZ) {
+		this.mX = String.valueOf(mX);
+		this.mY = String.valueOf(mY);
+		this.mZ = String.valueOf(mZ);
+	}
 	
 	public void setPedometerData(float step, float cal, float distance, float time) {
 		this.step = String.valueOf(step);
@@ -102,6 +128,30 @@ public class ModelObject {
 	
 	public String getGz() {
 		return this.gZ;
+	}
+
+	public String getAx() {
+		return this.aX;
+	}
+
+	public String getAy() {
+		return this.aY;
+	}
+
+	public String getAz() {
+		return this.aZ;
+	}
+
+	public String getMx() {
+		return this.mX;
+	}
+
+	public String getMy() {
+		return this.mY;
+	}
+
+	public String getMz() {
+		return this.mZ;
 	}
 	
 	public String getStep() {

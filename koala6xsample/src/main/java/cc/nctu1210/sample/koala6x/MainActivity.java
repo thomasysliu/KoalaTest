@@ -82,6 +82,18 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         mAdapter.notifyDataSetChanged();
     }
 
+    private void displayGyroData(final int position, final double gyro[]) {
+        ModelObject object = mObjects.get(position);
+        object.setGyroscopeData(gyro[0], gyro[1], gyro[2]);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    private void displayMagData(final int position, final double mag[]) {
+        ModelObject object = mObjects.get(position);
+        object.setmagnetometerData(mag[0], mag[1], mag[2]);
+        mAdapter.notifyDataSetChanged();
+    }
+
     private void displayPDRData(final int position, final float pdrData[]) {
         ModelObject object = mObjects.get(position);
         object.setPedometerData(pdrData[0], pdrData[1], pdrData[2], pdrData[3]);
@@ -139,7 +151,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         mServiceManager.registerSensorEventListener(this, SensorEvent.TYPE_ACCELEROMETER, KoalaService.MOTION_WRITE_RATE_10, KoalaService.MOTION_ACCEL_SCALE_2G, KoalaService.MOTION_GYRO_SCALE_250);
         //mServiceManager.registerSensorEventListener(this, SensorEvent.TYPE_ACCELEROMETER);
         mServiceManager.registerSensorEventListener(this, SensorEvent.TYPE_GYROSCOPE);
-        //mServiceManager.registerSensorEventListener(this, SensorEvent.TYPE_MAGNETOMETER);
+        mServiceManager.registerSensorEventListener(this, SensorEvent.TYPE_MAGNETOMETER);
 
     }
 
@@ -435,16 +447,37 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                                 values[0] = e.values[0];
                                 values[1] = e.values[1];
                                 values[2] = e.values[2];
-                                Log.d(TAG, "time="+System.currentTimeMillis()+ "aX:" + values[0]+"aY:" + values[1]+"aZ:" + values[2]+"\n");
+                                Log.d(TAG, "time=" + System.currentTimeMillis() + "aX:" + values[0] + "aY:" + values[1] + "aZ:" + values[2] + "\n");
                                 //updateSamplingRate(gyro_position, d.getCurrentSamplingRate());
-                                //displayAccData(gyro_position, values);
+                                displayGyroData(gyro_position, values);
                             } catch (Exception e) {
                                 Log.e(TAG, e.toString());
                             }
                         }
                     });
                 }
-                break;
+            break;
+            case SensorEvent.TYPE_MAGNETOMETER:
+                final int mago_position = findKoalaDevice(e.device.getAddress());
+                if (mago_position != -1) {
+                    final KoalaDevice d = mDevices.get(mago_position);
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            try {
+                                //d.addRecvItem();
+                                values[0] = e.values[0];
+                                values[1] = e.values[1];
+                                values[2] = e.values[2];
+                                Log.d(TAG, "time="+System.currentTimeMillis()+ "mX:" + values[0]+"mY:" + values[1]+"mZ:" + values[2]+"\n");
+                                //updateSamplingRate(gyro_position, d.getCurrentSamplingRate());
+                                displayMagData(mago_position, values);
+                            } catch (Exception e) {
+                                Log.e(TAG, e.toString());
+                            }
+                        }
+                    });
+                }
+            break;
         }
     }
 
