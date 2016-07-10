@@ -1,3 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\koala3xsample\build\intermediates\exploded-aar\KoalaTest\koala3xapi\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="43b820c973984b7d8df6acab490f669e6452cc9d">
+        <dex dex="C:\Users\Yi-Ta_Chuang\StudioProjects\KoalaTest\koala3xsample\build\intermediates\pre-dexed\debug\KoalaTest-koala3xapi-unspecified_b3d45803654e25f212846a991b374b58f7a5d30f.jar" />
+    </item>
+
+</items>

@@ -4,31 +4,26 @@ public class ModelObject {
 	private String deviceName;
 	private String macAddress;
 	private String rssi;
-	private String sampling;
-	private String gX;
-	private String gY;
-	private String gZ;
-	
+    private String status;
 	private String step;
 	private String cal;
 	private String distance;
-	private String time;
-
-	private String range;
+    private String time;
+	private String sleepState;
+	private String sleepTime;
 	
 	public ModelObject(String name, String addr, String rssi) {
 		this.deviceName = name;
 		this.macAddress = addr;
 		this.rssi = rssi;
-		this.sampling = "";
-		this.gX = "";
-		this.gY = "";
-		this.gZ = "";
+        this.status = "";
 		this.step ="";
 		this.cal="";
 		this.distance="";
-		this.time="";
-		this.range="";
+        this.time = "";
+        this.sleepState="";
+		this.sleepTime="";
+
 	}
 	
 	public void setName(String name) {
@@ -42,14 +37,10 @@ public class ModelObject {
 	public void setRssi(float rssi) {
 		this.rssi = String.valueOf(rssi);
 	}
-	
-	public void setSampling(float sampling) {
-		this.sampling = String.valueOf(sampling);
-	}
-	
-	public void setStep(String step) {
-		this.step = step;
-	}
+
+    public void setStep(String step) {
+        this.step = step;
+    }
 	
 	public void setCal(String cal) {
 		this.cal = cal;
@@ -58,30 +49,22 @@ public class ModelObject {
 	public void setDistance(String distance) {
 		this.distance = distance;
 	}
-	
-	public void setTime(String time) {
-		this.time = time;
-	}
-	
-	
-	public String getSampling() {
-		return this.sampling;
+
+    public void setTime(String time) {
+        this.time =time;
+    }
+
+	public void setSleepTime(String sleepTime) {
+        this.sleepTime = sleepTime;
 	}
 
-	public void setRange(String range) {
-		this.range = range;
-	}
+    public void setSleepState(String sleepState) {
+        this.sleepState = sleepState;
+    }
 
-	public String getRange() {
-		return this.range;
-	}
-	
-	
-	public void setAccelerometerData(double gX, double gY, double gZ) {
-		this.gX = String.valueOf(gX);
-		this.gY = String.valueOf(gY);
-		this.gZ = String.valueOf(gZ);
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 	
 	public void setPedometerData(float step, float cal, float distance, float time) {
 		this.step = String.valueOf(step);
@@ -89,7 +72,12 @@ public class ModelObject {
 		this.distance = String.valueOf(distance);
 		this.time = String.valueOf(time);
 	}
-	
+
+    public void setSleepData(int sleepState, int sleepTime) {
+        this.sleepState = String.valueOf(sleepState);
+        this.sleepTime = String.valueOf(sleepTime);
+    }
+
 	public String getName() {
 		return this.deviceName;
 	}
@@ -100,18 +88,6 @@ public class ModelObject {
 	
 	public String getRssi() {
 		return this.rssi;
-	}
-	
-	public String getGx() {
-		return this.gX;
-	}
-	
-	public String getGy() {
-		return this.gY;
-	}
-	
-	public String getGz() {
-		return this.gZ;
 	}
 	
 	public String getStep() {
@@ -129,5 +105,17 @@ public class ModelObject {
 	public String getTime() {
 		return this.time;
 	}
+
+    public String getSleepTime() {
+        return this.sleepTime;
+    }
+
+    public String getSleepState() {
+        return this.sleepState;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
 	
 }

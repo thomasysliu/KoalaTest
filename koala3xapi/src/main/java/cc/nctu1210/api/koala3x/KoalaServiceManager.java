@@ -90,12 +90,11 @@ public class KoalaServiceManager {
                 final String addr = intent.getStringExtra(KoalaService.EXTRA_NAME);
                 Log.d(TAG, "ACTION_GATT_SERVICES_DISCOVERED! mac Address:" + addr);
                 //startToReadData(addr);
-
-
+                readPDRMode(addr);
             } else if (KoalaService.ACTION_GATT_RSSI.equals(action)) {
                 final String addr = intent.getStringExtra(KoalaService.EXTRA_NAME);
                 float rssi = Float.valueOf(intent.getStringExtra(KoalaService.EXTRA_DATA));
-                Log.d(TAG, "mac Address:" + addr + " rssi:" + rssi);
+                //Log.d(TAG, "mac Address:" + addr + " rssi:" + rssi);
                 //fire a rssi event
                 for (int i=0, size=eventListeners.size(); i<size; i++) {
                     if (eventListeners.get(i).get(SensorEvent.TYPE_PEDOMETER) != null) {
@@ -125,6 +124,41 @@ public class KoalaServiceManager {
                         }
                     }
                 }
+            } else if (KoalaService.ACTION_SLEEP_DATA_AVAILABLE.equals(action)) {
+                final String addr = intent.getStringExtra(KoalaService.EXTRA_NAME);
+                final int values [] = intent.getIntArrayExtra(KoalaService.EXTRA_DATA);
+                Log.i(TAG, "ACTION_SLEEP_DATA_AVAILABLE received!!");
+                //fire a pdr data event
+                BluetoothGatt gattServer = mBluetoothLeService.getGattbyAddr(addr);
+                if (gattServer != null) {
+                    BluetoothDevice device = gattServer.getDevice();
+                    SensorEvent e = new SensorEvent(SensorEvent.TYPE_SLEEP_MONITOR, device, 2);
+                    e.sleepValues[0] = values[0];
+                    e.sleepValues[1] = values[1];
+                    for (int i=0, size=eventListeners.size(); i<size; i++) {
+                        if (eventListeners.get(i).get(SensorEvent.TYPE_SLEEP_MONITOR) != null) {
+                            SensorEventListener l = eventListeners.get(i).get(SensorEvent.TYPE_SLEEP_MONITOR);
+                            l.onSensorChange(e);
+                        }
+                    }
+                }
+            } else if (KoalaService.ACTION_STATUS_DATA_AVAILABLE.equals(action)) {
+                final String addr = intent.getStringExtra(KoalaService.EXTRA_NAME);
+                final int value = intent.getIntExtra(KoalaService.EXTRA_DATA, Pedometer.PDR_MODE);
+                Log.i(TAG, "ACTION_SLEEP_DATA_AVAILABLE received!!");
+                //fire a pdr data event
+                BluetoothGatt gattServer = mBluetoothLeService.getGattbyAddr(addr);
+                if (gattServer != null) {
+                    BluetoothDevice device = gattServer.getDevice();
+                    SensorEvent e = new SensorEvent(SensorEvent.TYPE_STATUS, device, 1);
+                    e.modeValue = value;
+                    for (int i=0, size=eventListeners.size(); i<size; i++) {
+                        if (eventListeners.get(i).get(SensorEvent.TYPE_STATUS) != null) {
+                            SensorEventListener l = eventListeners.get(i).get(SensorEvent.TYPE_STATUS);
+                            l.onSensorChange(e);
+                        }
+                    }
+                }
             }
         }
     };
@@ -139,6 +173,7 @@ public class KoalaServiceManager {
         //intentFilter.addAction(KoalaService.ACTION_DATA_AVAILABLE);
         intentFilter.addAction(KoalaService.ACTION_PDR_DATA_AVAILABLE);
         intentFilter.addAction(KoalaService.ACTION_SLEEP_DATA_AVAILABLE);
+        intentFilter.addAction(KoalaService.ACTION_STATUS_DATA_AVAILABLE);
         return intentFilter;
     }
 
@@ -158,6 +193,10 @@ public class KoalaServiceManager {
 
     public void disconnect() {
         mBluetoothLeService.disconnect();
+    }
+
+    public void disconnect(String addr) {
+        mBluetoothLeService.disconnect(addr);
     }
 
     public void close() {
@@ -193,7 +232,7 @@ public class KoalaServiceManager {
         new Thread() {
             public void run() {
                 try {
-                    sleep(1000);
+                    sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -202,11 +241,24 @@ public class KoalaServiceManager {
         }.start();
     }
 
-    private void startToReadPDRData(final String addr) {
+    public void softResetPDRData(final String addr) {
         new Thread() {
             public void run() {
                 try {
-                    sleep(1000);
+                    sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                mBluetoothLeService.softResetPedometer(addr);
+            }
+        }.start();
+    }
+
+    public void startToReadPDRData(final String addr) {
+        new Thread() {
+            public void run() {
+                try {
+                    sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -215,11 +267,11 @@ public class KoalaServiceManager {
         }.start();
     }
 
-    private void stopReadingPDRData(final String addr) {
+    public void stopReadingPDRData(final String addr) {
         new Thread() {
             public void run() {
                 try {
-                    sleep(1000);
+                    sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -228,7 +280,34 @@ public class KoalaServiceManager {
         }.start();
     }
 
-    private void setToFactoryMode(final String addr) {
+    public void readPDRMode(final String addr) {
+        new Thread() {
+            public void run() {
+                try {
+                    sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                mBluetoothLeService.readPedometerMode(addr);
+            }
+        }.start();
+    }
+
+    public void setPDRMode(final String addr, final int mode) {
+        new Thread() {
+            public void run() {
+                try {
+                    sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                mBluetoothLeService.setPDRMode(addr, mode);
+            }
+        }.start();
+    }
+
+
+    public void setToFactoryMode(final String addr) {
         new Thread() {
             public void run() {
                 try {
@@ -241,7 +320,7 @@ public class KoalaServiceManager {
         }.start();
     }
 
-    private void getSportInformation(final String addr) {
+    public void getSportInformation(final String addr) {
         new Thread() {
             public void run() {
                 try {
@@ -254,7 +333,7 @@ public class KoalaServiceManager {
         }.start();
     }
 
-    private void startReadRssi(final String addr) {
+    public void startReadRssi(final String addr) {
         new Thread() {
             public void run() {
                 try {

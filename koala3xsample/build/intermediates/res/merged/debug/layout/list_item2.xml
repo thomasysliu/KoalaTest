@@ -78,6 +78,22 @@
                 android:text="" >
             </TextView>
         </TableRow>
+        <!-- connection status -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:text="Connection status:"
+                android:textStyle="bold" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/tv_connect_state"
+                android:gravity="center_horizontal"
+                android:text="" >
+            </TextView>
+        </TableRow>
         <!-- step count -->
         <TableRow
             android:layout_width="match_parent"
@@ -94,18 +110,34 @@
                 android:text="" >
             </TextView>
         </TableRow>
-        <!-- range -->
+        <!-- sleep state -->
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
             <TextView
-                android:text="Range:"
+                android:text="Sleep state"
                 android:textStyle="bold" >
             </TextView>
 
             <TextView
-                android:id="@+id/tv_range"
+                android:id="@+id/tv_sleep"
+                android:gravity="center_horizontal"
+                android:text="" >
+            </TextView>
+        </TableRow>
+        <!-- Sleep time -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:text="Sleep time:"
+                android:textStyle="bold" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/tv_sleep_time"
                 android:gravity="center_horizontal"
                 android:text="" >
             </TextView>

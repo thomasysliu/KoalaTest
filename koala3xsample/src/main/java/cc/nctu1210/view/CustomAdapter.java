@@ -88,10 +88,10 @@ public class CustomAdapter extends BaseAdapter {
             viewHolder.name     = (TextView) view.findViewById(R.id.tv_name);
             viewHolder.addr     = (TextView) view.findViewById(R.id.tv_addr);
             viewHolder.rssi     = (TextView) view.findViewById(R.id.tv_rssi);
-            viewHolder.range = (TextView) view.findViewById(R.id.tv_range);
-            //viewHolder.sampling = (TextView) view.findViewById(R.id.tv_sampling);
+            viewHolder.status = (TextView) view.findViewById(R.id.tv_connect_state);
+            viewHolder.sleepState = (TextView) view.findViewById(R.id.tv_sleep);
+            viewHolder.sleepTime = (TextView) view.findViewById(R.id.tv_sleep_time);
             viewHolder.step     = (TextView) view.findViewById(R.id.tv_step);
-            //viewHolder.rawData = (TextView) view.findViewById(R.id.tv_raw);
 
             // store the holder with the view.
             view.setTag(viewHolder);
@@ -111,9 +111,9 @@ public class CustomAdapter extends BaseAdapter {
             viewHolder.name.setText(obj.getName());
             viewHolder.addr.setText(obj.getAddress());
             viewHolder.rssi.setText(obj.getRssi());
-            viewHolder.range.setText(obj.getRange());
-            //viewHolder.sampling.setText(obj.getSampling());
-            //viewHolder.rawData.setText(obj.getGx()+" "+obj.getGy()+" "+obj.getGz());
+            viewHolder.status.setText(obj.getStatus());
+            viewHolder.sleepState.setText(obj.getSleepState());
+            viewHolder.sleepTime.setText(obj.getSleepTime());
             viewHolder.step.setText(obj.getStep());
         }
         return view;
@@ -123,12 +123,12 @@ public class CustomAdapter extends BaseAdapter {
         public TextView name;
         public TextView addr;
         public TextView rssi;
-        public TextView sampling;
-        public TextView rawData;
         public TextView step;
-        private TextView range;
         public TextView cal;
         public TextView distance;
         public TextView time;
+        public TextView status;
+        public TextView sleepTime;
+        public TextView sleepState;
     }
 }

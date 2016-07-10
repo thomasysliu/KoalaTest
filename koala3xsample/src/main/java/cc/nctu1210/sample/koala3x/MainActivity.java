@@ -28,6 +28,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import cc.nctu1210.api.koala3x.KoalaDevice;
 import cc.nctu1210.api.koala3x.KoalaServiceManager;
+import cc.nctu1210.api.koala3x.Pedometer;
 import cc.nctu1210.api.koala3x.SensorEvent;
 import cc.nctu1210.api.koala3x.SensorEventListener;
 import cc.nctu1210.view.CustomAdapter;
@@ -47,6 +49,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private static final int REQUEST_EXTERNAL_STORAGE = 0x01 << 2;
 
     private boolean startScan = false;
+    private boolean serviceStart = false;
     private KoalaServiceManager mServiceManager;
     private boolean mBooleanServiceCreated = false;
     private BluetoothAdapter mBluetoothAdapter;
@@ -62,8 +65,17 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private static final long SCAN_PERIOD = 2000;
     public static final int REQUEST_CODE = 30;
 
+    private Context mContext;
+
     private Button btScan;
+    private Button btConnect;
     private Button btDisconnect;
+    private Button btStep;
+    private Button btSleep;
+    private Button btServiceStart;
+    private Button btGetSleep;
+    private TextView tvSelectedDevice;
+    private KoalaDevice selectedDevice = null;
 
     /* ListView Related */
     private String DEVICE_NAME = "name";
@@ -83,24 +95,17 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         String range="";
         object.setRssi(rssi);
 
-        if (rssi>-60) {
-            range = "near";
-        } else if (rssi<=-60 && rssi>=-90) {
-            range = "mediate";
-        } else if (rssi <- 90) {
-            range = "far";
-        }
+        //if (rssi>-60) {
+        //    range = "near";
+        //} else if (rssi<=-60 && rssi>=-90) {
+        //    range = "mediate";
+        //} else if (rssi <- 90) {
+        //    range = "far";
+        //}
 
-        if (rssi <= -95) {
-            notificationBuilder();
-        }
-        object.setRange(range);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    private void displayAccData(final int position, final double acc[]) {
-        ModelObject object = mObjects.get(position);
-        object.setAccelerometerData(acc[0], acc[1], acc[2]);
+        //if (rssi <= -95) {
+            //notificationBuilder();
+        //}
         mAdapter.notifyDataSetChanged();
     }
 
@@ -116,9 +121,19 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         mAdapter.notifyDataSetChanged();
     }
 
-    private void updateSamplingRate(final int position, float sampling) {
+    private void displaySleepData(final int position, final int sleepState, final int sleepTime) {
         ModelObject object = mObjects.get(position);
-        object.setSampling(sampling);
+        object.setSleepData(sleepState, sleepTime);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    private void displayStatus(final int position, final int status) {
+        ModelObject object = mObjects.get(position);
+        if (status == Pedometer.PDR_MODE) {
+            object.setStatus("PDR_MODE");
+        } else if (status == Pedometer.SLEEP_MODE) {
+            object.setStatus("SLEEP_MODE");
+        }
         mAdapter.notifyDataSetChanged();
     }
 
@@ -128,6 +143,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate");
         setContentView(R.layout.activity_main);
+        mContext = this.getBaseContext();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             verifyStoragePermissions(this);
@@ -135,7 +151,13 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         }
 
         btScan = (Button) findViewById(R.id.bt_scan);
+        btConnect = (Button) findViewById(R.id.bt_connect);
         btDisconnect = (Button) findViewById(R.id.bt_disconnect);
+        btStep = (Button) findViewById(R.id.bt_step_counter);
+        btSleep = (Button) findViewById(R.id.bt_sleep_monitor);
+        btServiceStart = (Button) findViewById(R.id.bt_service_start);
+        btGetSleep = (Button) findViewById(R.id.bt_sleep_start);
+        tvSelectedDevice = (TextView) findViewById(R.id.tv_select_device);
         listView = (ListView) findViewById(R.id.listView);
 
         mAdapter = new CustomAdapter(this, mObjects);
@@ -145,6 +167,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
         btScan.setOnClickListener(scanListener);
         btDisconnect.setOnClickListener(disConnectListener);
+        btConnect.setOnClickListener(connectListener);
+        btStep.setOnClickListener(stepCountModeListener);
+        btSleep.setOnClickListener(sleepModeListener);
+        btServiceStart.setOnClickListener(serviceStartListener);
+        btGetSleep.setOnClickListener(getSleepDataListener);
+
 
         Log.i(TAG, "getPackageManager");
         if (!getPackageManager().hasSystemFeature(
@@ -165,7 +193,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
         mServiceManager = new KoalaServiceManager(MainActivity.this);
         //mServiceManager.registerSensorEventListener(this, SensorEvent.TYPE_ACCELEROMETER);
+        mServiceManager.registerSensorEventListener(this, SensorEvent.TYPE_STATUS);
         mServiceManager.registerSensorEventListener(this, SensorEvent.TYPE_PEDOMETER);
+        mServiceManager.registerSensorEventListener(this, SensorEvent.TYPE_SLEEP_MONITOR);
 
     }
 
@@ -221,6 +251,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 scanLeDevice(startScan);
             } else {
                 startScan = false;
+                mDevices.clear();
+                mFlags.clear();
+                setupListView();
                 scanLeDevice(startScan);
                 btScan.setText("Scan");
             }
@@ -244,11 +277,116 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     private Button.OnClickListener disConnectListener = new Button.OnClickListener() {
         public void onClick(View v) {
+            if (selectedDevice == null) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(mContext, "device not select!!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                String addr = selectedDevice.getDevice().getAddress();
+                mServiceManager.disconnect(addr);
+            }
+            /*
             mServiceManager.disconnect();
             mServiceManager.close();
             mDevices.clear();
             mFlags.clear();
             setupListView();
+            */
+        }
+    };
+
+    private Button.OnClickListener connectListener = new Button.OnClickListener() {
+        public void onClick(View v) {
+            if (selectedDevice == null) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(mContext, "device not select!!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                String addr = selectedDevice.getDevice().getAddress();
+                selectedDevice.setConnectedTime();
+                mServiceManager.connect(addr);
+            }
+        }
+    };
+
+    private Button.OnClickListener stepCountModeListener = new Button.OnClickListener() {
+        public void onClick(View v) {
+            if (selectedDevice == null) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(mContext, "device not select!!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                String addr = selectedDevice.getDevice().getAddress();
+                mServiceManager.setPDRMode(addr, Pedometer.PDR_MODE);
+                //mServiceManager.softResetPDRData(addr);
+            }
+        }
+    };
+
+    private Button.OnClickListener sleepModeListener = new Button.OnClickListener() {
+        public void onClick(View v) {
+            if (selectedDevice == null) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(mContext, "device not select!!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                String addr = selectedDevice.getDevice().getAddress();
+                mServiceManager.setPDRMode(addr, Pedometer.SLEEP_MODE);
+            }
+        }
+    };
+
+    private Button.OnClickListener serviceStartListener = new Button.OnClickListener() {
+        public void onClick(View v) {
+            if (selectedDevice == null) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(mContext, "device not select!!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                String addr = selectedDevice.getDevice().getAddress();
+                if (serviceStart) {
+                    serviceStart = false;
+                    mServiceManager.stopReadingPDRData(addr);
+                    btServiceStart.setText("Start Service");
+                } else {
+                    serviceStart = true;
+                    mServiceManager.startToReadPDRData(addr);
+                    btServiceStart.setText("Stop Service");
+                }
+
+            }
+        }
+    };
+
+    private Button.OnClickListener getSleepDataListener = new Button.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (selectedDevice == null) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(mContext, "device not select!!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                String addr = selectedDevice.getDevice().getAddress();
+                mServiceManager.getSportInformation(addr);
+            }
         }
     };
 
@@ -447,13 +585,15 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // TODO Auto-generated method stub
-        String macAddress = mAdapter.getData().get(position).getAddress();
+        //String macAddress = mAdapter.getData().get(position).getAddress();
         KoalaDevice d = mDevices.get(position);
-        d.setConnectedTime();
-        if (mBooleanServiceCreated) {
-            Log.d(TAG, "Connecting to device:"+macAddress);
-            mServiceManager.connect(macAddress);
-        }
+        selectedDevice = d;
+        tvSelectedDevice.setText(d.getDevice().getAddress());
+        //d.setConnectedTime();
+        //if (mBooleanServiceCreated) {
+        //    Log.d(TAG, "Connecting to device:"+macAddress);
+        //    mServiceManager.connect(macAddress);
+        //}
     }
 
     private void notificationBuilder() {
@@ -475,12 +615,24 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     public void onSensorChange(final SensorEvent e) {
         final int eventType = e.type;
         final double values [] = new double[3];
+        final String addr = e.device.getAddress();
+        final int position = findKoalaDevice(addr);
+
         switch (eventType) {
+            case SensorEvent.TYPE_STATUS:
+                if (position != -1) {
+                    displayStatus(position, e.modeValue);
+                }
+                break;
             case SensorEvent.TYPE_PEDOMETER:
-                final int position2 = findKoalaDevice(e.device.getAddress());
-                if (position2 != -1) {
+                if (position != -1) {
                     Log.d(TAG, "time=" + System.currentTimeMillis() + "step counts:" + e.values[0] + "\n");
-                    displayPDRData(position2, e.values[0]);
+                    displayPDRData(position, e.values[0]);
+                }
+                break;
+            case SensorEvent.TYPE_SLEEP_MONITOR:
+                if (position != -1) {
+                    displaySleepData(position, e.sleepValues[0], e.sleepValues[1]);
                 }
                 break;
         }
@@ -500,7 +652,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     public void onRSSIChange(String addr, float rssi) {
         final int position = findKoalaDevice(addr);
         if (position != -1) {
-            Log.d(TAG, "mac Address:"+addr+" rssi:"+rssi);
+            //Log.d(TAG, "mac Address:"+addr+" rssi:"+rssi);
 
             displayRSSI(position, rssi);
         }

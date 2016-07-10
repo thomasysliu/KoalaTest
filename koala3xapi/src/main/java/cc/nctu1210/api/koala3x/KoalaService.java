@@ -43,6 +43,7 @@ public class KoalaService extends Service {
     public final static String ACTION_GATT_RSSI = "ACTION_GATT_RSSI";
     public final static String ACTION_PDR_DATA_AVAILABLE = "ACTION_PDR_DATA_AVAILABLE";
     public final static String ACTION_SLEEP_DATA_AVAILABLE = "ACTION_SLEEP_DATA_AVAILABLE";
+    public final static String ACTION_STATUS_DATA_AVAILABLE = "ACTION_STATUS_DATA_AVAILABLE";
     public final static String ACTION_DATA_AVAILABLE = "ACTION_DATA_AVAILABLE";
 
 
@@ -302,6 +303,22 @@ public class KoalaService extends Service {
     }
 
     /**
+     *  Disconnect a BLE device by the given MAC address
+     * @param addr Tje device's MAC address
+     */
+    public void disconnect(String addr) {
+        BluetoothGatt tmpGatt;
+        if (mBluetoothAdapter == null || this.mBluetoothGattList.isEmpty()) {
+            Log.w(TAG, "BluetoothAdapter not initialized");
+            return;
+        }
+        tmpGatt = getGattbyAddr(addr);
+        disableNotificationService(addr);
+        tmpGatt.disconnect();
+    }
+
+
+    /**
      * After using a given BLE device, the app must call this method to ensure
      * resources are released properly.
      */
@@ -422,6 +439,37 @@ public class KoalaService extends Service {
         return true;
     }
 
+    public boolean readPedometerMode(String addr) {
+        Pedometer tmpPDR = this.pedometers.get(addr);
+        if (tmpPDR == null) {
+            Log.e(TAG, "Pedometer can not be found!!");
+            return false;
+        }
+        tmpPDR.sendPedometerCommand(Pedometer.GET_PDR_MODE);
+        return true;
+    }
+
+    public boolean setPDRMode(String addr, int mode) {
+        Pedometer tmpPDR = this.pedometers.get(addr);
+        if (tmpPDR == null) {
+            Log.e(TAG, "Pedometer can not be found!!");
+            return false;
+        }
+        tmpPDR.setPDRMode(mode);
+        tmpPDR.sendPedometerCommand(Pedometer.SET_PDR_MODE);
+        return true;
+    }
+
+    public boolean softResetPedometer(String addr) {
+        Pedometer tmpPDR = this.pedometers.get(addr);
+        if (tmpPDR == null) {
+            Log.e(TAG, "Pedometer can not be found!!");
+            return false;
+        }
+        tmpPDR.sendPedometerCommand(Pedometer.SET_MCU_SOFT_RECOVERY);
+        return true;
+    }
+
     public boolean setToFactoryMode(String addr) {
         Pedometer tmpPDR = this.pedometers.get(addr);
         if (tmpPDR == null) {
@@ -439,7 +487,7 @@ public class KoalaService extends Service {
             Log.e(TAG, "Pedometer can not be found!!");
             return false;
         }
-        tmpPDR.sendPedometerCommand(Pedometer.GET_DAY_TARGET_ACHIEVEMNET);
+        tmpPDR.sendPedometerCommand(Pedometer.GET_DAY_SPORT_INFORMATION);
         return true;
     }
 

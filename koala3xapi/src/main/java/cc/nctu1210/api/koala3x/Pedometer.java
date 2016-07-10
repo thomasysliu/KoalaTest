@@ -36,6 +36,13 @@ public class Pedometer {
      */
     private float[] pdrData = new float[5];
     private float[] accData = new float[3];
+    private int[] sleepData = new int[2];
+    private int sleepQuality = 0;
+    private int sleepTime = 0;
+    private int pdrMode = PDR_MODE;
+
+    public static final byte SLEEP_MODE = 0x00;
+    public static final byte PDR_MODE = 0x01;
 
 
     public static final byte SET_TIME = 0x01;
@@ -59,8 +66,8 @@ public class Pedometer {
     public static final byte GET_DAY_SPORT_DATA_DISTRIBUTION = 0x45;
     public static final byte SET_FIRMWARE_UPGRADE = 0x47;
     public static final byte GET_CURRENT_SPORT_INFORMATION = 0x48;
-    public static final byte SET_START_SLEEP_MONITORING = 0x49;
-    public static final byte GET_SLEEP_MONITOR_STATE = 0x6B;
+    public static final byte SET_PDR_MODE = 0x49;
+    public static final byte GET_PDR_MODE = 0x6B;
 
 
 
@@ -117,26 +124,36 @@ public class Pedometer {
         int index = 0;
 
         switch (cmd.byteValue()) {
+            case SET_USER_INFO:
             case SET_TIME:
             case SET_CLEAR_SPORT:
             case SET_DEVICE_ID:
+            case SET_DEVICE_NAME:
             case GET_DAY_TOTAL_SPORT_INFORMATION:
             case SET_TARGET_ACHIEVEMNET:
             case GET_TARGET_ACHIEVEMNET:
             case GET_MAC_ADDRESS:
             case GET_SOFTWARE_REVISION:
-            case SET_MCU_SOFT_RECOVERY:
             case GET_TIME:
             case GET_USER_INFO:
-            case GET_DAY_SPORT_INFORMATION:
             case GET_DAY_SPORT_DATA_DISTRIBUTION:
             case GET_CURRENT_SPORT_INFORMATION:
-            case SET_START_SLEEP_MONITORING:
-            case GET_SLEEP_MONITOR_STATE:
                 Log.e(TAG, "not support yet!!");
                 break;
             case GET_DAY_TARGET_ACHIEVEMNET:
                 Log.d(TAG, "GET_DAY_TARGET_ACHIEVEMNET!!");
+                while (true) {
+                    if (index >= 15) {
+                        break;
+                    }
+                    command[index + 1] = 0;
+                    crc += command[index + 1];
+                    ++index;
+                }
+                break;
+            case GET_DAY_SPORT_INFORMATION:
+                Log.d(TAG, "GET_DAY_SPORT_INFORMATION!!");
+                index = 0;
                 while (true) {
                     if (index >= 15) {
                         break;
@@ -181,6 +198,55 @@ public class Pedometer {
                 }
                 break;
             case SET_STOP_TIME_PEDOMETER:
+                Log.d(TAG, "SET_STOP_TIME_PEDOMETER!!");
+                index = 0;
+                while (true) {
+                    if (index >= 15) {
+                        break;
+                    }
+                    command[index + 1] = 0;
+                    crc += command[index + 1];
+                    ++index;
+                }
+                break;
+            case SET_PDR_MODE:
+                Log.d(TAG, "SET_PDR_MODE!!");
+                Log.d(TAG, "mode:"+pdrMode);
+                command[1] = (byte) (pdrMode & 0xFF);
+                crc += command[1];
+                index = 1;
+                while (true) {
+                    if (index >= 15) {
+                        break;
+                    }
+                    command[index + 1] = 0;
+                    crc += command[index + 1];
+                    ++index;
+                }
+                break;
+            case SET_MCU_SOFT_RECOVERY:
+                Log.d(TAG, "SET_MCU_SOFT_RECOVERY!!");
+                index = 0;
+                while (true) {
+                    if (index >= 15) {
+                        break;
+                    }
+                    command[index + 1] = 0;
+                    crc += command[index + 1];
+                    ++index;
+                }
+                break;
+            case GET_PDR_MODE:
+                Log.d(TAG, "GET_PDR_MODE!!");
+                index = 0;
+                while (true) {
+                    if (index >= 15) {
+                        break;
+                    }
+                    command[index + 1] = 0;
+                    crc += command[index + 1];
+                    ++index;
+                }
                 break;
             default:
                 Log.e(TAG, "unrecognized command!!");
@@ -188,10 +254,10 @@ public class Pedometer {
 
         command[15] = (byte) (crc & 0xFF);
 
-        Log.d(TAG, "command:"+(byte)(command[0])+":"+(command[1])+":"+(command[2])+":"+(command[3])+":"+
-                (command[4])+":"+(command[5])+":"+(command[6])+":"+(command[7])+":"+
-                (command[8])+":"+(command[9])+":"+(command[10])+":"+(command[11])+":"+
-                (command[12])+":"+(command[13])+":"+(command[14])+":"+(command[15]));
+        Log.d(TAG, "command:" + (byte) (command[0]) + ":" + (command[1]) + ":" + (command[2]) + ":" + (command[3]) + ":" +
+                (command[4]) + ":" + (command[5]) + ":" + (command[6]) + ":" + (command[7]) + ":" +
+                (command[8]) + ":" + (command[9]) + ":" + (command[10]) + ":" + (command[11]) + ":" +
+                (command[12]) + ":" + (command[13]) + ":" + (command[14]) + ":" + (command[15]));
         return command;
     }
 
@@ -221,21 +287,60 @@ public class Pedometer {
                 case GET_TARGET_ACHIEVEMNET:
                 case GET_MAC_ADDRESS:
                 case GET_SOFTWARE_REVISION:
-                case SET_MCU_SOFT_RECOVERY:
                 case GET_TIME:
                 case GET_USER_INFO:
-                case GET_DAY_SPORT_INFORMATION:
+                case GET_DAY_TARGET_ACHIEVEMNET:
                 case GET_DAY_SPORT_DATA_DISTRIBUTION:
                 case GET_CURRENT_SPORT_INFORMATION:
-                case SET_START_SLEEP_MONITORING:
-                case GET_SLEEP_MONITOR_STATE:
                     Log.e(TAG, "not support yet!!");
                     break;
                 case SET_FACTORY_CONFIG:
                     Log.d(TAG, "recv a SET_FACTORY_CONFIG event!!");
                     break;
-                case GET_DAY_TARGET_ACHIEVEMNET:
-                    Log.d(TAG, "recv a GET_DAY_TARGET_ACHIEVEMNET event!!");
+                case GET_DAY_SPORT_INFORMATION:
+                    Log.d(TAG, "recv a GET_DAY_SPORT_INFORMATION event!!");
+                    if ((data[1] & 0xFF) == 0xF0) {
+                        Log.d(TAG, "Activity data exist!!");
+                        if ((data[6] & 0xFF) != 0) {
+                            Log.d(TAG, "Sleep data..");
+                            for (int i=0; i<8; i++) {
+                                sleepQuality += (data[i+7] & 0xFF);
+                            }
+                            sleepQuality = sleepQuality / 8;
+                            if (sleepQuality != 0) {
+                                sleepTime += 15;
+                            }
+                        }
+                    } else if ((data[1] & 0xFF) == 0xFF) {
+                        Log.d(TAG, "no activity data!!");
+                    }
+                    if ((data[5] & 0xFF) == 95) {
+                        Log.d(TAG, "All sleep data are processed!!");
+                        sleepData[0] = sleepQuality;
+                        sleepData[1] = sleepTime;
+                        intent = new Intent(KoalaService.ACTION_SLEEP_DATA_AVAILABLE);
+                        intent.putExtra(KoalaService.EXTRA_NAME, String.valueOf(device.getAddress()));
+                        intent.putExtra(KoalaService.EXTRA_DATA, sleepData);
+                        mBluetoothLeService.sendBroadcast(intent);
+                    }
+                    break;
+                case SET_MCU_SOFT_RECOVERY:
+                case SET_PDR_MODE:
+                    Log.d(TAG, "recv a SET_START_SLEEP_MONITORING event!!");
+                    //fire a mode change evnet
+                    pdrMode = (pdrMode & 0xFF);
+                    intent = new Intent(KoalaService.ACTION_STATUS_DATA_AVAILABLE);
+                    intent.putExtra(KoalaService.EXTRA_NAME, String.valueOf(device.getAddress()));
+                    intent.putExtra(KoalaService.EXTRA_DATA, pdrMode);
+                    mBluetoothLeService.sendBroadcast(intent);
+                    break;
+                case GET_PDR_MODE:
+                    Log.d(TAG, "recv a GET_SLEEP_MONITOR_STATE event!!");
+                    pdrMode = (data[1] & 0xFF);
+                    intent = new Intent(KoalaService.ACTION_STATUS_DATA_AVAILABLE);
+                    intent.putExtra(KoalaService.EXTRA_NAME, String.valueOf(device.getAddress()));
+                    intent.putExtra(KoalaService.EXTRA_DATA, pdrMode);
+                    mBluetoothLeService.sendBroadcast(intent);
                     break;
                 case SET_FIRMWARE_UPGRADE:
                     Log.d(TAG, "recv a SET_FIRMWARE_UPGRADE event!!");
@@ -281,22 +386,18 @@ public class Pedometer {
                     intent.putExtra(KoalaService.EXTRA_NAME, String.valueOf(device.getAddress()));
                     intent.putExtra(KoalaService.EXTRA_DATA, pdrData);
                     mBluetoothLeService.sendBroadcast(intent);
-                    /*
-                    for (int i=0, size=eventListeners.size(); i<size; i++) {
-                        if (eventListeners.get(i).get(SensorEvent.TYPE_PEDOMETER) != null) {
-                            SensorEventListener l = eventListeners.get(i).get(SensorEvent.TYPE_PEDOMETER);
-                            e.values[0] = pdrData[0];
-                            e.values[1] = pdrData[1];
-                            e.values[2] = pdrData[2];
-                            e.values[3] = pdrData[3];
-                            e.values[4] = pdrData[4];
-                            l.onSensorChange(e);
-                            Log.d(TAG, "time="+System.currentTimeMillis()+ "step counts:" + e.values[0]+"\n");
-                        }
-                    }*/
                     break;
             }
 
         }
+    }
+
+    public void resetSleepData() {
+        sleepTime = 0;
+        sleepQuality = 0;
+    }
+
+    public void setPDRMode(int mode) {
+        this.pdrMode = mode;
     }
 }
