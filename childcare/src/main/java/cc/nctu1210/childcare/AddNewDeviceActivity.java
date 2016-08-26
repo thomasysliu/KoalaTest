@@ -288,6 +288,10 @@ public class AddNewDeviceActivity extends Activity implements View.OnClickListen
     }
 
     @Override
+    public void onPedometerServiceChange(int i) {
+    }
+
+    @Override
     public void onConnectionStatusChange(boolean status) {
 
     }

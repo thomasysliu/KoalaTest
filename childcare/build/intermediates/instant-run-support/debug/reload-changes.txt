@@ -1,0 +1,2 @@
+CHANGED,C:\Users\User\Desktop\KoalaTest\childcare\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\cc\nctu1210\childcare\EditAlarmTimeActivity$override.class
+CHANGED,C:\Users\User\Desktop\KoalaTest\childcare\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class

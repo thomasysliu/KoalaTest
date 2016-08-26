@@ -72,7 +72,7 @@ public class MasterLoginSettingFragment extends Fragment implements OnClickListe
         SetAlarmTime = (LinearLayout) this.getView().findViewById(R.id.setting_alarm);
         SetAlarmTime.setOnClickListener(this);
         textTime = (TextView) this.getView().findViewById(R.id.text_time);
-        int showAlarmtime = ApplicationContext.alarmTime/60;
+        double showAlarmtime = (double)ApplicationContext.alarmTime/60;
         textTime.setText(String.valueOf(showAlarmtime));
         btGatewayEditor = (Button) this.getView().findViewById(R.id.button_gateway_list_editor);
         btGatewayEditor.setOnClickListener(this);
@@ -117,7 +117,7 @@ public class MasterLoginSettingFragment extends Fragment implements OnClickListe
                 if (resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     ApplicationContext.alarmTime = bundle.getInt(ApplicationContext.ALARM_TIME, 300);
-                    int showAlarmtime = ApplicationContext.alarmTime / 60;
+                    double showAlarmtime = (double)ApplicationContext.alarmTime / 60;
                     textTime.setText(String.valueOf(showAlarmtime));
                 }
                 break;
