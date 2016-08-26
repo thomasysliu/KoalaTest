@@ -1,5 +1,357 @@
 [
     {
+        "outputFile": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\values-v11\\values-v11.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 7,
+                    "endColumn": 12,
+                    "endOffset": 469
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 57,
+                        "endLine": 7,
+                        "endColumn": 12,
+                        "endOffset": 476
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 474,
+                    "endLine": 13,
+                    "endColumn": 12,
+                    "endOffset": 894
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 482,
+                        "endLine": 13,
+                        "endColumn": 12,
+                        "endOffset": 907
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 899,
+                    "endLine": 19,
+                    "endColumn": 12,
+                    "endOffset": 1322
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 913,
+                        "endLine": 19,
+                        "endColumn": 12,
+                        "endOffset": 1341
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 1327,
+                    "endLine": 25,
+                    "endColumn": 12,
+                    "endOffset": 1748
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 1347,
+                        "endLine": 25,
+                        "endColumn": 12,
+                        "endOffset": 1773
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 1753,
+                    "endLine": 31,
+                    "endColumn": 12,
+                    "endOffset": 2175
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 4,
+                        "startOffset": 1779,
+                        "endLine": 31,
+                        "endColumn": 12,
+                        "endOffset": 2206
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 32,
+                    "startColumn": 4,
+                    "startOffset": 2180,
+                    "endLine": 37,
+                    "endColumn": 12,
+                    "endOffset": 2600
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 32,
+                        "startColumn": 4,
+                        "startOffset": 2212,
+                        "endLine": 37,
+                        "endColumn": 12,
+                        "endOffset": 2637
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 38,
+                    "startColumn": 4,
+                    "startOffset": 2605,
+                    "endColumn": 88,
+                    "endOffset": 2689
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 38,
+                        "startColumn": 4,
+                        "startOffset": 2643,
+                        "endColumn": 88,
+                        "endOffset": 2727
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 39,
+                    "startColumn": 4,
+                    "startOffset": 2694,
+                    "endColumn": 100,
+                    "endOffset": 2790
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 39,
+                        "startColumn": 4,
+                        "startOffset": 2733,
+                        "endColumn": 100,
+                        "endOffset": 2829
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 40,
+                    "startColumn": 4,
+                    "startOffset": 2795,
+                    "endLine": 44,
+                    "endColumn": 12,
+                    "endOffset": 3198
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 40,
+                        "startColumn": 4,
+                        "startOffset": 2835,
+                        "endLine": 44,
+                        "endColumn": 12,
+                        "endOffset": 3242
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 45,
+                    "startColumn": 4,
+                    "startOffset": 3203,
+                    "endLine": 49,
+                    "endColumn": 12,
+                    "endOffset": 3618
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 45,
+                        "startColumn": 4,
+                        "startOffset": 3248,
+                        "endLine": 49,
+                        "endColumn": 12,
+                        "endOffset": 3667
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 50,
+                    "startColumn": 4,
+                    "startOffset": 3623,
+                    "endLine": 51,
+                    "endColumn": 12,
+                    "endOffset": 3725
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 50,
+                        "startColumn": 4,
+                        "startOffset": 3673,
+                        "endLine": 51,
+                        "endColumn": 12,
+                        "endOffset": 3776
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 52,
+                    "startColumn": 4,
+                    "startOffset": 3730,
+                    "endLine": 53,
+                    "endColumn": 12,
+                    "endOffset": 3854
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 52,
+                        "startColumn": 4,
+                        "startOffset": 3782,
+                        "endLine": 53,
+                        "endColumn": 12,
+                        "endOffset": 3907
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 54,
+                    "startColumn": 4,
+                    "startOffset": 3859,
+                    "endColumn": 70,
+                    "endOffset": 3925
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 54,
+                        "startColumn": 4,
+                        "startOffset": 3913,
+                        "endColumn": 70,
+                        "endOffset": 3979
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 55,
+                    "startColumn": 4,
+                    "startOffset": 3930,
+                    "endColumn": 82,
+                    "endOffset": 4008
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 55,
+                        "startColumn": 4,
+                        "startOffset": 3985,
+                        "endColumn": 82,
+                        "endOffset": 4063
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 56,
+                    "startColumn": 4,
+                    "startOffset": 4013,
+                    "endLine": 106,
+                    "endColumn": 12,
+                    "endOffset": 7716
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 56,
+                        "startColumn": 4,
+                        "startOffset": 4069,
+                        "endLine": 106,
+                        "endColumn": 12,
+                        "endOffset": 7822
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 107,
+                    "startColumn": 4,
+                    "startOffset": 7721,
+                    "endLine": 158,
+                    "endColumn": 12,
+                    "endOffset": 11564
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 107,
+                        "startColumn": 4,
+                        "startOffset": 7828,
+                        "endLine": 158,
+                        "endColumn": 12,
+                        "endOffset": 11722
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 159,
+                    "startColumn": 4,
+                    "startOffset": 11569,
+                    "endColumn": 90,
+                    "endOffset": 11655
+                },
+                "from": {
+                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "position": {
+                        "startLine": 159,
+                        "startColumn": 4,
+                        "startOffset": 11728,
+                        "endColumn": 90,
+                        "endOffset": 11814
+                    }
+                }
+            }
+        ]
+    },
+    {
         "outputFile": "D:\\Children-Care-App\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\values-v11\\values-v11.xml",
         "map": [
             {
@@ -352,7 +704,7 @@
         ]
     },
     {
-        "outputFile": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\values-v11\\values-v11.xml",
+        "outputFile": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\values-v11\\values-v11.xml",
         "map": [
             {
                 "to": {
@@ -364,14 +716,14 @@
                     "endOffset": 469
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
-                        "startOffset": 57,
+                        "startOffset": 55,
                         "endLine": 7,
                         "endColumn": 12,
-                        "endOffset": 476
+                        "endOffset": 469
                     }
                 }
             },
@@ -385,14 +737,14 @@
                     "endOffset": 894
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
-                        "startOffset": 482,
+                        "startOffset": 474,
                         "endLine": 13,
                         "endColumn": 12,
-                        "endOffset": 907
+                        "endOffset": 894
                     }
                 }
             },
@@ -406,14 +758,14 @@
                     "endOffset": 1322
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 14,
                         "startColumn": 4,
-                        "startOffset": 913,
+                        "startOffset": 899,
                         "endLine": 19,
                         "endColumn": 12,
-                        "endOffset": 1341
+                        "endOffset": 1322
                     }
                 }
             },
@@ -427,14 +779,14 @@
                     "endOffset": 1748
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
-                        "startOffset": 1347,
+                        "startOffset": 1327,
                         "endLine": 25,
                         "endColumn": 12,
-                        "endOffset": 1773
+                        "endOffset": 1748
                     }
                 }
             },
@@ -448,14 +800,14 @@
                     "endOffset": 2175
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 26,
                         "startColumn": 4,
-                        "startOffset": 1779,
+                        "startOffset": 1753,
                         "endLine": 31,
                         "endColumn": 12,
-                        "endOffset": 2206
+                        "endOffset": 2175
                     }
                 }
             },
@@ -469,14 +821,14 @@
                     "endOffset": 2600
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 32,
                         "startColumn": 4,
-                        "startOffset": 2212,
+                        "startOffset": 2180,
                         "endLine": 37,
                         "endColumn": 12,
-                        "endOffset": 2637
+                        "endOffset": 2600
                     }
                 }
             },
@@ -489,13 +841,13 @@
                     "endOffset": 2689
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 38,
                         "startColumn": 4,
-                        "startOffset": 2643,
+                        "startOffset": 2605,
                         "endColumn": 88,
-                        "endOffset": 2727
+                        "endOffset": 2689
                     }
                 }
             },
@@ -508,13 +860,13 @@
                     "endOffset": 2790
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 39,
                         "startColumn": 4,
-                        "startOffset": 2733,
+                        "startOffset": 2694,
                         "endColumn": 100,
-                        "endOffset": 2829
+                        "endOffset": 2790
                     }
                 }
             },
@@ -528,14 +880,14 @@
                     "endOffset": 3198
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 40,
                         "startColumn": 4,
-                        "startOffset": 2835,
+                        "startOffset": 2795,
                         "endLine": 44,
                         "endColumn": 12,
-                        "endOffset": 3242
+                        "endOffset": 3198
                     }
                 }
             },
@@ -549,14 +901,14 @@
                     "endOffset": 3618
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 45,
                         "startColumn": 4,
-                        "startOffset": 3248,
+                        "startOffset": 3203,
                         "endLine": 49,
                         "endColumn": 12,
-                        "endOffset": 3667
+                        "endOffset": 3618
                     }
                 }
             },
@@ -570,14 +922,14 @@
                     "endOffset": 3725
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 50,
                         "startColumn": 4,
-                        "startOffset": 3673,
+                        "startOffset": 3623,
                         "endLine": 51,
                         "endColumn": 12,
-                        "endOffset": 3776
+                        "endOffset": 3725
                     }
                 }
             },
@@ -591,14 +943,14 @@
                     "endOffset": 3854
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 52,
                         "startColumn": 4,
-                        "startOffset": 3782,
+                        "startOffset": 3730,
                         "endLine": 53,
                         "endColumn": 12,
-                        "endOffset": 3907
+                        "endOffset": 3854
                     }
                 }
             },
@@ -611,13 +963,13 @@
                     "endOffset": 3925
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 54,
                         "startColumn": 4,
-                        "startOffset": 3913,
+                        "startOffset": 3859,
                         "endColumn": 70,
-                        "endOffset": 3979
+                        "endOffset": 3925
                     }
                 }
             },
@@ -630,13 +982,13 @@
                     "endOffset": 4008
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 55,
                         "startColumn": 4,
-                        "startOffset": 3985,
+                        "startOffset": 3930,
                         "endColumn": 82,
-                        "endOffset": 4063
+                        "endOffset": 4008
                     }
                 }
             },
@@ -650,14 +1002,14 @@
                     "endOffset": 7716
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 56,
                         "startColumn": 4,
-                        "startOffset": 4069,
+                        "startOffset": 4013,
                         "endLine": 106,
                         "endColumn": 12,
-                        "endOffset": 7822
+                        "endOffset": 7716
                     }
                 }
             },
@@ -671,14 +1023,14 @@
                     "endOffset": 11564
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 107,
                         "startColumn": 4,
-                        "startOffset": 7828,
+                        "startOffset": 7721,
                         "endLine": 158,
                         "endColumn": 12,
-                        "endOffset": 11722
+                        "endOffset": 11564
                     }
                 }
             },
@@ -691,13 +1043,13 @@
                     "endOffset": 11655
                 },
                 "from": {
-                    "file": "C:\\Users\\Yi-Ta_Chuang\\StudioProjects\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
+                    "file": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-v11\\values-v11.xml",
                     "position": {
                         "startLine": 159,
                         "startColumn": 4,
-                        "startOffset": 11728,
+                        "startOffset": 11569,
                         "endColumn": 90,
-                        "endOffset": 11814
+                        "endOffset": 11655
                     }
                 }
             }
