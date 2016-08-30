@@ -4,41 +4,26 @@
     api-level="22"
     density="xxhdpi"
     format="7"
-    timestamp="349741651554931"
+    timestamp="87218785405398"
     token="6257568330306652467" >
 
     <task
         name="javac"
-        duration="685" />
+        duration="5483" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="16" />
+        duration="161" />
     <task
         name="verifier"
-        duration="3" />
+        duration="181" />
 
     <artifact
-        location="C:\Users\User\Desktop\KoalaTest\childcare\build\intermediates\transforms\dex\debug\folders\1000\5\slice_3\classes.dex"
-        type="DEX" />
+        location="C:\Users\User\Desktop\KoalaTest\childcare\build\outputs\apk\childcare-debug.apk"
+        type="MAIN" />
 
-    <build timestamp="348628371802156" >
-        <artifact
-            location="C:\Users\User\Desktop\KoalaTest\childcare\build\outputs\apk\childcare-debug.apk"
-            type="MAIN" />
-    </build>
-    <build timestamp="348904363764396" >
-        <artifact
-            location="C:\Users\User\Desktop\KoalaTest\childcare\build\intermediates\res\resources-debug.ap_"
-            type="RESOURCES" />
-    </build>
-    <build timestamp="349006430603760" >
-        <artifact
-            location="C:\Users\User\Desktop\KoalaTest\childcare\build\intermediates\transforms\dex\debug\folders\1000\5\slice_0\classes.dex"
-            type="DEX" />
-    </build>
     <build timestamp="349741651554931" >
         <artifact
             location="C:\Users\User\Desktop\KoalaTest\childcare\build\intermediates\transforms\dex\debug\folders\1000\5\slice_3\classes.dex"

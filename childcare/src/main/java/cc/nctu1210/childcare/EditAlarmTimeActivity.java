@@ -44,7 +44,7 @@ public class EditAlarmTimeActivity extends Activity implements View.OnClickListe
         Bundle bundle = intent.getExtras();
         final int time = bundle.getInt(ApplicationContext.ALARM_TIME, 0);
         double showAlarmtime = (double)time/60;
-        editAlarmTime.setText(String.valueOf(showAlarmtime));
+        editAlarmTime.setText(String.format("%.2f", showAlarmtime));
     }
 
     @Override
