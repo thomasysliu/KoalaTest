@@ -85,7 +85,7 @@ public class TeacherScheduledService  extends Service{
                     });
                 }
             }
-        }, 0, 1 * 10 * 1000);//60 sec
+        }, 0, 1 * 1 * 1000);//1 sec
     }
 
 
@@ -137,6 +137,13 @@ public class TeacherScheduledService  extends Service{
             notificationManager.notify(notifyID, notification);
         }
 
+    }
+
+    @Override
+    public void onDestroy() {
+        timer.cancel();
+        stopSelf();
+        super.onDestroy();
     }
 }
 

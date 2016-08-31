@@ -113,4 +113,11 @@ public class GatewayScheduledService extends Service {
         mChildListAdapter.notifyDataSetChanged();
 
     }
+
+    @Override
+    public void onDestroy() {
+        timer.cancel();
+        stopSelf();
+        super.onDestroy();
+    }
 }

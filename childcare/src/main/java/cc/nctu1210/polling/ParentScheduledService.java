@@ -85,11 +85,13 @@ public class ParentScheduledService extends Service{
                     });
                 }
             }
-        }, 0, 1 * 10 * 1000);//60 sec
+        }, 0, 1 * 1 * 1000);//1 sec
     }
     @Override
     public void onDestroy()
     {
+        timer.cancel();
+        stopSelf();
         super.onDestroy();
     }
 

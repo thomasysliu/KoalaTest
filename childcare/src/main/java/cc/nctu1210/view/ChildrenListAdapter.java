@@ -167,9 +167,9 @@ public class ChildrenListAdapter extends BaseAdapter {
                     if (obj.status.equals("near")) {
                         viewHolder.status.setImageDrawable(mContext.getResources().getDrawable(R.drawable.status_green, null));
                     } else if (obj.status.equals("medium")) {
-                        viewHolder.status.setImageDrawable(mContext.getResources().getDrawable(R.drawable.status_yellow, null));
+                        viewHolder.status.setImageDrawable(mContext.getResources().getDrawable(R.drawable.status_green, null));
                     } else if (obj.status.equals("far")) {
-                        viewHolder.status.setImageDrawable(mContext.getResources().getDrawable(R.drawable.status_red, null));
+                        viewHolder.status.setImageDrawable(mContext.getResources().getDrawable(R.drawable.status_green, null));
                     }
                 }
                 if(isMaster == 1)

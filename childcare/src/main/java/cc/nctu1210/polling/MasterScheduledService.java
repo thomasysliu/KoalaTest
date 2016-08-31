@@ -88,7 +88,7 @@ public class MasterScheduledService extends Service{
                     });
                 }
             }
-        }, 0, 1 * 10 * 1000);//10 sec
+        }, 0, 1 * 1 * 1000);//1 sec
     }
 
 
@@ -108,5 +108,12 @@ public class MasterScheduledService extends Service{
         Log.i("TAG", "Initialized ListView....." + mChildListAdapter.getData().size());
         mChildListAdapter.notifyDataSetChanged();
 
+    }
+
+    @Override
+    public void onDestroy() {
+        timer.cancel();
+        stopSelf();
+        super.onDestroy();
     }
 }
