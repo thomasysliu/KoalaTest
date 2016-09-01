@@ -104,12 +104,12 @@
         "source": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\src\\main\\res\\layout\\device_discovery.xml"
     },
     {
-        "merged": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\add_gateway.xml",
-        "source": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\src\\main\\res\\layout\\add_gateway.xml"
-    },
-    {
         "merged": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\master_login_setting_page.xml",
         "source": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\src\\main\\res\\layout\\master_login_setting_page.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\add_gateway.xml",
+        "source": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\src\\main\\res\\layout\\add_gateway.xml"
     },
     {
         "merged": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\list_scan_item.xml",
@@ -124,12 +124,12 @@
         "source": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\layout\\select_dialog_multichoice_material.xml"
     },
     {
-        "merged": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\edit_gateway.xml",
-        "source": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\src\\main\\res\\layout\\edit_gateway.xml"
-    },
-    {
         "merged": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
         "source": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\layout\\abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\edit_gateway.xml",
+        "source": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\src\\main\\res\\layout\\edit_gateway.xml"
     },
     {
         "merged": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
@@ -196,12 +196,12 @@
         "source": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\src\\main\\res\\layout\\child_profile_create.xml"
     },
     {
-        "merged": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
-        "source": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\layout\\abc_list_menu_item_radio.xml"
-    },
-    {
         "merged": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\tab_view.xml",
         "source": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\src\\main\\res\\layout\\tab_view.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
+        "source": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\layout\\abc_list_menu_item_radio.xml"
     },
     {
         "merged": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\layout\\gateway_list_editor.xml",

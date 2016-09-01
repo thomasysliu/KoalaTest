@@ -53,6 +53,7 @@ import cc.nctu1210.childcare.MasterLoginTabViewActivity;
 import cc.nctu1210.childcare.ParentLoginActivity;
 import cc.nctu1210.childcare.R;
 import cc.nctu1210.childcare.TeacherLoginActivity;
+import cc.nctu1210.entity.ChildHistory;
 import cc.nctu1210.entity.ChildProfile;
 import cc.nctu1210.view.NewGatewayItem;
 import cc.nctu1210.view.NewParentItem;
@@ -193,6 +194,7 @@ public class ApplicationContext extends Application {
     public static final String LOGIN_URL = BACKEND_API_URL + "login.php";
     public static final String GATEWAY_UPLOAD_URL = BACKEND_API_URL + "gateway_upload.php";
     public static final String SHOW_CHILD_BY_ID_URL = BACKEND_API_URL + "show_child_by_id.php";
+    public static final String SHOW_CHILD_HISTORY_BY_ID_URL = BACKEND_API_URL + "show_child_history_by_id.php";
     public static final String PARENT_CHILD_DEFINE_URL = BACKEND_API_URL + "parent_child_define.php";
     public static final String NEW_CHILD_URL = BACKEND_API_URL + "new_child.php";
     public static final String DELETE_URL = BACKEND_API_URL + "delete.php";
@@ -942,6 +944,48 @@ public class ApplicationContext extends Application {
                             }
                             child.setCid(cid);
                             content.child = child;
+                            callBack.done(content);
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i(TAG, error.toString());
+                    }
+                });
+        //no cache
+        jsObjRequest.setShouldCache(false);
+        VolleyRequestManager.getInstance(getInstance().getApplicationContext()).addToRequestQueue(jsObjRequest);
+    }
+
+    public static void show_child_history_by_id(String cid, String date_from, String date_to , final CallBack callBack) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("cid", cid);
+            json.put("date_from", date_from);
+            json.put("date_to",date_to);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.POST, SHOW_CHILD_HISTORY_BY_ID_URL, json, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+                            Log.i(TAG, response.toString());
+                            CallBackContent content=new CallBackContent();
+                            JSONArray data = response.getJSONArray("data");
+                            for(int i=0; i<data.length(); i++) {
+                                ChildHistory history;
+                                String times = ((JSONObject) data.get(i)).getString("times");
+                                String place = ((JSONObject) data.get(i)).getString("place");
+                                history = new ChildHistory(times,place);
+                                content.show_child_history.add(history);
+                            }
                             callBack.done(content);
                         }catch (JSONException e){
                             e.printStackTrace();

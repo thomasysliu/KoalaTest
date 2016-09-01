@@ -104,12 +104,12 @@
         "source": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\src\\main\\res\\drawable\\default_icon.png"
     },
     {
-        "merged": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\drawable\\status_red.png",
-        "source": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\src\\main\\res\\drawable\\status_red.png"
-    },
-    {
         "merged": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_radio_material.xml",
         "source": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable\\abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\drawable\\status_red.png",
+        "source": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\src\\main\\res\\drawable\\status_red.png"
     },
     {
         "merged": "C:\\Users\\User\\Desktop\\KoalaTest\\childcare\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_small_material.xml",

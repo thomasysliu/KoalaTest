@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/setting_alarm"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:id="@+id/text_alarm"
+            android:text="@string/alarm_time"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:id="@+id/text_time"
+            android:text="5"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:id="@+id/text_min"
+            android:text="@string/minute"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:text="@string/click_to_edit"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="32dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:textSize="20sp"
+        android:layout_marginTop="50dp"
+        android:id="@+id/button_gateway_list_editor"
+        android:layout_gravity="center"
+        android:text="@string/gateway_list_editor"/>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:textSize="20sp"
+        android:layout_marginTop="50dp"
+        android:id="@+id/button_parent_list_editor"
+        android:layout_gravity="center"
+        android:text="@string/parent_list_editor"/>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:textSize="20sp"
+        android:layout_marginTop="50dp"
+        android:id="@+id/button_child_profile_list_editor"
+        android:layout_gravity="center"
+        android:text="@string/child_profile_list_editor"/>
+
+</LinearLayout>

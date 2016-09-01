@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="10dp">
+
+    <!-- Gateway -->
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/parent_title"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="25sp">
+        </TextView>
+    </TableRow>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_child_list"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:descendantFocusability="beforeDescendants"
+        />
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="26dp"
+        android:id="@+id/image_add_child"
+        android:src="@drawable/add"
+        android:layout_marginLeft="280dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        >
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:textSize="25sp"
+            android:id="@+id/button_edit_ok"
+            android:text="@string/ok"/>
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:textSize="25sp"
+            android:id="@+id/button_edit_remove"
+            android:text="@string/remove"/>
+    </LinearLayout>
+
+
+</TableLayout>

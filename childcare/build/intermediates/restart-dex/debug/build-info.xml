@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="x86"
-    api-level="23"
-    density="420dpi"
+    abi="armeabi-v7a,armeabi"
+    api-level="22"
+    density="xxhdpi"
     format="7"
-    timestamp="159500917912132"
+    timestamp="160146686407991"
     token="6257568330306652467" >
 
     <task
         name="javac"
-        duration="968" />
+        duration="1898" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="1902" />
+        duration="2584" />
     <task
         name="verifier"
-        duration="473" />
+        duration="469" />
 
     <artifact
         location="C:\Users\User\Desktop\KoalaTest\childcare\build\outputs\apk\childcare-debug.apk"
         type="MAIN" />
 
-    <build timestamp="159500917912132" >
+    <build timestamp="160146686407991" >
         <artifact
             location="C:\Users\User\Desktop\KoalaTest\childcare\build\outputs\apk\childcare-debug.apk"
             type="MAIN" />

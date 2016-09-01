@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:id="@+id/text_parent_list"
+            android:layout_marginLeft="100dp"
+            android:text="@string/parent_list"/>
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="36dp"
+            android:id="@+id/image_add_parent"
+            android:src="@drawable/add"
+            android:layout_marginLeft="50dp"
+            />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list_set_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/close"
+            android:id="@+id/bt_close"
+            android:layout_gravity="center"
+            android:textSize="15sp"
+            android:enabled="true"
+            />
+    </LinearLayout>
+
+</LinearLayout>

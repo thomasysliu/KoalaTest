@@ -3,6 +3,7 @@ package cc.nctu1210.tool;
 import java.util.ArrayList;
 import java.util.List;
 
+import cc.nctu1210.entity.ChildHistory;
 import cc.nctu1210.entity.ChildProfile;
 import cc.nctu1210.view.NewGatewayItem;
 import cc.nctu1210.view.NewParentItem;
@@ -22,6 +23,7 @@ public class CallBackContent {
     List<NewGatewayItem> show_gateway = new ArrayList<NewGatewayItem>();
     List<NewParentItem> show_parent = new ArrayList<NewParentItem>();
     List<ChildProfile> show_children = new ArrayList<ChildProfile>();
+    List<ChildHistory> show_child_history = new ArrayList<ChildHistory>();
     String mGid;
     String mPid;
     String mPlace;
