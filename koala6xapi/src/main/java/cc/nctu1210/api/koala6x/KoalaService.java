@@ -76,6 +76,24 @@ public class KoalaService extends Service {
     private static int acc_fsr = MOTION_ACCEL_SCALE_2G;
     private static int gyro_fsr = MOTION_GYRO_SCALE_250;
 
+    private boolean is_9x = false;
+    public static final UUID UUID_NAXSEN_MOTION_SERVICE = UUID.fromString(Koala6xGattAttributes.NAXSEN_MOTION_SERVICE_UUID);
+    public static final UUID UUID_NAXSEN_MOTION_MEASUREMENT_CHARACTERISTIC = UUID.fromString(Koala6xGattAttributes.NAXSEN_MOTION_MEASUREMENT_CHARACTERISTIC_UUID);
+
+    public static final UUID UUID_NAXSEN_MOTION_DMP_MEASUREMENT_CHARACTERISTIC = UUID.fromString(Koala6xGattAttributes.NAXSEN_MOTION_DMP_MEASUREMENT_CHARACTERISTIC_UUID);
+    public static final UUID UUID_NAXSEN_BATTERY = UUID.fromString(Koala6xGattAttributes.NAXSEN_BATTERY_UUID);
+    public static final UUID UUID_NAXSEN_TX_POWER_SERVICE = UUID.fromString(Koala6xGattAttributes.NAXSEN_TX_POWER_SERVICE_UUID);
+    public static final UUID UUID_NAXSEN_TX_POWER = UUID.fromString(Koala6xGattAttributes.NAXSEN_TX_POWER_UUID);
+    public static final UUID UUID_NAXSEN_BATTERY_SERVICE = UUID.fromString(Koala6xGattAttributes.NAXSEN_BATTERY_SERVICE_UUID);
+    public static final UUID UUID_NAXSEN_STORAGE_SERVICE = UUID.fromString(Koala6xGattAttributes.NAXSEN_STORAGE_SERVICE_UUID);
+    public static final UUID UUID_NAXSEN_STORAGE_CMD = UUID.fromString(Koala6xGattAttributes.NAXSEN_STORAGE_CMD_CHARACTERISTIC_UUID);
+    public static final UUID UUID_NAXSEN_STORAGE_READ = UUID.fromString(Koala6xGattAttributes.NAXSEN_STORAGE_READ_CHARACTERISTIC_UUID);
+    public static final UUID UUID_NAXSEN_STORAGE_READ_CONFIG = UUID.fromString(Koala6xGattAttributes.NAXSEN_STORAGE_READ_CONFIG_UUID);
+    /*public final static UUID UUID_NAXSEN_MOTION_RATE_CHANGE_CHARACTERISTIC = UUID.fromString(Koala6xGattAttributes.NAXSEN_MOTION_RATE_CHANGE_CHARACTERISTIC_UUID);
+    public final static UUID UUID_NAXSEN_MOTION_ACC_FSR_CHANGE_CHARACTERISTIC = UUID.fromString(Koala6xGattAttributes.NAXSEN_MOTION_ACC_FSR_CHANGE_CHARACTERISTIC_UUID);
+    public final static UUID UUID_NAXSEN_MOTION_GYRO_FSR_CHANGE_CHARACTERISTIC = UUID.fromString(Koala6xGattAttributes.NAXSEN_MOTION_GYRO_FSR_CHANGE_CHARACTERISTIC_UUID);
+*/
+
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -114,7 +132,14 @@ public class KoalaService extends Service {
 
             if (newState == BluetoothProfile.STATE_CONNECTED) {
                 intentAction = ACTION_GATT_CONNECTED;
+                if(gatt.getDevice().getName() != null){
+                    is_9x = true;
+                }
+                Log.i(TAG, "is_9x = "+ is_9x);
+                Log.i(TAG, "gatt.getDevice().getName() = "+ gatt.getDevice().getName());
+
                 String addr = gatt.getDevice().getAddress();
+                // dirty
                 broadcastUpdate(intentAction, addr);
                 Log.i(TAG, "Connected to GATT server.");
                 // Attempts to discover services after successful connection.
@@ -141,6 +166,7 @@ public class KoalaService extends Service {
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 String addr = gatt.getDevice().getAddress();
+                _set_storage_notify(addr);
                 broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED, addr);
             } else {
                 Log.w(TAG, "onServicesDiscovered received: " + status);
@@ -189,7 +215,7 @@ public class KoalaService extends Service {
         final Intent intent = new Intent(action);
         intent.putExtra(EXTRA_NAME, String.valueOf(addr));
         // This is special handling for the Motion Raw Data Measurement profile. Data
-        if (UUID_KOALA_MOTION_MEASUREMENT_CHARACTERISTIC.equals(characteristic.getUuid())) {
+        if (UUID_KOALA_MOTION_MEASUREMENT_CHARACTERISTIC.equals(characteristic.getUuid()) || UUID_NAXSEN_MOTION_MEASUREMENT_CHARACTERISTIC.equals(characteristic.getUuid())) {
             final byte[] rx = characteristic.getValue();
             //fire sensor event
             fireSensorEvent(addr, rx);
@@ -213,18 +239,37 @@ public class KoalaService extends Service {
         double mag_x = 0.0;
         double mag_y = 0.0;
         double mag_z = 0.0;
+        short s_accel_x =0;
+        short s_accel_y =0;
+        short s_accel_z =0;
+        short s_gyro_x = 0;
+        short s_gyro_y =0;
+        short s_gyro_z =0;
+        short s_mag_x = 0;
+        short s_mag_y = 0;
+        short s_mag_z = 0;
 
-
-        short s_accel_x = (short)( (short)values[1] *256  + values[2]) ;
-        short s_accel_y = (short)( (short)values[3] *256  + values[4]) ;
-        short s_accel_z = (short)( (short)values[5]*256  + values[6]) ;
-        short s_gyro_x = (short)( (short)values[7]*256 + values[8]) ;
-        short s_gyro_y = (short)((short)values[9] *256  + values[10]) ;
-        short s_gyro_z = (short)((short)values[11] *256 + values[12]) ;
-        short s_mag_x = (short)((short)values[13] *256 + values[13]);
-        short s_mag_y = (short)((short)values[14] *256 + values[15]);
-        short s_mag_z = (short)((short)values[16] *256 + values[17]);
-
+        if(!is_9x) {
+            s_accel_x = (short) ((short) values[1] * 256 + values[2]);
+            s_accel_y = (short) ((short) values[3] * 256 + values[4]);
+            s_accel_z = (short) ((short) values[5] * 256 + values[6]);
+            s_gyro_x = (short) ((short) values[7] * 256 + values[8]);
+            s_gyro_y = (short) ((short) values[9] * 256 + values[10]);
+            s_gyro_z = (short) ((short) values[11] * 256 + values[12]);
+            s_mag_x = (short) ((short) values[13] * 256 + values[13]);
+            s_mag_y = (short) ((short) values[14] * 256 + values[15]);
+            s_mag_z = (short) ((short) values[16] * 256 + values[17]);
+        }else{
+            s_accel_x = (short) ((short) values[0] * 256 + values[1]);
+            s_accel_y = (short) ((short) values[2] * 256 + values[3]);
+            s_accel_z = (short) ((short) values[4] * 256 + values[5]);
+            s_gyro_x = (short) ((short) values[6] * 256 + values[7]);
+            s_gyro_y = (short) ((short) values[8] * 256 + values[9]);
+            s_gyro_z = (short) ((short) values[10] * 256 + values[11]);
+            s_mag_x = (short) ((short) values[12] * 256 + values[13]);
+            s_mag_y = (short) ((short) values[14] * 256 + values[15]);
+            s_mag_z = (short) ((short) values[16] * 256 + values[17]);
+        }
 
         switch (acc_fsr) {
             case MOTION_ACCEL_SCALE_2G:
@@ -280,9 +325,15 @@ public class KoalaService extends Service {
         gyroData[1] = gyro_y;
         gyroData[2] = gyro_z;
 
-        magData[0] = (double) (s_mag_x * 9824 / 65520);  //+-4800 effective for 14bits data
-        magData[1] = (double) (s_mag_y * 9824 / 65520);
-        magData[2] = (double) (s_mag_z * 9824 / 65520);
+        if(!is_9x){
+            magData[0] = (double) (s_mag_x * 9824 / 65520);  //+-4800 effective for 14bits data
+            magData[1] = (double) (s_mag_y * 9824 / 65520);
+            magData[2] = (double) (s_mag_z * 9824 / 65520);
+        }else{
+            magData[0] = s_mag_x * 4912. / 32760.;
+            magData[1] = s_mag_y * 4912. / 32760.;
+            magData[2] = s_mag_z * 4912. / 32760.;
+        }
 
         Intent intent_acc = new Intent(KoalaService.ACTION_RAW_ACC_DATA_AVAILABLE);
         intent_acc.putExtra(KoalaService.EXTRA_NAME, String.valueOf(addr));
@@ -450,13 +501,22 @@ public class KoalaService extends Service {
     public boolean enableMotionRawService(String addr) {
         //Log.w(TAG, "not support yet!!");
         BluetoothGatt tmpGatt = getGattbyAddr(addr);
-        BluetoothGattService motionService = tmpGatt.getService(UUID_KOALA_MOTION_SERVICE);
+        BluetoothGattService motionService;
+        if(!is_9x){
+            motionService = tmpGatt.getService(UUID_KOALA_MOTION_SERVICE);
+        }else{
+            motionService = tmpGatt.getService(UUID_NAXSEN_MOTION_SERVICE);
+        }
         if (motionService == null) {
             Log.w(TAG, "motion service not found!");
             return false;
         }
-
-        BluetoothGattCharacteristic motionRawDataCharacteristic = motionService.getCharacteristic(UUID_KOALA_MOTION_MEASUREMENT_CHARACTERISTIC);
+        BluetoothGattCharacteristic motionRawDataCharacteristic;
+        if(!is_9x){
+            motionRawDataCharacteristic = motionService.getCharacteristic(UUID_KOALA_MOTION_MEASUREMENT_CHARACTERISTIC);
+        }else{
+            motionRawDataCharacteristic = motionService.getCharacteristic(UUID_NAXSEN_MOTION_MEASUREMENT_CHARACTERISTIC);
+        }
         if (motionRawDataCharacteristic == null) {
             Log.w(TAG, "motion characteristic not found!");
             return false;
@@ -475,13 +535,24 @@ public class KoalaService extends Service {
      */
     public boolean disableMotionRawService(String addr) {
         BluetoothGatt tmpGatt = getGattbyAddr(addr);
-        BluetoothGattService motionService = tmpGatt.getService(UUID_KOALA_MOTION_SERVICE);
+        BluetoothGattService motionService;
+        if(!is_9x){
+            motionService = tmpGatt.getService(UUID_KOALA_MOTION_SERVICE);
+        }else{
+
+            motionService = tmpGatt.getService(UUID_NAXSEN_MOTION_SERVICE);
+        }
         if (motionService == null) {
             Log.w(TAG, "motion service not found!");
             return false;
         }
 
-        BluetoothGattCharacteristic motionRawDataCharacteristic = motionService.getCharacteristic(UUID_KOALA_MOTION_MEASUREMENT_CHARACTERISTIC);
+        BluetoothGattCharacteristic motionRawDataCharacteristic;
+        if(!is_9x){
+            motionRawDataCharacteristic = motionService.getCharacteristic(UUID_KOALA_MOTION_MEASUREMENT_CHARACTERISTIC);
+        }else{
+            motionRawDataCharacteristic = motionService.getCharacteristic(UUID_NAXSEN_MOTION_MEASUREMENT_CHARACTERISTIC);
+        }
         if (motionRawDataCharacteristic == null) {
             Log.w(TAG, "motion characteristic not found!");
             return false;
@@ -506,7 +577,12 @@ public class KoalaService extends Service {
      */
     public boolean setMotionAccelScale(String addr, int scale){
         BluetoothGatt tmpGatt = getGattbyAddr(addr);
-        BluetoothGattService motionService = tmpGatt.getService(UUID_KOALA_MOTION_SERVICE);
+        BluetoothGattService motionService;
+        if(!is_9x){
+            motionService = tmpGatt.getService(UUID_KOALA_MOTION_SERVICE);
+        }else{
+            motionService = tmpGatt.getService(UUID_NAXSEN_MOTION_SERVICE);
+        }
         if (motionService == null) {
             Log.w(TAG, "motion service not found!");
             return false;
@@ -555,7 +631,13 @@ public class KoalaService extends Service {
      */
     public boolean setMotionDataWriteRate(String addr, int rate){
         BluetoothGatt tmpGatt = getGattbyAddr(addr);
-        BluetoothGattService motionService = tmpGatt.getService(UUID_KOALA_MOTION_SERVICE);
+        BluetoothGattService motionService;
+        if(!is_9x){
+            motionService = tmpGatt.getService(UUID_KOALA_MOTION_SERVICE);
+        }else{
+
+            motionService = tmpGatt.getService(UUID_NAXSEN_MOTION_SERVICE);
+        }
         if (motionService == null) {
             Log.w(TAG, "motion service not found!");
             return false;
@@ -602,42 +684,107 @@ public class KoalaService extends Service {
      */
     public boolean setMotionGyroScale(String addr, int scale){
         BluetoothGatt tmpGatt = getGattbyAddr(addr);
-        BluetoothGattService motionService = tmpGatt.getService(UUID_KOALA_MOTION_SERVICE);
+        BluetoothGattService motionService;
+        if(!is_9x){
+            motionService = tmpGatt.getService(UUID_KOALA_MOTION_SERVICE);
+        }else{
+
+            motionService = tmpGatt.getService(UUID_NAXSEN_MOTION_SERVICE);
+        }
         if (motionService == null) {
             Log.w(TAG, "motion service not found!");
             return false;
         }
 
-        BluetoothGattCharacteristic motionParamCharacteristic = motionService.getCharacteristic(UUID_KOALA_MOTION_GYRO_FSR_CHANGE_CHARACTERISTIC);
-        if (motionParamCharacteristic == null) {
-            Log.w(TAG, "motion characteristic not found!");
-            return false;
-        }
 
-        byte[] value = new byte[]{ 0x00 };
-        switch (scale) {
-            case MOTION_GYRO_SCALE_250:
-                value[0] = 0x00;
-                break;
-            case MOTION_GYRO_SCALE_500:
-                value[0] = 0x01;
-                break;
-            case MOTION_GYRO_SCALE_1000:
-                value[0] = 0x02;
-                break;
-            case MOTION_GYRO_SCALE_2000:
-                value[0] = 0x03;
-                break;
-            default:
-                value[0] = 0x00;
-                break;
+        if(!is_9x) {
+            BluetoothGattCharacteristic motionParamCharacteristic = motionService.getCharacteristic(UUID_KOALA_MOTION_GYRO_FSR_CHANGE_CHARACTERISTIC);
+            if (motionParamCharacteristic == null) {
+                Log.w(TAG, "motion characteristic not found!");
+                return false;
+            }
+
+            byte[] value = new byte[]{0x00};
+            switch (scale) {
+                case MOTION_GYRO_SCALE_250:
+                    value[0] = 0x00;
+                    break;
+                case MOTION_GYRO_SCALE_500:
+                    value[0] = 0x01;
+                    break;
+                case MOTION_GYRO_SCALE_1000:
+                    value[0] = 0x02;
+                    break;
+                case MOTION_GYRO_SCALE_2000:
+                    value[0] = 0x03;
+                    break;
+                default:
+                    value[0] = 0x00;
+                    break;
+            }
+            motionParamCharacteristic.setValue(value);
+            boolean status = tmpGatt.writeCharacteristic(motionParamCharacteristic);
+            Log.d(TAG, "setMotionGyroScale: status:" + status);
+            return status;
         }
-        motionParamCharacteristic.setValue(value);
-        boolean status = tmpGatt.writeCharacteristic(motionParamCharacteristic);
-        Log.d(TAG, "setMotionGyroScale: status:" + status);
-        return status;
+        else {
+
+            return true;
+        }
     }
 
+    /**
+     * Configuration the scale of accel sensor
+     *
+     * @param acc_scale
+     *            int 0 MOTION_ACCEL_SCALE_2G: 2g
+     *            int 1 MOTION_ACCEL_SCALE_4G:4g
+     *            int 2 MOTION_ACCEL_SCALE_8G: 8g
+     *             int 3 MOTION_ACCEL_SCALE_16G  16g
+     */
+    public boolean setMotionData9x_FSR_Rate(String addr, final int acc_scale, final int gyro_scale, final int rate){
+        BluetoothGatt tmpGatt = getGattbyAddr(addr);
+        BluetoothGattService motionService;
+        byte[] value = new byte[]{0x45, 0x02, 0x02, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+
+        switch (acc_scale) {
+            case MOTION_ACCEL_SCALE_2G:
+                value[1] = 0x00;
+                break;
+            case MOTION_ACCEL_SCALE_4G:
+                value[1] = 0x01;
+                break;
+            case MOTION_ACCEL_SCALE_8G:
+                value[1] = 0x02;
+                break;
+            case MOTION_ACCEL_SCALE_16G:
+                value[1] = 0x03;
+                break;
+            default:
+                value[1] = 0x00;
+                break;
+        }
+        switch (gyro_scale) {
+            case MOTION_ACCEL_SCALE_2G:
+                value[2] = 0x00;
+                break;
+            case MOTION_ACCEL_SCALE_4G:
+                value[2] = 0x01;
+                break;
+            case MOTION_ACCEL_SCALE_8G:
+                value[2] = 0x02;
+                break;
+            case MOTION_ACCEL_SCALE_16G:
+                value[2] = 0x03;
+                break;
+            default:
+                value[2] = 0x00;
+                break;
+        }
+        Log.d(TAG, "setMotionData9x_FSR_Rate !!"+ formatData(value));
+        _send_cmd(value, addr);
+        return true;
+    }
     public static void setSensorWriteRate(int rate) {
         sensor_write_rate = rate;
     }
@@ -650,5 +797,99 @@ public class KoalaService extends Service {
         gyro_fsr = scale;
     }
 
+    private void _return_status(Boolean status) {
+        /*if (status) {
+            broadcastUpdate(STATUS_DONE);
+        } else {
+            broadcastUpdate(STATUS_FAIL);
+        }*/
+    }
 
+    static public String formatData(byte[] data) {
+        if (data == null) {
+            return "";
+        }
+        final StringBuilder stringBuilder = new StringBuilder(data.length);
+        for (byte byteChar : data)
+            stringBuilder.append(String.format("%02X", byteChar));
+        return stringBuilder.toString();
+    }
+
+    private void _send_cmd(byte[] value, String addr) {
+        //check mBluetoothGatt is available
+        BluetoothGatt mBluetoothGatt = getGattbyAddr(addr);
+        if (mBluetoothGatt == null) {
+            Log.e(TAG, "lost connection");
+            //return false;
+            _return_status(false);
+            return;
+        }
+        BluetoothGattService Service = mBluetoothGatt.getService(UUID_NAXSEN_STORAGE_SERVICE);
+        if (Service == null) {
+            Log.e(TAG, "service not found!");
+            _return_status(false);
+            return;
+        }
+        BluetoothGattCharacteristic charac = Service
+                .getCharacteristic(UUID_NAXSEN_STORAGE_CMD);
+        if (charac == null) {
+            Log.e(TAG, "char not found!");
+            _return_status(false);
+            return;
+        }
+        charac.setValue(value);
+        if (mBluetoothGatt == null) {
+            Log.e(TAG, "lost connection");
+            //return false;
+            _return_status(false);
+            return;
+        }
+        boolean status = mBluetoothGatt.writeCharacteristic(charac);
+
+        Log.e(TAG, "send_cmd status:" + status);
+        //Log.e(TAG, "status:"+status);
+        _return_status(status);
+    }
+
+    private void _set_storage_notify(String addr) {
+        enable_notify(UUID_NAXSEN_STORAGE_SERVICE, UUID_NAXSEN_STORAGE_READ, addr);
+    }
+
+    private void enable_notify(UUID service_uuid, UUID char_uuid, String addr) {
+        BluetoothGatt mBluetoothGatt = getGattbyAddr(addr);
+        //check mBluetoothGatt is available
+        if (mBluetoothGatt == null) {
+            Log.e(TAG, "lost connection");
+            _return_status(false);
+            return;
+        }
+        BluetoothGattService Service = mBluetoothGatt.getService(service_uuid);
+        if (Service == null) {
+            Log.e(TAG, "service not found!");
+            _return_status(false);
+            return;
+        }
+        BluetoothGattCharacteristic charac = Service
+                .getCharacteristic(char_uuid);
+        if (charac == null) {
+            Log.e(TAG, "char not found!");
+            _return_status(false);
+            return;
+        }
+        //setStorageNotification(charac, true);
+
+        mBluetoothGatt.setCharacteristicNotification(charac, true);
+
+        BluetoothGattDescriptor descriptor = charac.getDescriptor(CCCD);
+        if(descriptor == null){
+            Log.e(TAG, "descriptor not found!");
+            _return_status(false);
+            return;
+        }
+        descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+        mBluetoothGatt.writeDescriptor(descriptor);
+        charac.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+
+        _return_status(true);
+    }
 }

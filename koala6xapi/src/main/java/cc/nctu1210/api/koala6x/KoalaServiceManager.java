@@ -25,6 +25,7 @@ public class KoalaServiceManager {
     private int sensor_rate = KoalaService.MOTION_WRITE_RATE_10;
     private int acc_fsr = KoalaService.MOTION_ACCEL_SCALE_2G;
     private int gyro_fsr = KoalaService.MOTION_GYRO_SCALE_250;
+    private boolean is_9x = false;
     private Activity mActivity;
     private KoalaService mBluetoothLeService; // the main service to control the ble device
 
@@ -74,6 +75,7 @@ public class KoalaServiceManager {
 
             if (KoalaService.ACTION_GATT_CONNECTED.equals(action)) {
                 final String addr = intent.getStringExtra(KoalaService.EXTRA_NAME);
+                set9x_FSR_Rate(addr, acc_fsr, gyro_fsr, sensor_rate);
                 startReadRssi(addr);
                 for (int i=0, size=eventListeners.size(); i<size; i++) {
                     if (eventListeners.get(i).get(SensorEvent.TYPE_ACCELEROMETER) != null) {
@@ -96,6 +98,7 @@ public class KoalaServiceManager {
                 setAccFSR(addr, acc_fsr);
                 setGyroFSR(addr, gyro_fsr);
                 setSamplingRate(addr, sensor_rate);
+                set9x_FSR_Rate(addr, acc_fsr, gyro_fsr, sensor_rate);
                 startToReadData(addr);
             } else if (KoalaService.ACTION_GATT_RSSI.equals(action)) {
                 final String addr = intent.getStringExtra(KoalaService.EXTRA_NAME);
@@ -233,6 +236,7 @@ public class KoalaServiceManager {
         KoalaService.setAccFSR(this.acc_fsr);
         this.gyro_fsr = gyro_scale;
         KoalaService.setGyroFSR(this.gyro_fsr);
+        //KoalaService.setMotionData9x_FSR_Rate(addr, acc_fsr, gyro_fsr, sensor_rate);
         this.eventListeners.add(e);
     }
 
@@ -327,5 +331,19 @@ public class KoalaServiceManager {
             }
         }.start();
     }
+
+    private void set9x_FSR_Rate(final String addr, final int acc_scale, final int gyro_scale, final int rate) {
+        new Thread() {
+            public void run() {
+                try {
+                    sleep(300);   // update every 500ms
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                mBluetoothLeService.setMotionData9x_FSR_Rate(addr, acc_scale, gyro_scale, rate);
+            }
+        }.start();
+    }
+
 
 }
